@@ -281,7 +281,7 @@
                 <!-- <img src="./img/OIP.jpeg" alt="imagen"  class="sin-bordes"> -->
             </div>
 
-
+           
 
         </div>
         <div class="row gradient-arriba pt-5 " id="oferts">
