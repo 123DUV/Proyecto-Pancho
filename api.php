@@ -1,8 +1,13 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+session_start();
+
+use function PHPSTORM_META\type;
+
+header("Access-Control-Allow-Origin: http://localhost");
 header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
 
 $hostname = 'localhost';
 $username = 'root';
@@ -19,27 +24,83 @@ if (!$con) {
 $respuesta = str_replace("/app_duv/api.php/", "", $_SERVER['REQUEST_URI']);
 
 $respuesta = explode("?", $respuesta)[0];
-error_log("ruta: ".$respuesta);
+error_log("ruta: " . $respuesta);
 $metodo = $_SERVER['REQUEST_METHOD'];
- 
+
 //obtener todos los usuarios
 
-if($respuesta==='get-all-user' && $metodo==='GET'){
+
+if ($respuesta === 'get-all-user' && $metodo === 'GET') {
     $stmt = $con->prepare("SELECT * FROM datos");
     $stmt->execute();
-    $resultado = $stmt->get_result(); 
-    if($resultado){
-        foreach($resultado as $row){
+    $resultado = $stmt->get_result();
+    if ($resultado) {
+        foreach ($resultado as $row) {
             $resultadoImprimir[] = $row;
         }
         echo json_encode($resultadoImprimir);
-    }else{
+    } else {
         http_response_code(400);
         $respuestaError = [
-            "Error"=>"no se recibieron datos",
-            "datosRecibidos"=>[]
+            "Error" => "no se recibieron datos",
+            "datosRecibidos" => []
         ];
-        echo json_encode($respuestaError); 
+        echo json_encode($respuestaError);
+    }
+}
+//validar contra
+if ($respuesta === 'validar' && $metodo === 'POST') {
+    $datosLogin = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+    
+    if ($datosLogin === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["error" => "Error validando contraseña"]);
+        exit;
+    }
+    $nameUser = $datosLogin['nameUser'];
+    
+    $password = $datosLogin['password'];
+
+    $stmtContra = $con->prepare("SELECT contra FROM datos WHERE nameUser='$nameUser'");
+    $stmtContra->execute();
+    $resultadoContra = $stmtContra->get_result();
+
+    if ($resultadoContra) {
+     
+        $row = $resultadoContra->fetch_assoc();
+        if ($row) {
+
+
+            $contrahash = $row['contra'];
+
+            if (password_verify($password, $contrahash)) {
+                http_response_code(200);
+              
+                $mostrart = [
+                    "Success" => "validación correcta"
+                ];
+                echo json_encode($mostrart);
+
+            } else {
+                http_response_code(400);
+                $mostrart = [
+                    "Error" => "validación incorrecta"
+                ];
+                echo json_encode($mostrart);
+            }
+
+        } else {
+            http_response_code(400);
+            $respuestaErrorContra = [
+                "Error" => "usuario no encontrado",
+            ];
+            echo json_encode($respuestaErrorContra);
+        }
+    } else {
+        http_response_code(500);
+        $respuestaErrorContra=[
+            "Error"=>"error validacion contraseña"
+        ];
+        echo json_encode($respuestaErrorContra);
     }
 }
 
@@ -59,19 +120,19 @@ if ($respuesta === 'get-user' && $metodo === 'GET') {
         if ($resultado) {
 
             $datos = $resultado->fetch_all(MYSQLI_ASSOC);
-            if(count($datos)>0){
+            if (count($datos) > 0) {
                 echo json_encode($datos);
-            }else{
+            } else {
                 http_response_code(400);
                 $response = [
                     "Error" => "Usuario no encontrado",
-                   
+
                 ];
                 echo json_encode($response);
             }
-           
-           
-        } else{
+
+
+        } else {
             http_response_code(400);
             $responsee = [
                 "Error" => "Error en resultado",
@@ -99,20 +160,23 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         exit;
     }
 
-
+   
     $nameUser = $datosRecibidos['nameUser'];
     $telefono = $datosRecibidos['telefono'];
     $contra = $datosRecibidos['contra'];
+
+    
+
     $contraCod = password_hash($contra, PASSWORD_BCRYPT);
     $nombreTraidoBd = 'SELECT COUNT(*) from datos where nameUser = ?';
     $stmtName = mysqli_prepare($con, $nombreTraidoBd);
     mysqli_stmt_bind_param($stmtName, 's', $nameUser);
     $ejecutadoName = mysqli_stmt_execute($stmtName);
 
-    if($ejecutadoName===false){
+    if ($ejecutadoName === false) {
         http_response_code(400);
         $response = [
-            "error"=>"Error mirando nombre de usuario",
+            "error" => "Error mirando nombre de usuario",
             "datosRecibidos" => $datosRecibidos
         ];
         echo json_encode($response);
@@ -130,9 +194,9 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         echo json_encode($response);
         exit;
     } else {
-        $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra) values(?,?,?,?)';
+        $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra) values(?,?,?)';
         $stmt = mysqli_prepare($con, $insertarDatos);
-        mysqli_stmt_bind_param($stmt, 'sis',  $nameUser, $telefono, $contraCod);
+        mysqli_stmt_bind_param($stmt, 'sis', $nameUser, $telefono, $contraCod);
         $ejecutado = mysqli_stmt_execute($stmt);
         if ($ejecutado === true) {
             $response = [
@@ -150,5 +214,21 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         }
 
     }
+}
+
+//manejar datos sesion usuario
+
+//cerrar sesión 
+
+if($respuesta === 'logout' && $metodo === 'GET'){
+ 
+    setcookie("PHPSESSID","",time()-3600,"/");
+    session_destroy();
+    http_response_code(200);
+    $sendResponse = [
+        "Success"=>"Log out succesful"
+    ];
+    echo json_encode($sendResponse);
+
 }
 ?>

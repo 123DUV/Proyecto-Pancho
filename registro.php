@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,85 +15,122 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <!-- CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- JavaScript de Bootstrap (requiere Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <!-- Bootstrap JS y Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        body {
-            background: rgb(210, 247, 255);
-            background: linear-gradient(0deg, rgba(210, 247, 255, 1) 25%, rgba(13, 204, 255, 1) 100%);
-            background-repeat: no-repeat;
-        }
-
-        #botonVolver {
-            position: relative;
-            top: 5vh;
-        }
-
-        form {
-            text-align: center;
-            width: 50%;
-            margin: 0 auto;
-            height: 100vh;
-            padding-top: 25vh;
-        }
-        .text-justify{
-            text-align: center;
-            text-align-last: center;
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
         }
     </style>
 </head>
 
 <body>
-    <div class="d-flex justify-content-center" id="botonVolver">
-        <button type="button" class="btn btn-dark mx-2 text-center" onclick="history.go(-1);"><i
-                class="bi bi-arrow-left"></i> Volver</button>
-    </div>
-    <form class="form" id="formCorreo" method="post">
-        <h2 class="titulo">Registrate</h2>
+    <section class="h-auto">
+        <div class="container py-5 h-auto">
+            <div class="row d-flex align-items-center justify-content-center h-auto">
+                <div class="col-md-8 col-lg-7 col-xl-6">
+                    <img src="./img/draw2.svg" class="img-fluid" alt="Phone image">
+                </div>
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                    <form>
+                        <!-- User input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="text" class="form-control form-control-lg" id="nameUser" name="nameUser" />
+                            <label class="form-label" for="nameUser">Nombre usuario</label>
+                        </div>
+                        <!-- Phone input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <input type="number" class="form-control form-control-lg" id="telefono" name="telefono" />
+                            <label class="form-label" for="telefono">Teléfono</label>
+                        </div>
 
-        <p type="Alias:"><input placeholder="Nombre" name="nameUser" class="form-control" id="nameUser"></input></p>
+                        <!-- Password input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                            <div class="input-group mb-1">
+                                <input type="password" id="contra" class="form-control form-control-lg" autocomplete="new-password"
+                                 
+                                    aria-describedby="button-addon2">
+                                <button class="btn btn-outline-secondary bg-secondary" type="button" id="button-addon2"
+                                    onclick="mostrarContra();"><i id="icono" class="bi bi-eye-slash text-white"></i></button>
+                                 
+                            </div>
+                            <label for="contra" class="mx-1">Contraseña</label>
+                        </div>
 
-        <p type="Phone:"><input placeholder="Phone" type="number" class="form-control" name="telefono"
-                id="telefono"></input></p>
-        <p type="Password: "><input placeholder="Password" aria-describedby="desc" type="password" class="form-control"
-                name="password" id="password" autocomplete="new-password"></input></p>
-        <div id="desc">
-           <p class="text-justify">
-           Minimo 8 caracteres<br>
-            Maximo 15<br>
-            Al menos una mayúscula<br>
-            Al menos una minuscula<br>
-            Al menos un dígito<br>
-            No espacios en blanco<br>
-            Al menos 1 caracter especial<br>
-           </p></div>
-        <div class="d-flex justify-content-center">
 
-            <button type="button" class="btn btn-dark" id="botonEnvio" onclick="enviarForm();">Enviar</button>
-            <!-- <button type="button" class="btn btn-dark mx-2" id="botonEnvi" onclick="obtenerDatos();">get info</button> -->
+                        <div class="d-flex justify-content-around align-items-center mb-4">
+
+
+                            <a href="./login.php">Iniciar sesión</a>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="d-flex justify-content-evenly align-items-center ">
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                class="btn btn-primary btn-lg btn-block" onclick="enviarForm();">Iniciar</button>
+                            <button type="button" class="btn btn-dark btn-lg btn-block "
+                                onclick="volver();">Salir</button>
+                        </div>
+
+                        <div class="divider d-flex align-items-center my-4">
+                            <p class="text-center fw-bold mx-3 mb-0 text-muted">O</p>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a data-mdb-ripple-init class="btn btn-primary btn-sm btn-block"
+                                style="background-color: #3b5998" href="#!" role="button">
+                                <i class="fab fa-facebook-f me-2"></i>Continua con Facebook
+                            </a>
+                            <a data-mdb-ripple-init class="btn btn-primary btn-sm btn-block"
+                                style="background-color: #55acee" href="#!" role="button">
+                                <i class="fab fa-twitter me-2"></i>Continua con Twitter</a>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
-
-    </form>
-
-
-    <div>
-
-    </div>
+    </section>
 
     <script>
 
         const controller = new AbortController();
         const signal = controller.signal;
         const divDesc = document.getElementById('desc');
-        divDesc.style.display = 'none';
+        const botonInfo = document.getElementById('botonInfo');
+        const botonMostrarC = document.getElementById('contra');
+        const iconoCambio = document.getElementById('icono');
 
-        function volver() {
-            window.location.href = 'index.php';
+        function mostrarContra() {
+            if (botonMostrarC.type === "password") {
+                botonMostrarC.type = "text";
+               
+            } else {
+                botonMostrarC.type = "password"
+            }
+           
+                    icono.classList.toggle('bi-eye');
+                    icono.classList.toggle('bi-eye-slash')
+               
+                
+            
         }
 
+        function volver() {
+            window.location.href = './index.php';
+        }
 
         function obtenerDatos() {
             event.preventDefault();
@@ -138,7 +176,7 @@
 
             const nameUser = document.getElementById('nameUser').value;
             const telefono = document.getElementById('telefono').value;
-            const contra = document.getElementById('password').value;
+            const contra = document.getElementById('contra').value;
 
             var data = {
                 nameUser: nameUser,
@@ -168,7 +206,7 @@
                             title: 'Error',
                             text: 'Usuario ya en uso'
                         });
-                        controller.abort();
+
                     }
 
                 })
@@ -178,10 +216,11 @@
         }
 
         function enviarForm() {
+
             const regexContra = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
             const nameUser = document.getElementById('nameUser').value;
             const telefono = document.getElementById('telefono').value;
-            const contra = document.getElementById('password').value;
+            const contra = document.getElementById('contra').value;
 
 
             if (nameUser.length < 3) {
@@ -198,13 +237,13 @@
                     icon: "info"
                 });
 
-            } else if (!regexContra.test(contra.value)) {
+            } else if (!regexContra.test(contra)) {
                 Swal.fire({
                     title: "Info",
                     text: "La contraseña no cumple con las condiciones",
                     icon: "info"
                 });
-                divDesc.style.display = 'block';
+
 
             } else {
 
@@ -217,6 +256,10 @@
 
 
         }
+
+
+
+
     </script>
 
 

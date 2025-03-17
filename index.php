@@ -1,3 +1,27 @@
+<?php 
+session_start();
+
+    // echo session_id();
+    // echo $_SESSION['user'];
+    // var_dump($_SESSION);
+
+    $nameGlobal = $_SESSION['user'];
+    $saludo;
+    $fecha = date('Y-m-d H:i:s');
+    $fechaComparacion= date('Y-m-d 12:00:00');
+
+    if(empty($nameGlobal) || $nameGlobal===null){
+        if($fecha< $fechaComparacion){
+            $saludo = 'Buen dia';
+        }else{
+            $saludo = 'Buena tarde';
+        } 
+    }else{ 
+        $saludo = 'Bienvenido/a '.$_SESSION['user'];
+    }
+    
+//   session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +34,7 @@
     <meta name="author" content="Duvan Bedoya">
     <meta name="robots" content="index, follow">
     <title>App</title>
-    <link rel="icon" type="image/png" href="./img/R.png">
+    <link rel="icon" type="image/x-icon" href="./img/icono-form.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
@@ -194,17 +218,20 @@
 
        
     </style>
+    
 </head>
 
 <body>
- 
     <div class="container-fluid ">
-
         <button class="goup btn btn-light"><i class="bi bi-arrow-up"></i></button>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded" data-mdb-navbar-init>
             <div class="container" id="top">
+                
+                <div class="d-flex justify-content-center align-items-center">
                 <i class="bi bi-cursor-fill fs-3" id="irArriba"></i>
+                <p class="m-3" style="color: black;"><?php echo  $saludo?></p>
+                </div>
                 <a class="navbar-brand" href="#!"></a>
                 <button class="navbar-toggler" type="button" data-mdb-collapse-init data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -213,32 +240,33 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
+                   
                     <li class="nav-item">
-                            <a class="nav-link" href="login.php">Login</a>
+                            <a class="nav-link " id="hide" href="login.php">Iniciar sesión</a>
                         </li>
-                 
                         <li class="nav-item">
                             <a class="nav-link" href="blog.php">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#oferts">Oferts</a>
+                            <a class="nav-link" href="#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact me</a>
+                            <a class="nav-link" href="#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="news.php">News</a>
+                            <a class="nav-link" href="news.php">Noticias</a>
                         </li>
                         <li>
-                            <a class="nav-link rounded" href="registro.php" style="background-color: #c2c2c2; "
-                                class="text-center">Sign Up</a>
+                            <a class="nav-link rounded " href="registro.php" style="background-color: #c2c2c2; "
+                                class="text-center ">Registrate</a>
                         </li>
+                       
                     </ul>
                 </div>
             </div>
         </nav>
+        <button type="button" class="btn btn-light" onclick="cerrarSesion();">Cerrar sesión</button>
         <!-- Navbar -->
-
         <div class="row d-flex  gradient-abajo ">
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
@@ -377,13 +405,30 @@
         }());
     </script>
     <script>
+        function cerrarSesion(){
+            fetch(`http://localhost/app_duv/api.php/logout`,{
+                method: 'GET',
+                header : {"Content-Type": "application/json"}
+            })
+            .then(result=>{
+                if(result.ok){
+                    window.location.href= 'http://localhost/app_duv/index.php'
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Error cerrando sesión'
+                    })
+                }
+                result.json()})
+            .then(data=>console.log(data))
+            .catch(error=>console.log(error))
+        }
 
 
         document.getElementById('irArriba').addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-       
-
 
     </script>
     <script>
