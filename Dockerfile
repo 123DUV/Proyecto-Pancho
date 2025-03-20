@@ -1,11 +1,16 @@
-# Usa la imagen oficial de PHP con Apache
 FROM php:8.1-apache
 
-# Copia el código de tu proyecto al servidor Apache
+# Habilitar mod_rewrite
+RUN a2enmod rewrite
+
+# Copiar archivos al servidor
 COPY . /var/www/html/
 
-# Expone el puerto 80 (Render lo usará)
+# Establecer permisos correctos
+RUN chown -R www-data:www-data /var/www/html
+
+# Exponer el puerto 80
 EXPOSE 80
 
-# Comando para iniciar Apache
+# Iniciar Apache
 CMD ["apache2-foreground"]
