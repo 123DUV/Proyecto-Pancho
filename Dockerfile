@@ -2,6 +2,8 @@ FROM php:8.1-apache
 
 # Habilitar mod_rewrite
 RUN a2enmod rewrite
+RUN a2enmod headers
+
 
 # Copiar archivos al servidor
 COPY . /var/www/html/
