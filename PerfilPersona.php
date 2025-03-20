@@ -149,7 +149,7 @@ if($logeado){
                 console.log(urls);
             });
             function cerrarSesion() {
-            fetch(`http://localhost/api.php/logout`, {
+            fetch(`https://controlcoser.onrender.com/api/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })

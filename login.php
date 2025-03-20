@@ -118,7 +118,7 @@ if(!empty($_SESSION['user'])){
           text: 'Campo nombre usuario necesario'
         });
       } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`http://localhost/api.php/validar`, {
+        fetch(`https://controlcoser.onrender.com/api/validar`, {
           method: 'POST',
           header: {
             "Content-Type": "application/json"

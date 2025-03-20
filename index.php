@@ -439,7 +439,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             document.getElementById('closeR').style.visibility = "visible";
         }
         function cerrarSesion() {
-            fetch(`http://localhost/api.php/logout`, {
+            fetch(`https://controlcoser.onrender.com/api/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })

@@ -282,7 +282,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("http://localhost/api.php/save-user", {
+            fetch("https://controlcoser.onrender.com/api/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {
