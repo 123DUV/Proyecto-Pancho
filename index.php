@@ -250,7 +250,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         <li class="nav-item">
                             <div id="inicioSesion">
-                                <a class="nav-link " id="hide" href="app_duv/login">Iniciar sesión</a>
+                                <a class="nav-link " id="hide" href="/login">Iniciar sesión</a>
                             </div>
 
                         </li>
