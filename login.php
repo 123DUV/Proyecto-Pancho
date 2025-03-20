@@ -1,24 +1,23 @@
 <?php
 session_start();
-// echo session_id();
-if (isset($_SESSION['user_id'])) {
-  // Redirigir al usuario a la página de inicio o perfil
-  header("Location: index.php");
-  exit();
+
+if(!empty($_SESSION['user'])){
+  header("Location: /app_duv/");
 }
-// var_dump($_SESSION);
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Inicio de sesión</title>
   <!-- <link rel="stylesheet" href="./styles.css"> -->
   <title>Login</title>
   <link rel="icon" type="image/png" href="./img/icono-form.jpg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  <link rel="stylesheet" type="text/css" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -36,15 +35,17 @@ if (isset($_SESSION['user_id'])) {
     }
   </style>
 </head>
+
 <body>
   <section class="h-auto">
     <div class="container py-5 h-auto">
       <div class="row d-flex align-items-center justify-content-center h-auto">
+        <h2 class="text-center mb-5 text-uppercase">Inicia sesión</h2>
         <div class="col-md-8 col-lg-7 col-xl-6">
           <img src="./img/draw2.svg" class="img-fluid" alt="Phone image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form method="post" action="login.php" id="myForm">
+          <form method="post" action="api.php" id="myForm">
             <!-- User input -->
             <div data-mdb-input-init class="form-outline mb-4">
               <input type="text" id="nameUser" name="nameUser" class="form-control form-control-lg" />
@@ -67,13 +68,13 @@ if (isset($_SESSION['user_id'])) {
                 <label class="form-check-label" for="form1Example3"> Recordarme</label>
               </div>
               <a href="#!">Olvide mi contraseña?</a>
-              <a href="./registro.php">Registrarse</a>
+              <a href="/app_duv/registro">Registrarse</a>
             </div>
             <!-- Submit button -->
             <div class="d-flex justify-content-evenly align-items-center ">
-              <button type="submit" onclick="obtenerDatos(event);" data-mdb-button-init data-mdb-ripple-init
-                class="btn btn-primary btn-lg btn-block"  id="botonEnviar">Iniciar</button>
-                <button type="button" class="btn btn-dark btn-lg btn-block " onclick="volver();" id="salir">Salir</button>
+              <button type="submit" onclick="validarContra(event);" data-mdb-button-init data-mdb-ripple-init
+                class="btn btn-primary btn-lg btn-block" id="botonEnviar">Iniciar</button>
+              <button type="button" class="btn btn-dark btn-lg btn-block " onclick="volver();" id="salir">Salir</button>
             </div>
             <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0 text-muted">O</p>
@@ -98,37 +99,67 @@ if (isset($_SESSION['user_id'])) {
     const controller = new AbortController();
     const botonMostrarC = document.getElementById('contra');
     const iconoCambio = document.getElementById('icono');
-    function validarContra() {
+
+
+
+
+    function validarContra(event) {
+      event.preventDefault();
       const nameUser = document.getElementById('nameUser').value;
       const password = document.getElementById('contra').value;
       var data = {
         nameUser: nameUser,
         password: password
       }
-      fetch(`http://localhost/app_duv/api.php/validar`, {
-        method: 'POST',
-        header: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-        .then(result => {
-          if (!result.ok) {
-            Swal.fire({
-              icon: 'info',
-              title: 'Info',
-              text: 'La contraseña es incorrecta'
-            });
-          } else {
-            window.location.href = 'http://localhost/app_duv/index.php';
-            return result.json();
-          }
+      if (nameUser.trim() === '') {
+        Swal.fire({
+          icon: 'info',
+          title: 'Info',
+          text: 'Campo nombre usuario necesario'
+        });
+      } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
+        fetch(`http://localhost/app_duv/api.php/validar`, {
+          method: 'POST',
+          header: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
         })
-        .then(data => {
-          console.log(data)
-          window.location.href = 'http://localhost/app_duv/index.php';
-        })
-        .catch(error => console.error("Error:", error))
+          .then(result => {
+            if (result.ok) {
+              document.getElementById("botonEnviar").disabled = true;
+           
+                  // document.getElementById('botonEnviar').addEventListener("click", function () {
+                   
+                  document.getElementById('myForm').submit();
+                  
+                  //   console.log("enviado");
+                  // });
+                  window.location.href = "/app_duv/"
+                  return result.json();
+               
+
+
+            } else if(result.status===404){
+              Swal.fire({
+                icon: 'info',
+                title: 'Info',
+                text: 'Usuario no encontrado'
+              });
+            }else if(result.status===400){
+              Swal.fire({
+                icon: "info",
+                title: "Info",
+                text: "La contraseña es incorrecta"
+              })
+            }
+          })
+          .then(data => {
+            console.log(data)
+
+          })
+          .catch(error => console.error("Error:", error))
+      }
     }
 
     function mostrarContra() {
@@ -141,57 +172,12 @@ if (isset($_SESSION['user_id'])) {
       icono.classList.toggle('bi-eye-slash-fill');
     }
 
-    // document.getElementById('botonEnviar').addEventListener("click", function(){
-    //   window.location.href = './index.php'
-    // });
-    function volver(){
-      window.location.href = 'http://localhost/app_duv/index.php';
-   
-    }
-    //desaparecer login al logearse
+    function volver() {
+      window.location.href = '/app_duv/';
 
-    function obtenerDatos(event) {
-      event.preventDefault();
-      const nameUser = document.getElementById('nameUser').value;
-      if (nameUser.trim() === '') {
-        Swal.fire({
-          icon: 'info',
-          title: 'Info',
-          text: 'Campo nombre usuario necesario'
-        });
-      } else {
-        fetch(`http://localhost/app_duv/api.php/get-user?user=${nameUser}`, {
-          method: 'GET',
-        })
-          .then(result => {
-            if (result.ok) {
-              validarContra();
-              <?php $_SESSION['user']=$_POST['nameUser']; ?>
-              window.location.href = 'http://localhost/app_duv/index.php';
-              return result.json();
-              
-            } else {
-              Swal.fire({
-                icon: 'info',
-                title: 'Usuario no encontrado',
-                text: 'El usuario ingresado no existe'
-              });
-              return;
-            }
-          })
-          .then(data => {
-            window.location.href = "http://localhost/app_duv/index.php";
-            console.log(data);
-            // contrahasheada=data[0]['contra'];
-          })
-          .catch(error => {
-            console.error("Error: ", error);
-          })
-      }
     }
-    //mandar sesion
 
-   
+
 
   </script>
 </body>

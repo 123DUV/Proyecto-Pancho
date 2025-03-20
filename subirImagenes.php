@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form</title>
+    <title>Subir Imagenes </title>
     <link rel="icon" type="image/png" href="./img/icono-form.jpg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -14,9 +14,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="./styles.css"> -->
-    <link rel="stylesheet" type="text/css" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         input[type="file"]{
@@ -66,7 +64,7 @@
                             text: 'Imagen subida correctamente'
                         }).then((result)=>{
                             if(result.isConfirmed){
-                            window.location.href='index.php'
+                            window.location.href='/app_duv/'
                             }
                         });
                         </script>";
@@ -89,9 +87,9 @@
     <div class="m-5">
              <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i> Volver</button>
         </div>
-        <form action="subirImagenes.php" method="post" enctype="multipart/form-data">
+        <form action="/app_duv/subirImagenes" method="post" enctype="multipart/form-data">
             <div class="text-center col-md-6 col-sm-6 col-6" style="margin: 0 auto;">
-                <label for="inputModificado" class="inputFalso">Cargar Imagen</label>
+                <label for="inputModificado" class="inputFalso overflow-hidden ">Cargar Imagen</label>
             <input type="file" accept="image/*" multiple="true" name="images[]" class="" id="inputModificado" required>
           <div id="vistaPrevia">
 
@@ -154,7 +152,7 @@
             });
 
             function volver(){
-                window.location.href = "index.php";
+                window.location.href = "/app_duv/";
             }
         </script>
     </body>

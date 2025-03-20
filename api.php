@@ -51,13 +51,13 @@ if ($respuesta === 'get-all-user' && $metodo === 'GET') {
 //validar contra
 if ($respuesta === 'validar' && $metodo === 'POST') {
     $datosLogin = json_decode(file_get_contents("php://input"), true) ?? $_POST;
-    
+
     if ($datosLogin === null && json_last_error() !== JSON_ERROR_NONE) {
         echo json_encode(["error" => "Error validando contraseña"]);
         exit;
     }
     $nameUser = $datosLogin['nameUser'];
-    
+
     $password = $datosLogin['password'];
 
     $stmtContra = $con->prepare("SELECT contra FROM datos WHERE nameUser='$nameUser'");
@@ -65,7 +65,7 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
     $resultadoContra = $stmtContra->get_result();
 
     if ($resultadoContra) {
-     
+
         $row = $resultadoContra->fetch_assoc();
         if ($row) {
 
@@ -74,7 +74,7 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
 
             if (password_verify($password, $contrahash)) {
                 http_response_code(200);
-              
+                $_SESSION['user'] = $nameUser;
                 $mostrart = [
                     "Success" => "validación correcta"
                 ];
@@ -89,7 +89,7 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
             }
 
         } else {
-            http_response_code(400);
+            http_response_code(404);
             $respuestaErrorContra = [
                 "Error" => "usuario no encontrado",
             ];
@@ -97,12 +97,13 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
         }
     } else {
         http_response_code(500);
-        $respuestaErrorContra=[
-            "Error"=>"error validacion contraseña"
+        $respuestaErrorContra = [
+            "Error" => "error validacion contraseña"
         ];
         echo json_encode($respuestaErrorContra);
     }
 }
+
 
 //obtener info por nombre de usuario
 
@@ -152,7 +153,6 @@ if ($respuesta === 'get-user' && $metodo === 'GET') {
 //guardar usuario
 
 if ($respuesta === 'save-user' && $metodo === 'POST') {
-
     $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
 
     if ($datosRecibidos === null && json_last_error() !== JSON_ERROR_NONE) {
@@ -160,12 +160,14 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         exit;
     }
 
-   
     $nameUser = $datosRecibidos['nameUser'];
     $telefono = $datosRecibidos['telefono'];
     $contra = $datosRecibidos['contra'];
+    $imagenPerfil = $datosRecibidos['imagenPerfil'];
 
-    
+    if(empty($imagenPerfil)){
+        $imagenPerfil="./uploads./imgsDefecto./imgPerfilDefecto.jpg";
+    }
 
     $contraCod = password_hash($contra, PASSWORD_BCRYPT);
     $nombreTraidoBd = 'SELECT COUNT(*) from datos where nameUser = ?';
@@ -194,11 +196,23 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         echo json_encode($response);
         exit;
     } else {
-        $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra) values(?,?,?)';
+        
+    $captcha =$datosRecibidos['g-recaptcha-response']?? $_POST['g-recaptcha-response'];
+    $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
+    $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
+
+    $response = file_get_contents($urlApi);
+
+    $responseTwo = json_decode($response);
+
+    if ($responseTwo->success == true) {
+        http_response_code(200);
+        $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra, imgPerfil) values(?,?,?,?)';
         $stmt = mysqli_prepare($con, $insertarDatos);
-        mysqli_stmt_bind_param($stmt, 'sis', $nameUser, $telefono, $contraCod);
+        mysqli_stmt_bind_param($stmt, 'siss', $nameUser, $telefono, $contraCod, $imagenPerfil);
         $ejecutado = mysqli_stmt_execute($stmt);
         if ($ejecutado === true) {
+            http_response_code(200);
             $response = [
                 "mensaje" => "Usuario agregado correctamente",
                 "datosRecibidos" => $datosRecibidos
@@ -213,22 +227,32 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
             echo json_encode($response);
         }
 
+    } else {
+        http_response_code(400);
+        $mensaje = [
+            "Error" => "error en la validación del captcha"
+        ];
+        echo json_encode($mensaje);
     }
-}
+       
+    }
 
-//manejar datos sesion usuario
+
+}
 
 //cerrar sesión 
 
-if($respuesta === 'logout' && $metodo === 'GET'){
- 
-    setcookie("PHPSESSID","",time()-3600,"/");
+if ($respuesta === 'logout' && $metodo === 'GET') {
+
+
     session_destroy();
     http_response_code(200);
     $sendResponse = [
-        "Success"=>"Log out succesful"
+        "Success" => "Log out succesful"
     ];
     echo json_encode($sendResponse);
 
 }
+
+
 ?>

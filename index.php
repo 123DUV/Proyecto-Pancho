@@ -1,29 +1,37 @@
-<?php 
+<?php
 session_start();
 
-    // echo session_id();
-    // echo $_SESSION['user'];
-    // var_dump($_SESSION);
+// echo session_id();
+// echo $_SESSION['user'];
+// var_dump($_SESSION);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
-    $nameGlobal = $_SESSION['user'];
-    $saludo;
-    $fecha = date('Y-m-d H:i:s');
-    $fechaComparacion= date('Y-m-d 12:00:00');
+if (isset($_SESSION['user'])) {
+    $logedIn = true;
+} else {
+    $logedIn = false;
+}
 
-    if(empty($nameGlobal) || $nameGlobal===null){
-        if($fecha< $fechaComparacion){
-            $saludo = 'Buen dia';
-        }else{
-            $saludo = 'Buena tarde';
-        } 
-    }else{ 
-        $saludo = 'Bienvenido/a '.$_SESSION['user'];
+$nameGlobal = $_SESSION['user'];
+$saludo;
+date_default_timezone_set("America/Bogota");
+$fecha = date('Y-m-d H:i:s');
+$fechaComparacion = date('Y-m-d 12:00:00');
+
+if (empty($nameGlobal) || $nameGlobal === null) {
+    if ($fecha < $fechaComparacion) {
+        $saludo = 'Buen dia';
+    } else {
+        $saludo = 'Buena tarde';
     }
-    
+} else {
+    $saludo = 'Bienvenido/a ' . $_SESSION['user'];
+}
+
 //   session_destroy();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es1">
 
 <head>
     <meta charset="UTF-8">
@@ -37,8 +45,7 @@ session_start();
     <link rel="icon" type="image/x-icon" href="./img/icono-form.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -214,23 +221,23 @@ session_start();
             font-weight: 700;
             color: #eee;
         }
-
-
-       
     </style>
-    
+
 </head>
 
 <body>
+    <script>
+        var logedIn = <?php echo json_encode($logedIn); ?>;
+    </script>
     <div class="container-fluid ">
         <button class="goup btn btn-light"><i class="bi bi-arrow-up"></i></button>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded" data-mdb-navbar-init>
             <div class="container" id="top">
-                
+
                 <div class="d-flex justify-content-center align-items-center">
-                <i class="bi bi-cursor-fill fs-3" id="irArriba"></i>
-                <p class="m-3" style="color: black;"><?php echo  $saludo?></p>
+                    <i class="bi bi-cursor-fill fs-3" id="irArriba"></i>
+                    <p class="m-3" style="color: black;"><?php echo $saludo ?></p>
                 </div>
                 <a class="navbar-brand" href="#!"></a>
                 <button class="navbar-toggler" type="button" data-mdb-collapse-init data-bs-toggle="collapse"
@@ -240,32 +247,48 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
-                   
-                    <li class="nav-item">
-                            <a class="nav-link " id="hide" href="login.php">Iniciar sesión</a>
+
+                        <li class="nav-item">
+                            <div id="inicioSesion">
+                                <a class="nav-link " id="hide" href="app_duv/login">Iniciar sesión</a>
+                            </div>
+
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog.php">Blog</a>
+                            <a class="nav-link" href="app_duv/blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#oferts">Ofertas</a>
+                            <a class="nav-link" href="app_duv/#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contactame</a>
+                            <a class="nav-link" href="app_duv/#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="news.php">Noticias</a>
+                            <a class="nav-link" href="app_duv/news">Noticias</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="app_duv/subirImagenes">subirImagenes</a>
+                        </li>
+                        <div id="perfil">
+                        <li class="nav-item">
+                            <a class="nav-link" href="app_duv/perfilPersona">Perfil</a>
+                        </li>
+                        </div>
+                        
                         <li>
-                            <a class="nav-link rounded " href="registro.php" style="background-color: #c2c2c2; "
-                                class="text-center ">Registrate</a>
+                            <div id="closeR">
+                            <a class="nav-link rounded " href="app_duv/registro" style="background-color: #c2c2c2; "
+                            class="text-center ">Registrate</a>
+                            </div>
+                    
                         </li>
-                       
+                        <button type="button" id="closeS" class="btn btn-light" onclick="cerrarSesion();">Cerrar sesión</button>
+
                     </ul>
                 </div>
             </div>
         </nav>
-        <button type="button" class="btn btn-light" onclick="cerrarSesion();">Cerrar sesión</button>
+
         <!-- Navbar -->
         <div class="row d-flex  gradient-abajo ">
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
@@ -309,7 +332,7 @@ session_start();
                 <!-- <img src="./img/OIP.jpeg" alt="imagen"  class="sin-bordes"> -->
             </div>
 
-           
+
 
         </div>
         <div class="row gradient-arriba pt-5 " id="oferts">
@@ -368,7 +391,7 @@ session_start();
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<base href="/">
     <script>
         // Create a lightbox
         (function () {
@@ -405,31 +428,47 @@ session_start();
         }());
     </script>
     <script>
-        function cerrarSesion(){
-            fetch(`http://localhost/app_duv/api.php/logout`,{
+
+        if (logedIn) {
+            document.getElementById('inicioSesion').style.visibility = "hidden";
+            document.getElementById('closeS').style.visibility = "visible";
+            document.getElementById('closeR').style.visibility = "hidden";
+        }else{
+            document.getElementById('inicioSesion').style.display = "visible";
+            document.getElementById('closeS').style.visibility = "hidden";
+            document.getElementById('closeR').style.visibility = "visible";
+        }
+        function cerrarSesion() {
+            fetch(`http://localhost/app_duv/api.php/logout`, {
                 method: 'GET',
-                header : {"Content-Type": "application/json"}
+                header: { "Content-Type": "application/json" }
             })
-            .then(result=>{
-                if(result.ok){
-                    window.location.href= 'http://localhost/app_duv/index.php'
-                }else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error cerrando sesión'
-                    })
-                }
-                result.json()})
-            .then(data=>console.log(data))
-            .catch(error=>console.log(error))
+                .then(result => {
+                    if (result.ok) {
+                        
+                        window.location.href = '/app_duv/'
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error cerrando sesión'
+                        })
+                    }
+                    result.json()
+                })
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
         }
 
 
         document.getElementById('irArriba').addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-
+        function deshabilitaRetroceso(){
+    window.location.hash="no-back-button";
+    window.location.hash="Again-No-back-button" //chrome
+    window.onhashchange=function(){window.location.hash="";}
+}
     </script>
     <script>
         $(document).ready(function () {
