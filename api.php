@@ -9,10 +9,10 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Credentials: true");
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'app-duv';
+$hostname = 'sql10.freesqldatabase.com';
+$username = 'sql10768775';
+$password = 'C5sPIR9Bbv';
+$dbname = 'sql10768775';
 $tablaPrincipal = 'datos';
 
 $con = mysqli_connect($hostname, $username, $password, $dbname);
