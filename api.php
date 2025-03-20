@@ -198,7 +198,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
     } else {
         
     $captcha =$datosRecibidos['g-recaptcha-response']?? $_POST['g-recaptcha-response'];
-    $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
+    $secretKey = '6Lfe8voqAAAAABNEit1YMLQ_PWLgtuLm6WSVsWa5';
     $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
 
     $response = file_get_contents($urlApi);
