@@ -117,10 +117,10 @@ if($logeado){
 
         <script>
             function irLogin(){
-                window.location.href = "/app_duv/login";
+                window.location.href = "/login";
             }
             function volver(){
-                window.location.href = "/app_duv/";
+                window.location.href = "/";
             }
             document.addEventListener('DOMContentLoaded', function(){
                 const image = document.getElementById("");
@@ -148,14 +148,14 @@ if($logeado){
                 console.log(urls);
             });
             function cerrarSesion() {
-            fetch(`http://localhost/app_duv/api.php/logout`, {
+            fetch(`http://localhost/api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })
                 .then(result => {
                     if (result.ok) {
                         
-                        window.location.href = '/app_duv/'
+                        window.location.href = '/'
                     } else {
                         Swal.fire({
                             icon: 'error',

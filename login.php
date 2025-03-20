@@ -2,7 +2,7 @@
 session_start();
 
 if(!empty($_SESSION['user'])){
-  header("Location: /app_duv/");
+  header("Location: /");
 }
 
 ?>
@@ -68,7 +68,7 @@ if(!empty($_SESSION['user'])){
                 <label class="form-check-label" for="form1Example3"> Recordarme</label>
               </div>
               <a href="#!">Olvide mi contraseña?</a>
-              <a href="/app_duv/registro">Registrarse</a>
+              <a href="/registro">Registrarse</a>
             </div>
             <!-- Submit button -->
             <div class="d-flex justify-content-evenly align-items-center ">
@@ -118,7 +118,7 @@ if(!empty($_SESSION['user'])){
           text: 'Campo nombre usuario necesario'
         });
       } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`http://localhost/app_duv/api.php/validar`, {
+        fetch(`http://localhost/api.php/validar`, {
           method: 'POST',
           header: {
             "Content-Type": "application/json"
@@ -135,7 +135,7 @@ if(!empty($_SESSION['user'])){
                   
                   //   console.log("enviado");
                   // });
-                  window.location.href = "/app_duv/"
+                  window.location.href = "/"
                   return result.json();
                
 
@@ -173,7 +173,7 @@ if(!empty($_SESSION['user'])){
     }
 
     function volver() {
-      window.location.href = '/app_duv/';
+      window.location.href = '/';
 
     }
 

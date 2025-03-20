@@ -126,7 +126,7 @@
                         <div class="d-flex justify-content-around align-items-center mb-4">
 
 
-                            <a href="/app_duv/login">Iniciar sesión</a>
+                            <a href="/login">Iniciar sesión</a>
                         </div>
 
                         <!-- Submit button -->
@@ -220,10 +220,10 @@
             divInfoOculto.style.display = "block";
         })
         function volver() {
-            window.location.href = '/app_duv/';
+            window.location.href = '/';
         }
         function irLogin() {
-            window.location.href = '/app_duv/login';
+            window.location.href = '/login';
         }
 
         function obtenerDatos() {
@@ -237,7 +237,7 @@
                     text: 'Campo alias necesario'
                 });
             } else {
-                fetch(`https://localhost/app_duv/api.php/get-user?user=${nameUser}`, {
+                fetch(`https://localhost/api.php/get-user?user=${nameUser}`, {
                     method: 'GET',
                 })
                     .then(respuesta => {
@@ -282,7 +282,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("http://localhost/app_duv/api.php/save-user", {
+            fetch("http://localhost/api.php/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {

@@ -255,29 +255,29 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/blog">Blog</a>
+                            <a class="nav-link" href="/blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/#oferts">Ofertas</a>
+                            <a class="nav-link" href="/#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/#contact">Contactame</a>
+                            <a class="nav-link" href="/#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/news">Noticias</a>
+                            <a class="nav-link" href="/news">Noticias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/subirImagenes">subirImagenes</a>
+                            <a class="nav-link" href="/subirImagenes">subirImagenes</a>
                         </li>
                         <div id="perfil">
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/perfilPersona">Perfil</a>
+                            <a class="nav-link" href="/perfilPersona">Perfil</a>
                         </li>
                         </div>
                         
                         <li>
                             <div id="closeR">
-                            <a class="nav-link rounded " href="app_duv/registro" style="background-color: #c2c2c2; "
+                            <a class="nav-link rounded " href="/registro" style="background-color: #c2c2c2; "
                             class="text-center ">Registrate</a>
                             </div>
                     
@@ -439,14 +439,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             document.getElementById('closeR').style.visibility = "visible";
         }
         function cerrarSesion() {
-            fetch(`http://localhost/app_duv/api.php/logout`, {
+            fetch(`http://localhost/api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })
                 .then(result => {
                     if (result.ok) {
                         
-                        window.location.href = '/app_duv/'
+                        window.location.href = '/'
                     } else {
                         Swal.fire({
                             icon: 'error',

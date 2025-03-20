@@ -106,7 +106,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/app_duv/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                            <a href="/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-original-title="Orders">
                                 <i class="bi bi-arrow-left fs-3"></i>
                             </a>
@@ -133,7 +133,7 @@
                 <div class="text-center sticky-top" style="background-color: yellow;">
 
                     <div class="line-container">
-                        <a href="/app_duv/news" style="text-decoration: none;">
+                        <a href="/news" style="text-decoration: none;">
                             <p class="text-black pt-1">Check the news</p>
                             <div class="line">
 
@@ -194,7 +194,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function volver() {
-            window.location.href = '/app_duv/';
+            window.location.href = '/';
         }
     </script>
     <script>

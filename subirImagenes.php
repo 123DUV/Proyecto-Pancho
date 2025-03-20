@@ -64,7 +64,7 @@
                             text: 'Imagen subida correctamente'
                         }).then((result)=>{
                             if(result.isConfirmed){
-                            window.location.href='/app_duv/'
+                            window.location.href='/'
                             }
                         });
                         </script>";
@@ -87,7 +87,7 @@
     <div class="m-5">
              <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i> Volver</button>
         </div>
-        <form action="/app_duv/subirImagenes" method="post" enctype="multipart/form-data">
+        <form action="/subirImagenes" method="post" enctype="multipart/form-data">
             <div class="text-center col-md-6 col-sm-6 col-6" style="margin: 0 auto;">
                 <label for="inputModificado" class="inputFalso overflow-hidden ">Cargar Imagen</label>
             <input type="file" accept="image/*" multiple="true" name="images[]" class="" id="inputModificado" required>
@@ -152,7 +152,7 @@
             });
 
             function volver(){
-                window.location.href = "/app_duv/";
+                window.location.href = "/";
             }
         </script>
     </body>

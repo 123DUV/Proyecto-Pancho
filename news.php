@@ -380,7 +380,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             function volver() {
-                window.location.href = '/app_duv/';
+                window.location.href = '/';
             }
 
 
