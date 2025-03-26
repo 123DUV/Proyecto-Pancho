@@ -1,5 +1,15 @@
 <?php
+$recordar = isset($_POST['remember']) ? true : false;
+$lifetime;
+if($recordar){
+    $lifetime = 60*60*24*30;
+}else{
+    $lifetime = 10; 
+}
+
+session_set_cookie_params($lifetime);
 session_start();
+ini_set("session.gc_maxlifetime", $lifetime);
 
 use function PHPSTORM_META\type;
 
@@ -9,10 +19,16 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Credentials: true");
 
-$hostname = 'sql10.freesqldatabase.com';
-$username = 'sql10768775';
-$password = 'C5sPIR9Bbv';
-$dbname = 'sql10768775';
+// $hostname = 'sql10.freesqldatabase.com';
+// $username = 'sql10768775';
+// $password = 'C5sPIR9Bbv';
+// $dbname = 'sql10768775';
+// $tablaPrincipal = 'datos';
+
+$hostname = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'app-duv';
 $tablaPrincipal = 'datos';
 
 $con = mysqli_connect($hostname, $username, $password, $dbname);
@@ -20,16 +36,18 @@ if (!$con) {
     die("fallo" . mysqli_connect_error());
 }
 
+
 //obtener ruta despues de api.php
-$respuesta = str_replace("/api/", "", $_SERVER['REQUEST_URI']);
+$respuesta = str_replace("/app_duv/api.php/", "", $_SERVER['REQUEST_URI']);
 
 $respuesta = explode("?", $respuesta)[0];
 error_log("ruta: " . $respuesta);
 $metodo = $_SERVER['REQUEST_METHOD'];
 
+//recordar usuario
+
+
 //obtener todos los usuarios
-
-
 if ($respuesta === 'get-all-user' && $metodo === 'GET') {
     $stmt = $con->prepare("SELECT * FROM datos");
     $stmt->execute();
@@ -48,8 +66,10 @@ if ($respuesta === 'get-all-user' && $metodo === 'GET') {
         echo json_encode($respuestaError);
     }
 }
+
 //validar contra
 if ($respuesta === 'validar' && $metodo === 'POST') {
+    
     $datosLogin = json_decode(file_get_contents("php://input"), true) ?? $_POST;
 
     if ($datosLogin === null && json_last_error() !== JSON_ERROR_NONE) {
@@ -104,6 +124,81 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
     }
 }
 
+//guardar numero cajas
+if($respuesta === 'guardar-cajas' && $metodo ==='GET'){
+  
+    $nroCajas = $_GET['cajas'];
+    $enviarCajas = "UPDATE datos set nroCajas = ? WHERE nameUser = 'admin'";
+    $stmt = mysqli_prepare($con, $enviarCajas);
+    mysqli_stmt_bind_param($stmt, 'i', $nroCajas);
+    $ejecutado = mysqli_stmt_execute($stmt);
+    if ($ejecutado === false) {
+        http_response_code(400);
+        $response = [
+            "error" => "Error subiendo numero cajas",
+          
+        ];
+        echo json_encode($response);
+        exit;
+    }else{
+  
+            http_response_code(200);
+            $response = [
+                "success" => "Numero cajas subido",
+            
+            ];
+            echo json_encode($response);   
+    }
+
+}
+
+//obtener numero cajas
+if($respuesta === 'obtener-cajas' && $metodo === 'GET'){
+  
+        $stmt = $con->prepare("SELECT nroCajas FROM datos WHERE nameUser = 'admin'");
+        $stmt->execute();
+        $respuesta = $stmt->get_result();
+
+        if($respuesta){
+            foreach ($respuesta as $row) {
+                $resultadoImprimir = $row;
+            }
+            echo json_encode($resultadoImprimir);
+            
+          
+        }else{
+            http_response_code(400);
+            $response = [
+                "error"=>"no se pudo obtener el numero de cajas"
+            ];
+            echo json_encode($response);
+        }
+    
+}
+
+//eliminar cajas
+if($respuesta ==='no-cajas' && $metodo === 'GET'){
+    $stmt = $con->prepare("UPDATE datos SET nroCajas = 0 WHERE nameUser = 'admin'");
+    $respuesta = $stmt->execute();
+        
+
+        if($respuesta){
+        
+            http_response_code(400);
+            $response = [
+                "success"=>"Eliminado correctamente"
+            ];
+            echo json_encode($response);
+            
+          
+        }else{
+            http_response_code(400);
+            $response = [
+                "error"=>"no se pudo eliminar"
+            ];
+            echo json_encode($response);
+        } 
+}
 
 //obtener info por nombre de usuario
 
@@ -198,7 +293,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
     } else {
         
     $captcha =$datosRecibidos['g-recaptcha-response']?? $_POST['g-recaptcha-response'];
-    $secretKey = '6Lfe8voqAAAAABNEit1YMLQ_PWLgtuLm6WSVsWa5';
+    $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
     $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
 
     $response = file_get_contents($urlApi);
@@ -251,6 +346,7 @@ if ($respuesta === 'logout' && $metodo === 'GET') {
         "Success" => "Log out succesful"
     ];
     echo json_encode($sendResponse);
+    header("refresh: 2; url=/");
 
 }
 

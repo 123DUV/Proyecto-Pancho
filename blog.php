@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -106,7 +110,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                            <a href="/app_duv/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-original-title="Orders">
                                 <i class="bi bi-arrow-left fs-3"></i>
                             </a>
@@ -194,7 +198,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function volver() {
-            window.location.href = '/';
+            window.location.href = '/app_duv/';
         }
     </script>
     <script>

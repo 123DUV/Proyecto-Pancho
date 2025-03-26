@@ -2,7 +2,7 @@
 session_start();
 
 if(!empty($_SESSION['user'])){
-  header("Location: /");
+  header("Location: /app_duv/");
 }
 
 ?>
@@ -42,7 +42,7 @@ if(!empty($_SESSION['user'])){
       <div class="row d-flex align-items-center justify-content-center h-auto">
         <h2 class="text-center mb-5 text-uppercase">Inicia sesión</h2>
         <div class="col-md-8 col-lg-7 col-xl-6">
-          <img src="./img/draw2.svg" class="img-fluid" alt="Phone image">
+          <img src="./uploads/draw1.svg" class="img-fluid" alt="login-image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
           <form method="post" action="api.php" id="myForm">
@@ -64,11 +64,11 @@ if(!empty($_SESSION['user'])){
             <div class="d-flex flex-column flex-sm-column flex-md-row justify-content-around align-items-center mb-4">
               <!-- Checkbox -->
               <div class="form-check ">
-                <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                <input class="form-check-input" type="checkbox" value="" id="remember" name="remember" />
                 <label class="form-check-label" for="form1Example3"> Recordarme</label>
               </div>
               <a href="#!">Olvide mi contraseña?</a>
-              <a href="/registro">Registrarse</a>
+              <a href="/app_duv/registro">Registrarse</a>
             </div>
             <!-- Submit button -->
             <div class="d-flex justify-content-evenly align-items-center ">
@@ -100,7 +100,17 @@ if(!empty($_SESSION['user'])){
     const botonMostrarC = document.getElementById('contra');
     const iconoCambio = document.getElementById('icono');
 
+    function recordar(){
+      fetch(`http://localhost/app_duv/api.php/recordar`,{
+        method: "get",
+        headers:{
+          "Content-Type": "application/json"
+        }
+      })
+      .then(result=>{
 
+      })
+    }
 
 
     function validarContra(event) {
@@ -118,9 +128,9 @@ if(!empty($_SESSION['user'])){
           text: 'Campo nombre usuario necesario'
         });
       } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`https://controlcoser.onrender.com/api/validar`, {
+        fetch(`http://localhost/app_duv/api.php/validar`, {
           method: 'POST',
-          header: {
+          headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(data)
@@ -135,7 +145,7 @@ if(!empty($_SESSION['user'])){
                   
                   //   console.log("enviado");
                   // });
-                  window.location.href = "/"
+                  window.location.href = "/app_duv/"
                   return result.json();
                
 
@@ -173,7 +183,7 @@ if(!empty($_SESSION['user'])){
     }
 
     function volver() {
-      window.location.href = '/';
+      window.location.href = '/app_duv/';
 
     }
 

@@ -1,10 +1,12 @@
 <?php
 session_start();
-
-// echo session_id();
-// echo $_SESSION['user'];
-// var_dump($_SESSION);
+$mostrarSubir = false;
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+if ($_SESSION['user'] === "admin") {
+    $mostrarSubir = true;
+} else {
+    $mostrarSubir = false;
+}
 
 if (isset($_SESSION['user'])) {
     $logedIn = true;
@@ -27,13 +29,13 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 } else {
     $saludo = 'Bienvenido/a ' . $_SESSION['user'];
 }
-
-//   session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="es1">
 
 <head>
+<title>App</title>
+<link rel="icon" type="image/png" href="/app_duv/img/R.png">
     <meta charset="UTF-8">
     <meta name="description" content="sewing machine services and information">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,8 +43,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <meta name="keywords" content="MACHINE,SERVICES,INFORMATION, SEWING MACHINE">
     <meta name="author" content="Duvan Bedoya">
     <meta name="robots" content="index, follow">
-    <title>App</title>
-    <link rel="icon" type="image/x-icon" href="./img/icono-form.jpg">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,39 +251,49 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         <li class="nav-item">
                             <div id="inicioSesion">
-                                <a class="nav-link " id="hide" href="/login">Iniciar sesión</a>
+                                <a class="nav-link " id="hide" href="app_duv/login">Iniciar sesión</a>
                             </div>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/blog">Blog</a>
+                            <a class="nav-link" href="app_duv/blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#oferts">Ofertas</a>
+                            <a class="nav-link" href="app_duv/#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#contact">Contactame</a>
+                            <a class="nav-link" href="app_duv/#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/news">Noticias</a>
+                            <a class="nav-link" href="app_duv/news">Noticias</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/subirImagenes">subirImagenes</a>
-                        </li>
-                        <div id="perfil">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/perfilPersona">Perfil</a>
-                        </li>
+                        <div class="<?php
+                        if ($mostrarSubir === true) {
+                            echo "d-block";
+                        } else {
+                            echo "d-none";
+                        }
+                        ?>">
+                            <li class="nav-item">
+                                <a class="nav-link" href="app_duv/subirImagenes">subirImagenes</a>
+                            </li>
                         </div>
-                        
+
+                        <div id="perfil">
+                            <li class="nav-item">
+                                <a class="nav-link" href="app_duv/perfilPersona">Perfil</a>
+                            </li>
+                        </div>
+
                         <li>
                             <div id="closeR">
-                            <a class="nav-link rounded " href="/registro" style="background-color: #c2c2c2; "
-                            class="text-center ">Registrate</a>
+                                <a class="nav-link rounded " href="app_duv/registro" style="background-color: #c2c2c2; "
+                                    class="text-center ">Registrate</a>
                             </div>
-                    
+
                         </li>
-                        <button type="button" id="closeS" class="btn btn-light" onclick="cerrarSesion();">Cerrar sesión</button>
+                        <button type="button" id="closeS" class="btn btn-light" onclick="cerrarSesion();">Cerrar
+                            sesión</button>
 
                     </ul>
                 </div>
@@ -300,7 +311,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-                <img src="./img/OIP.jpeg" loading="lazy" alt="imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/imagenPrincipal.jpg" loading="lazy" alt="imagen-principal" class="rounded"
+                    width="100%">
             </div>
         </div>
         <div class="row d-flex text-center pt-5  gradient-arriba" style="font-family: var(--fuente);">
@@ -323,7 +335,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row inline-block reverse-order  bg-black gradient-abajo pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./img/OIP.jpeg" loading="lazy" alt="imagen" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.jpg" loading="lazy" alt="segunda-inicio" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
@@ -338,19 +350,21 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <div class="row gradient-arriba pt-5 " id="oferts">
             <div class="contenedor-lightbox">
                 <h2 class="text-center" style="font-family: var(--fuente);">Titulo</h2>
-                <div class="lightbox-gallery">
-                    <div><img src="./img/OIP.jpeg" loading="lazy" data-image-hd="./img/OIP.jpeg" alt="imagen">
-                    </div>
-                    <div><img src="./img/OIP.jpeg" loading="lazy" data-image-hd="./img/OIP.jpeg" alt="imagen">
-                    </div>
-                    <div><img src="./img/OIP.jpeg" loading="lazy" data-image-hd="./img/OIP.jpeg" alt="imagen">
-                    </div>
-                    <div><img src="./img/OIP.jpeg" loading="lazy" data-image-hd="./img/OIP.jpeg" alt="imagen"></div>
-                    <div><img src="./img/OIP.jpeg" loading="lazy" data-image-hd="./img/OIP.jpeg" alt="imagen">
-                    </div>
-                    <div><img src="./img/OIP.jpeg" loading="lazy" data-image-hd="./img/OIP.jpeg" alt="imagen">
-                    </div>
+                <div class="<?php if ($mostrarSubir) {
+                    echo "d-block  flex-row justify-content-end ";
+                } else {
+                    echo "d-none ";
+                } ?>" id="btnLight">
+                    <button class="btn" style="background-color: #01E7F9;" id="btnAdd">+</button>
+
+                    <button class="btn " onclick="eliminarCajas();" id="delete"
+                        style="background-color:rgb(253, 67, 67);">-</button>
+
                 </div>
+                <div class="lightbox-gallery" id="cajaLight">
+
+                </div>
+
             </div>
         </div>
         <div class="row gradient-abajo pt-5" style="background-image: url('./img/R.jpeg');" id="contact">
@@ -391,8 +405,114 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<base href="/">
+    <base href="/">
     <script>
+        function eliminarCajas() {
+            fetch(`http://localhost/app_duv/api.php/no-cajas`, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "get"
+            })
+                .then(result => {
+                    return result.json()
+                })
+                .then(data => {
+                    console.log(data);
+                })
+            const cajitas = document.getElementById("cajaLight");
+            cajitas.innerHTML = "";
+            location.reload();
+        }
+
+        let cuenta = 1;
+        let contadorAlterno = 0;
+        fetch(`http://localhost/app_duv/api.php/obtener-cajas`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "get"
+        })
+            .then(result => {
+                return result.json()
+            })
+            .then(data => {
+                cuenta = data.nroCajas;
+                console.log(cuenta);
+                console.log(data)
+                
+                while (cuenta - 1 >= 0) {
+                    contadorAlterno++;
+                    const caja = document.getElementById("cajaLight");
+                    const crearDivL = document.createElement("div");
+                    const crearImg = document.createElement("img");
+                    crearImg.src = `/app_duv/uploads/imagen-${contadorAlterno}-li.jpg`;
+                    crearImg.loading = "lazy";
+                    crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorAlterno}-li.jpg`;
+                    crearImg.alt = `imagen-${contadorAlterno}-li`;
+                    crearDivL.classList = "cajita"
+                    crearDivL.appendChild(crearImg);
+                    caja.appendChild(crearDivL);
+                    cuenta--;
+                }
+                
+            })
+
+
+            let varia = contadorAlterno + 1 ?? 1;
+
+
+
+        var contadorClicksAdd = varia ?? 1;
+        document.getElementById("btnAdd").addEventListener("click", function () {
+
+            crearCajas(contadorClicksAdd);
+            fech();
+            contadorClicksAdd++;
+
+
+
+        });
+        function crearCajas(contadorClicksAdd) {
+            const caja = document.getElementById("cajaLight");
+            const crearDivL = document.createElement("div");
+            const crearImg = document.createElement("img");
+            crearImg.src = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.jpg`;
+            crearImg.loading = "lazy";
+            crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.jpg`;
+            crearImg.alt = `imagen-${contadorClicksAdd}-li`;
+            crearDivL.classList = "cajita"
+            crearDivL.appendChild(crearImg);
+            caja.appendChild(crearDivL);
+        }
+        function fech() {
+            fetch(`http://localhost/app_duv/api.php/guardar-cajas?cajas=${contadorClicksAdd}`, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "get"
+
+            })
+            fetch(`http://localhost/app_duv/api.php/obtener-cajas`, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "get"
+            })
+                .then(result => {
+                    return result.json()
+                })
+                .then(data => {
+                    varia = data.nroCajas;
+
+                    console.log(varia);
+                    console.log(data)
+                })
+
+        }
+
+
+
         // Create a lightbox
         (function () {
             var $lightbox = $("<div class='lightbox'></div>");
@@ -433,20 +553,20 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             document.getElementById('inicioSesion').style.visibility = "hidden";
             document.getElementById('closeS').style.visibility = "visible";
             document.getElementById('closeR').style.visibility = "hidden";
-        }else{
+        } else {
             document.getElementById('inicioSesion').style.display = "visible";
             document.getElementById('closeS').style.visibility = "hidden";
             document.getElementById('closeR').style.visibility = "visible";
         }
         function cerrarSesion() {
-            fetch(`https://controlcoser.onrender.com/api/logout`, {
+            fetch(`http://localhost/app_duv/api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })
                 .then(result => {
                     if (result.ok) {
-                        
-                        window.location.href = '/'
+
+                        window.location.href = '/app_duv/'
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -464,11 +584,11 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         document.getElementById('irArriba').addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-        function deshabilitaRetroceso(){
-    window.location.hash="no-back-button";
-    window.location.hash="Again-No-back-button" //chrome
-    window.onhashchange=function(){window.location.hash="";}
-}
+        function deshabilitaRetroceso() {
+            window.location.hash = "no-back-button";
+            window.location.hash = "Again-No-back-button" //chrome
+            window.onhashchange = function () { window.location.hash = ""; }
+        }
     </script>
     <script>
         $(document).ready(function () {

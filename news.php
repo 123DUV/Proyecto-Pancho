@@ -286,7 +286,7 @@
     <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded" data-mdb-navbar-init style="background: rgb(158,236,255);
         background: linear-gradient(0deg, rgba(158,236,255,1) 25%, rgba(33,116,236,1) 67%);">
         <div class="container" id="top">
-            <img src="./img/news1.png" class="imagen-news" alt="">
+            <img src="./uploads/news1.jpg" class="imagen-news" alt="">
             <a class="navbar-brand" href="#!"></a>
             <button class="navbar-toggler" type="button" data-mdb-collapse-init data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -361,14 +361,14 @@
 
             <div class="row text-center">
                     <div class="col-md-6 ">
-                        <img src="./img/OIP.jpeg" loading="lazy" class="rounded img-fluid" alt="imagen">
+                        <img src="./uploads/desc-1-nws.jpg" loading="lazy" class="rounded img-fluid" alt="imagen descripición news uno">
                         <div class="text-black " style="font-family: 'Space Mono', monospace;;">
                              <p class="fs-4">Descripción</p>
                         </div>
                         
                     </div>
                     <div class="col-md-6 ">
-                        <img src="./img/OIP.jpeg" loading="lazy" class="rounded img-fluid" alt="imagen">
+                        <img src="./uploads/desc-1-nws.jpg" loading="lazy" class="rounded img-fluid" alt="imagen descripción news dos">
                         <div class="text-black" style="font-family: 'Space Mono', monospace;">
                         <p class="fs-4">Descripción</p>
                         </div>
@@ -380,7 +380,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             function volver() {
-                window.location.href = '/';
+                window.location.href = '/app_duv/';
             }
 
 

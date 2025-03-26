@@ -60,7 +60,7 @@
             <div class="row d-flex align-items-center justify-content-center h-auto">
             <h2 class="text-center mb-5 text-uppercase">Registrate</h2>
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                    <img src="./img/draw2.svg" class="img-fluid" alt="Phone image">
+                    <img src="./img/draw2.svg" class="img-fluid" alt="register-image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                     <form method="post" action="api.php">
@@ -120,13 +120,13 @@
                         </div>
 
                         <!-- captcha-->
-                        <div class="g-recaptcha" data-sitekey="6Lfe8voqAAAAAIAoYByqlNMeA4VUMApPvsfDbMDn"></div>
+                        <div class="g-recaptcha" data-sitekey="6LdJffgqAAAAAPKNIYQ35mOvtBLHuXkZcTry9Hef"></div>
 
 
                         <div class="d-flex justify-content-around align-items-center mb-4">
 
 
-                            <a href="/login">Iniciar sesión</a>
+                            <a href="/app_duv/login">Iniciar sesión</a>
                         </div>
 
                         <!-- Submit button -->
@@ -220,10 +220,10 @@
             divInfoOculto.style.display = "block";
         })
         function volver() {
-            window.location.href = '/';
+            window.location.href = '/app_duv/';
         }
         function irLogin() {
-            window.location.href = '/login';
+            window.location.href = '/app_duv/login';
         }
 
         function obtenerDatos() {
@@ -237,7 +237,7 @@
                     text: 'Campo alias necesario'
                 });
             } else {
-                fetch(`https://localhost/api.php/get-user?user=${nameUser}`, {
+                fetch(`https://localhost/app_duv/api.php/get-user?user=${nameUser}`, {
                     method: 'GET',
                 })
                     .then(respuesta => {
@@ -282,7 +282,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("https://controlcoser.onrender.com/api/save-user", {
+            fetch("http://localhost/app_duv/api.php/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {

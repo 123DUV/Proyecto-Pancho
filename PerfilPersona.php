@@ -1,9 +1,14 @@
 <?php 
 session_start();
-$hostname = 'sql10.freesqldatabase.com';
-$username = 'sql10768775';
-$password = 'C5sPIR9Bbv';
-$dbname = 'sql10768775';
+// $hostname = 'sql10.freesqldatabase.com';
+// $username = 'sql10768775';
+// $password = 'C5sPIR9Bbv';
+// $dbname = 'sql10768775';
+// $tablaPrincipal = 'datos';
+$hostname = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'app-duv';
 $tablaPrincipal = 'datos';
 
 
@@ -118,10 +123,10 @@ if($logeado){
 
         <script>
             function irLogin(){
-                window.location.href = "/login";
+                window.location.href = "/app_duv/login";
             }
             function volver(){
-                window.location.href = "/";
+                window.location.href = "/app_duv/";
             }
             document.addEventListener('DOMContentLoaded', function(){
                 const image = document.getElementById("");
@@ -149,14 +154,14 @@ if($logeado){
                 console.log(urls);
             });
             function cerrarSesion() {
-            fetch(`https://controlcoser.onrender.com/api/logout`, {
+            fetch(`http://localhost/app_duv/api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })
                 .then(result => {
                     if (result.ok) {
                         
-                        window.location.href = '/'
+                        window.location.href = '/app_duv/'
                     } else {
                         Swal.fire({
                             icon: 'error',
