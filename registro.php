@@ -119,7 +119,8 @@
 
                         </div>
 
-               
+                        <!-- captcha-->
+                        <div class="g-recaptcha" data-sitekey="6LdJffgqAAAAAPKNIYQ35mOvtBLHuXkZcTry9Hef"></div>
 
 
                         <div class="d-flex justify-content-around align-items-center mb-4">
