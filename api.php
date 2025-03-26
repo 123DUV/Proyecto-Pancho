@@ -291,10 +291,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         echo json_encode($response);
         exit;
     } else {
-        
-    $captcha =$datosRecibidos['g-recaptcha-response']?? $_POST['g-recaptcha-response'];
-    $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
-    $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
+  
 
     $response = file_get_contents($urlApi);
 
