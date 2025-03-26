@@ -291,7 +291,6 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         echo json_encode($response);
         exit;
     } else {
-  
 
     $response = file_get_contents($urlApi);
 
