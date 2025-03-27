@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News</title>
-    <link rel="icon" type="image/png" href="./img/icono-form.jpg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -14,9 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-  
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
@@ -272,7 +269,8 @@
         .contenedor-lo-demas {
             overflow: hidden;
         }
-        .text-justify{
+
+        .text-justify {
             text-align: justify;
             text-align-last: center;
         }
@@ -286,35 +284,15 @@
     <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded" data-mdb-navbar-init style="background: rgb(158,236,255);
         background: linear-gradient(0deg, rgba(158,236,255,1) 25%, rgba(33,116,236,1) 67%);">
         <div class="container" id="top">
-            <img src="./uploads/news1.jpg" class="imagen-news" alt="">
-            <a class="navbar-brand" href="#!"></a>
-            <button class="navbar-toggler" type="button" data-mdb-collapse-init data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="bi bi-person-lines-fill"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#oferts">Oferts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">Contact me</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="news.php">News</a>
-                    </li> -->
-                    <li>
-                        <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i>
-                            Volver</button>
-                    </li>
-                </ul>
-            </div>
+            
+            <a class="navbar-brand" href="/app_duv/"><i class="bi bi-c-circle fs-3 text-white"></i></a>
+       
+        
         </div>
     </nav>
 
     <div class="contenedor-lo-demas">
-        <div>
+        <!-- <div>
             <div class="contenedor-slides">
                 <ul class="slides">
                     <li id="slide1"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg" alt="" /></li>
@@ -343,67 +321,72 @@
                 </ul>
             </div> 
 
-        </div>
+        </div> -->
         <div class="col-md-12 ">
-            <div class="col-md-6 text-center px-4 pt-4 bg-primary rounded" style="margin: 0 auto; font-family: var(--fuente);">
-            <p class="fs-5 pb-4">Important News</p>
+            <div class="col-md-6 text-center px-4 pt-4 bg-primary rounded"
+                style="margin: 0 auto; font-family: var(--fuente);">
+                <p class="fs-5 pb-4">Important News</p>
             </div>
-       
-            
+
+
         </div>
         <div class="col-md-12">
-               <div class="text-justify col-md-6 p-4 " style="font-family: 'Space Mono', monospace;margin: 0 auto;">
-               <p class="fs-5">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur qui odio, nisi explicabo facere aliquid non. Enim inventore molestiae alias, vitae optio quibusdam atque commodi qui accusantium incidunt fugiat harum?
-               
-               </div>
-            </div>
+            <div class="text-justify col-md-6 p-4 " style="font-family: 'Space Mono', monospace;margin: 0 auto;">
+                <p class="fs-5">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur qui odio, nisi explicabo
+                    facere aliquid non. Enim inventore molestiae alias, vitae optio quibusdam atque commodi qui
+                    accusantium incidunt fugiat harum?
 
-            <div class="row text-center">
-                    <div class="col-md-6 ">
-                        <img src="./uploads/desc-1-nws.jpg" loading="lazy" class="rounded img-fluid" alt="imagen descripición news uno">
-                        <div class="text-black " style="font-family: 'Space Mono', monospace;;">
-                             <p class="fs-4">Descripción</p>
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-6 ">
-                        <img src="./uploads/desc-1-nws.jpg" loading="lazy" class="rounded img-fluid" alt="imagen descripción news dos">
-                        <div class="text-black" style="font-family: 'Space Mono', monospace;">
-                        <p class="fs-4">Descripción</p>
-                        </div>
-                       
-                    </div>
-                </div>
+            </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            function volver() {
-                window.location.href = '/app_duv/';
-            }
+        <div class="row text-center">
+            <div class="col-md-6 ">
+                <img src="./uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
+                    alt="imagen descripición news uno">
+                <div class="text-black " style="font-family: 'Space Mono', monospace;;">
+                    <p class="fs-4">Descripción</p>
+                </div>
+
+            </div>
+            <div class="col-md-6 ">
+                <img src="./uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
+                    alt="imagen descripción news dos">
+                <div class="text-black" style="font-family: 'Space Mono', monospace;">
+                    <p class="fs-4">Descripción</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function volver() {
+            window.location.href = '/app_duv/';
+        }
 
 
 
-        </script>
-        <script>
-            $(document).ready(function () {
-                $('.goup').hide();
-                $('.goup').click(function () {
-                    $('body,html').animate({
-                        scrollTop: 0
-                    }, 0)
-                });
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 200) {
-                        $('.goup').fadeIn();
-                    }
-                    else {
-                        $('.goup').fadeOut();
-                    }
-                });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.goup').hide();
+            $('.goup').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 0)
             });
-        </script>
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 200) {
+                    $('.goup').fadeIn();
+                }
+                else {
+                    $('.goup').fadeOut();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

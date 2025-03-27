@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 // $hostname = 'sql10.freesqldatabase.com';
 // $username = 'sql10768775';
@@ -21,22 +21,22 @@ $user;
 $imgExtraida;
 $estadoCeIn;
 
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     $logeado = true;
     $user = $_SESSION['user'];
     $estadoCeIn = "Cerrar sesión";
-}else{
+} else {
     $logeado = false;
     $user = "Usuario";
     $estadoCeIn = "Iniciar sesión";
 }
 
-if($logeado){
+if ($logeado) {
     $stmt = $con->prepare("SELECT imgPerfil FROM datos WHERE nameUser = ?");
     $stmt->bind_param("s", $user);
     $stmt->execute();
     $resultado = $stmt->get_result();
-    $extraerImg =$resultado->fetch_assoc();
+    $extraerImg = $resultado->fetch_assoc();
     $imgExtraida = $extraerImg['imgPerfil'];
 }
 ?>
@@ -48,7 +48,7 @@ if($logeado){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="icon" type="image/png" href="./img/icono-form.jpg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -70,7 +70,7 @@ if($logeado){
             border-radius: 50%;
             cursor: pointer;
             color: black;
-            margin-top: 25%;
+            margin-top: 15%;
         }
 
         .inputFalso img {
@@ -86,32 +86,63 @@ if($logeado){
 </head>
 
 <body>
-    <div class="container">
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" bg-dark ">
+                <div
+                    class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
+                    <a href="/app_duv/perfilPersona" class="d-block p-3 text-white text-decoration-none" title="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-original-title="Icon-only">
+                        <i class="bi bi-c-circle fs-1"></i>
+                    </a>
+                    <ul
+                        class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+                        <li class="nav-item">
+                            <a href="/app_duv/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-original-title="Home">
+                                <i class="bi-house fs-3"></i>
+                            </a>
+                        </li>
+                     
+                    </ul>
+                    <div class="dropdown">
+                        <a href="#"
+                            class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
+                            id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi-person-circle h2"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                           
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="/app_duv/">Inicio</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <form action="">
             <div class="text-center ">
                 <label for="inputModificado" class="inputFalso ">
-                    <img src="<?php if(empty($imgExtraida)){
+                    <img src="<?php if (empty($imgExtraida)) {
                         echo $imgDefectoPerfil;
-                    }else{
-                        echo $imgExtraida ;
+                    } else {
+                        echo $imgExtraida;
                     } ?>" class="img-fluid" alt="imagen">
                 </label>
-                <input type="file" accept="image/*" multiple="true" name="image" class="" id="inputModificado"
-                    required>
-                    <div class="text-center mt-2 mb-2">
-                        <h2>¡Hola, <?php echo $user ?>!</h2>
-                    </div>
+                <input type="file" accept="image/*" multiple="true" name="image" class="" id="inputModificado" required>
+                <div class="text-center mt-2 mb-2">
+                    <h2>¡Hola, <?php echo $user ?>!</h2>
+                </div>
                 <div class="text-center">
                     <button id="botonCrop" class="btn btn-lg border-bottom mt-2 mx-2">Editar foto perfil</button>
-                    <button id="botonCeIn" class="btn btn-lg btn-danger mt-2" onclick="<?php 
-                     
-                    if($logeado===true){
+                    <button id="botonCeIn" class="btn btn-lg btn-danger mt-2" onclick="<?php
+
+                    if ($logeado === true) {
                         echo "cerrarSesion()";
-                    }else{
+                    } else {
                         echo "irLogin()";
-                    }?>"> <?php    echo $estadoCeIn;  ?></button>
+                    } ?>"> <?php echo $estadoCeIn; ?></button>
                     <!-- <canvas id="previewCanvas"></canvas>  -->
                 </div>
                 <div id="vistaPrevia">
@@ -122,13 +153,14 @@ if($logeado){
         </form>
 
         <script>
-            function irLogin(){
+            
+            function irLogin() {
                 window.location.href = "/app_duv/login";
             }
-            function volver(){
+            function volver() {
                 window.location.href = "/app_duv/";
             }
-            document.addEventListener('DOMContentLoaded', function(){
+            document.addEventListener('DOMContentLoaded', function () {
                 const image = document.getElementById("");
             })
 
@@ -154,26 +186,26 @@ if($logeado){
                 console.log(urls);
             });
             function cerrarSesion() {
-            fetch(`http://localhost/app_duv/api.php/logout`, {
-                method: 'GET',
-                header: { "Content-Type": "application/json" }
-            })
-                .then(result => {
-                    if (result.ok) {
-                        
-                        window.location.href = '/app_duv/'
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Error cerrando sesión'
-                        })
-                    }
-                    result.json()
+                fetch(`http://localhost/app_duv/api.php/logout`, {
+                    method: 'GET',
+                    header: { "Content-Type": "application/json" }
                 })
-                .then(data => console.log(data))
-                .catch(error => console.log(error))
-        }
+                    .then(result => {
+                        if (result.ok) {
+
+                            window.location.href = '/app_duv/'
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Error cerrando sesión'
+                            })
+                        }
+                        result.json()
+                    })
+                    .then(data => console.log(data))
+                    .catch(error => console.log(error))
+            }
         </script>
 </body>
 

@@ -1,5 +1,9 @@
 <?php
-session_start();
+ $lifetime = 60 * 60 * 24 * 30;
+ session_set_cookie_params($lifetime);
+ ini_set("session.gc_maxlifetime", $lifetime);
+ ini_set("session.cookie_lifetime", $lifetime);
+ session_start();
 $mostrarSubir = false;
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 if ($_SESSION['user'] === "admin") {
@@ -34,21 +38,26 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 <html lang="es1">
 
 <head>
-<title>App</title>
-<link rel="icon" type="image/png" href="/app_duv/img/R.png">
+    <title>App</title>
+    <!--iconos-->
+    <link rel="icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <!--encabezados -->
     <meta charset="UTF-8">
     <meta name="description" content="sewing machine services and information">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="MACHINE,SERVICES,INFORMATION, SEWING MACHINE">
     <meta name="author" content="Duvan Bedoya">
     <meta name="robots" content="index, follow">
-    
+    <!--bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--fuente-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <!--script boots y sweetalert-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/queryloader2/3.3.2/queryloader2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queryloader2/3.3.2/queryloader2.min.js"></script>
@@ -68,23 +77,12 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             width: 50px;
         }
 
-        @media (prefers-color-scheme: light) {
-            :root {
-                --body-bg: #FFFFFF;
-                --body-color: #000000;
-                --fuente: "Press Start 2P", serif;
-            }
+
+        :root {
+            --body-bg: #FFFFFF;
+            --body-color: #000000;
+            --fuente: "Winky Sans", sans-serif;
         }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --body-bg: #000000;
-                --body-color: #FFFFFF;
-                --fuente: "Press Start 2P", serif;
-            }
-        }
-
-
 
         .full-lados {
             margin: 0 !important;
@@ -94,19 +92,19 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         }
 
         .gradient {
-            background: rgb(163, 160, 163);
-            background: radial-gradient(circle, rgba(163, 160, 163, 1) 28%, rgba(255, 255, 255, 1) 69%);
+            background: rgb(210, 247, 255);
+            background: linear-gradient(0deg, rgba(210, 247, 255, 1) 25%, rgba(142, 227, 250, 1) 100%);
         }
 
-        .gradient-abajo {
-            background: rgb(65, 65, 65);
-            background: linear-gradient(0deg, rgba(65, 65, 65, 1) 0%, rgba(249, 248, 246, 1) 65%);
+        .gradient-nav {
+            background: rgb(210, 247, 255);
+            background: linear-gradient(0deg, rgba(210, 247, 255, 1) 25%, rgba(113, 224, 254, 1) 100%);
         }
 
-        .gradient-arriba {
+        /* .gradient-arriba {
             background: rgb(249, 248, 246);
             background: linear-gradient(0deg, rgba(249, 248, 246, 1) 19%, rgba(65, 65, 65, 1) 95%);
-        }
+        }  */
 
         .shadow {
             box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
@@ -226,14 +224,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
 </head>
 
-<body>
+<body class="gradient">
     <script>
         var logedIn = <?php echo json_encode($logedIn); ?>;
     </script>
     <div class="container-fluid ">
         <button class="goup btn btn-light"><i class="bi bi-arrow-up"></i></button>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded" data-mdb-navbar-init>
+        <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded gradient-nav" data-mdb-navbar-init>
             <div class="container" id="top">
 
                 <div class="d-flex justify-content-center align-items-center">
@@ -299,55 +297,57 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 </div>
             </div>
         </nav>
-
         <!-- Navbar -->
-        <div class="row d-flex  gradient-abajo ">
+        <div class="row d-flex ">
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
                 <h4 style="font-family: var(--fuente);">Pagina</h4>
                 <p style="font-family: var(--fuente);">Descripción</p>
-                <!-- <img src="./img/OIP.jpeg" loading="lazy" alt="imagen"  class="sin-bordes"> -->
+                <!-- <img src="./uploads/imagenPrincipal.png" loading="lazy" alt="imagen-principal" class="rounded"
+                width="100%"> -->
             </div>
 
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-                <img src="./uploads/imagenPrincipal.jpg" loading="lazy" alt="imagen-principal" class="rounded"
+            
+                <img src="./uploads/imagenPrincipal.png" loading="lazy" alt="imagen-principal" class="rounded"
                     width="100%">
             </div>
         </div>
-        <div class="row d-flex text-center pt-5  gradient-arriba" style="font-family: var(--fuente);">
+        <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-0-circle-fill" onclick="window.location.href='https://www.facebook.com'"
+                <i class="bi bi-facebook text-primary" onclick="window.location.href='https://www.facebook.com'"
                     style="font-size: 10vw;"></i>
-                <p><a href="https://www.facebook.com" style="text-decoration: none; color:inherit;">Descripción</a></p>
+                <p><a href="https://www.facebook.com" style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
-                <i class="bi bi-1-circle-fill"
-                    onclick="window.location.href='https://wa.me/1234567890?text=Hola,%20quiero%solicitar%20esto'"
+                <i class="bi bi-whatsapp text-success"
+                    onclick="window.location.href='https://wa.me/3128616610?text=Hola,%quiero%solicitar%más%información%acerca%de%tus%servicios'"
                     style="font-size: 10vw; text-decoration: inherit;"></i>
-                <p><a href="https://wa.me/1234567890" style="text-decoration: none; color:inherit;">Descripción</a></p>
+                <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
+                        style="text-decoration: none; color:inherit;">Whatsapp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-2-circle-fill" onclick="window.location.href='https://www.instagram.com'"
+                <i class="bi bi-instagram text-danger" onclick="window.location.href='https://www.instagram.com'"
                     style="font-size: 10vw;"></i>
-                <p><a href="https://www.instagram.com" style="text-decoration: none; color:inherit;">Descripción</a></p>
+                <p><a href="https://www.instagram.com" style="text-decoration: none; color:inherit;">Instagram</a></p>
             </div>
         </div>
-        <div class="row inline-block reverse-order  bg-black gradient-abajo pt-5 ">
+        <div class="row inline-block reverse-order pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./uploads/segundaInicio.jpg" loading="lazy" alt="segunda-inicio" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.png" loading="lazy" alt="segunda-imagen-principal" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
                 <h4 style="font-family: var(--fuente);">Pagina</h4>
                 <p style="font-family: var(--fuente);">Descripción</p>
-                <!-- <img src="./img/OIP.jpeg" alt="imagen"  class="sin-bordes"> -->
+               
             </div>
 
 
 
         </div>
-        <div class="row gradient-arriba pt-5 " id="oferts">
+        <div class="row  pt-5 " id="oferts">
             <div class="contenedor-lightbox">
                 <h2 class="text-center" style="font-family: var(--fuente);">Titulo</h2>
                 <div class="<?php if ($mostrarSubir) {
@@ -367,15 +367,16 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             </div>
         </div>
-        <div class="row gradient-abajo pt-5" style="background-image: url('./img/R.jpeg');" id="contact">
+        <!-- footer -->
+        <div class="row  pt-5" style="background-image: url('./img/R.jpeg');" id="contact">
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-telephone fs-5"></i>
-                <p>3123123123</p>
+                <p>3128616610</p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-envelope-at fs-5"></i>
                 <p><a href="mailto:correo@gmail.com?subject=Asunto%20del%20correo&body=si%20es%20necesario"
-                        style="text-decoration: none; color:inherit;">Correo@gmail.com</a></p>
+                        style="text-decoration: none; color:inherit;">bedoyafabio4@gmail.com</a></p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-geo-alt fs-5"></i>
@@ -385,10 +386,21 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-calendar fs-5"></i>
                 <p>Horario</p>
+               
+               <ul class="text-center " style="list-style-type: none; padding-left: 0!important;">
+                    <li>
+                        Lunes-Sabado: 8 am - 4 pm
+                    </li>
+                    <li>
+                    Domingo: 8 am - 2pm 
+                    </li>
+                    <p> *<span> Los horarios pueden variar</span></p>
+                </ul>
+               
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-whatsapp"
-                    onclick="window.location.href='https://wa.me/1234567890?text=Hola,%20quiero%solicitar%20esto'"></i>
+                    onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'"></i>
                 <i class="bi bi-facebook" onclick="window.location.href='https://www.facebook.com'"></i>
                 <i class="bi bi-instagram" onclick="window.location.href='https://www.instagram.com'"></i>
             </div>
@@ -399,6 +411,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
 
         </div>
+        <!--fin footer-->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -440,26 +453,26 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 cuenta = data.nroCajas;
                 console.log(cuenta);
                 console.log(data)
-                
+
                 while (cuenta - 1 >= 0) {
                     contadorAlterno++;
                     const caja = document.getElementById("cajaLight");
                     const crearDivL = document.createElement("div");
                     const crearImg = document.createElement("img");
-                    crearImg.src = `/app_duv/uploads/imagen-${contadorAlterno}-li.jpg`;
+                    crearImg.src = `/app_duv/uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.loading = "lazy";
-                    crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorAlterno}-li.jpg`;
-                    crearImg.alt = `imagen-${contadorAlterno}-li`;
+                    crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorAlterno}-li.png`;
+                    crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
                     crearDivL.classList = "cajita"
                     crearDivL.appendChild(crearImg);
                     caja.appendChild(crearDivL);
                     cuenta--;
                 }
-                
+
             })
 
 
-            let varia = contadorAlterno + 1 ?? 1;
+        let varia = contadorAlterno + 1 ?? 1;
 
 
 
@@ -474,19 +487,23 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         });
         function crearCajas(contadorClicksAdd) {
+            const numeroCajas = document.querySelectorAll(".cajita");
+           const arrayCajas= Array.from(numeroCajas);
+           contadorClicksAdd=arrayCajas.length +1;
+
             const caja = document.getElementById("cajaLight");
             const crearDivL = document.createElement("div");
             const crearImg = document.createElement("img");
-            crearImg.src = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.jpg`;
+            crearImg.src = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.png`;
             crearImg.loading = "lazy";
-            crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.jpg`;
-            crearImg.alt = `imagen-${contadorClicksAdd}-li`;
+            crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.png`;
+            crearImg.alt = `imagen-${contadorClicksAdd}-ofertas`;
             crearDivL.classList = "cajita"
             crearDivL.appendChild(crearImg);
             caja.appendChild(crearDivL);
         }
         function fech() {
-            fetch(`http://localhost/app_duv/api.php/guardar-cajas?cajas=${contadorClicksAdd}`, {
+            fetch(`http://localhost/app_duv/api.php/guardar-cajas?cajas=${contadorClicksAdd+contadorAlterno}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },

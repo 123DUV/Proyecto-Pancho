@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Imagenes </title>
-    <link rel="icon" type="image/png" href="./img/icono-form.jpg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -104,10 +104,7 @@
         }
     }
 
-    function eliminarImagen()
-    {
 
-    }
     ?>
     <div class="m-5">
         <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i> Volver</button>
