@@ -4,6 +4,9 @@
  ini_set("session.gc_maxlifetime", $lifetime);
  ini_set("session.cookie_lifetime", $lifetime);
  session_start();
+
+    include_once 'config.php';
+
 $mostrarSubir = false;
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 if ($_SESSION['user'] === "admin") {
@@ -20,6 +23,7 @@ if (isset($_SESSION['user'])) {
 
 $nameGlobal = $_SESSION['user'];
 $saludo;
+$hora;
 date_default_timezone_set("America/Bogota");
 $fecha = date('Y-m-d H:i:s');
 $fechaComparacion = date('Y-m-d 12:00:00');
@@ -27,8 +31,10 @@ $fechaComparacion = date('Y-m-d 12:00:00');
 if (empty($nameGlobal) || $nameGlobal === null) {
     if ($fecha < $fechaComparacion) {
         $saludo = 'Buen dia';
+        $hora = 'Buen dia';
     } else {
         $saludo = 'Buena tarde';
+        $hora = 'Buena tarde';
     }
 } else {
     $saludo = 'Bienvenido/a ' . $_SESSION['user'];
@@ -249,12 +255,12 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         <li class="nav-item">
                             <div id="inicioSesion">
-                                <a class="nav-link " id="hide" href="app_duv/login">Iniciar sesión</a>
+                                <a class="nav-link " id="hide" href="app_duv/pages/login">Iniciar sesión</a>
                             </div>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/blog">Blog</a>
+                            <a class="nav-link" href="app_duv/pages/blog">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="app_duv/#oferts">Ofertas</a>
@@ -263,7 +269,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                             <a class="nav-link" href="app_duv/#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/news">Noticias</a>
+                            <a class="nav-link" href="app_duv/pages/news">Noticias</a>
                         </li>
                         <div class="<?php
                         if ($mostrarSubir === true) {
@@ -273,19 +279,19 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                         }
                         ?>">
                             <li class="nav-item">
-                                <a class="nav-link" href="app_duv/subirImagenes">subirImagenes</a>
+                                <a class="nav-link" href="app_duv/pages/subirImagenes">subirImagenes</a>
                             </li>
                         </div>
 
                         <div id="perfil">
                             <li class="nav-item">
-                                <a class="nav-link" href="app_duv/perfilPersona">Perfil</a>
+                                <a class="nav-link" href="app_duv/pages/perfilPersona">Perfil</a>
                             </li>
                         </div>
 
                         <li>
                             <div id="closeR">
-                                <a class="nav-link rounded " href="app_duv/registro" style="background-color: #c2c2c2; "
+                                <a class="nav-link rounded " href="app_duv/pages/registro" style="background-color: #c2c2c2; "
                                     class="text-center ">Registrate</a>
                             </div>
 
@@ -310,7 +316,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
             
-                <img src="./uploads/imagenPrincipal.png" loading="lazy" alt="imagen-principal" class="rounded"
+                <img src="./uploads/imagenPrincipal.png"  alt="imagen-principal" class="rounded"
                     width="100%">
             </div>
         </div>
@@ -335,7 +341,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row inline-block reverse-order pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./uploads/segundaInicio.png" loading="lazy" alt="segunda-imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.png" alt="segunda-imagen-principal" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
@@ -375,7 +381,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-envelope-at fs-5"></i>
-                <p><a href="mailto:correo@gmail.com?subject=Asunto%20del%20correo&body=si%20es%20necesario"
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=bedoyafabio4@gmail.com&su=<?php echo $hora ?>&body="
                         style="text-decoration: none; color:inherit;">bedoyafabio4@gmail.com</a></p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
@@ -421,7 +427,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <base href="/">
     <script>
         function eliminarCajas() {
-            fetch(`http://localhost/app_duv/api.php/no-cajas`, {
+            fetch(`<?php echo $BASE_URL?>api.php/no-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -440,7 +446,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         let cuenta = 1;
         let contadorAlterno = 0;
-        fetch(`http://localhost/app_duv/api.php/obtener-cajas`, {
+        fetch(`<?php echo $BASE_URL?>api.php/obtener-cajas`, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -503,14 +509,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             caja.appendChild(crearDivL);
         }
         function fech() {
-            fetch(`http://localhost/app_duv/api.php/guardar-cajas?cajas=${contadorClicksAdd+contadorAlterno}`, {
+            fetch(`<?php echo $BASE_URL?>api.php/guardar-cajas?cajas=${contadorClicksAdd+contadorAlterno}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 method: "get"
 
             })
-            fetch(`http://localhost/app_duv/api.php/obtener-cajas`, {
+            fetch(`<?php echo $BASE_URL?>api.php/obtener-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -576,7 +582,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             document.getElementById('closeR').style.visibility = "visible";
         }
         function cerrarSesion() {
-            fetch(`http://localhost/app_duv/api.php/logout`, {
+            fetch(`<?php echo $BASE_URL?>api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })

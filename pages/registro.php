@@ -1,3 +1,7 @@
+<?php
+    include_once '../config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -59,7 +63,7 @@
             <div class="row d-flex align-items-center justify-content-center h-auto">
             <h2 class="text-center mb-5 text-uppercase">Registrate</h2>
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                    <img src="./img/draw2.svg" class="img-fluid" alt="register-image">
+                    <img src="../uploads/draw2.svg" class="img-fluid" alt="register-image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                     <form method="post" action="api.php">
@@ -125,7 +129,7 @@
                         <div class="d-flex justify-content-around align-items-center mb-4">
 
 
-                            <a href="/app_duv/login">Iniciar sesión</a>
+                            <a href="/app_duv/pages/login">Iniciar sesión</a>
                         </div>
 
                         <!-- Submit button -->
@@ -222,7 +226,7 @@
             window.location.href = '/app_duv/';
         }
         function irLogin() {
-            window.location.href = '/app_duv/login';
+            window.location.href = '/app_duv/pages/login';
         }
 
         function obtenerDatos() {
@@ -236,7 +240,7 @@
                     text: 'Campo alias necesario'
                 });
             } else {
-                fetch(`https://localhost/app_duv/api.php/get-user?user=${nameUser}`, {
+                fetch(`<?php echo $BASE_URL?>api.php/get-user?user=${nameUser}`, {
                     method: 'GET',
                 })
                     .then(respuesta => {
@@ -281,7 +285,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("http://localhost/app_duv/api.php/save-user", {
+            fetch("<?php echo $BASE_URL?>api.php/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {

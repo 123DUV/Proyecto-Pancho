@@ -325,6 +325,48 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
 
 }
 
+//actualizar imagen de perfil
+if ($respuesta === 'act-img' && $metodo === 'POST') {
+    $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+
+    if ($datosRecibidos === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["error" => "Error decoding JSON: " . json_last_error_msg()]);
+        exit;
+    }
+    // $img=$_FILES['file']['name'];
+    $img = $datosRecibidos['image'];
+    $nombreUser = $_SESSION['user'];
+    if (!empty($img)) {
+        http_response_code(200);
+        $actImg = "UPDATE datos SET imgPerfil = ? WHERE nameUser = ?";
+        $stmt = mysqli_prepare($con, $actImg);
+        mysqli_stmt_bind_param($stmt, 'ss', $img, $nombreUser);
+        $ejecutado = mysqli_stmt_execute($stmt);
+        if ($ejecutado === true) {
+            http_response_code(200);
+            $response = [
+                "mensaje" => "Imagen de perfil actualizada correctamente",
+                "datosRecibidos" => $datosRecibidos
+            ];
+            echo json_encode($response);
+        } else {
+            http_response_code(400);
+            $response = [
+                "error" => "Error al actualizar foto de perfil usuario",
+                "datosRecibidos" => $datosRecibidos
+            ];
+            echo json_encode($response);
+        }
+    }else{
+        http_response_code(400);
+        $response = [
+            "error" => "Imagen vacia",
+            "datosRecibidos" => $datosRecibidos
+        ];
+        echo json_encode($response);
+    }
+}
+
 //cerrar sesión 
 
 if ($respuesta === 'logout' && $metodo === 'GET') {

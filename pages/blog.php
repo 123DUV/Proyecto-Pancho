@@ -104,7 +104,7 @@ session_start();
             <!-- nav -->
             <div class="col-sm-auto bg-dark ">
                 <div class="d-flex flex-sm-column flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/" class="d-block  text-white text-decoration-none" title="" data-bs-toggle="tooltip"
+                    <a href="/app_duv/pages/blog" class="d-block  text-white text-decoration-none" title="" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
@@ -122,7 +122,7 @@ session_start();
                         
                     </ul>
                     <div class="">
-                        <a href="/app_duv/perfilPersona"
+                        <a href="/app_duv/pages/perfilPersona"
                             class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none "
                             aria-expanded="false">
                             <i class="bi-person-circle h2"></i>
@@ -137,7 +137,7 @@ session_start();
                 <div class="text-center sticky-top" style="background-color: yellow;">
 
                     <div class="line-container">
-                        <a href="/app_duv/news" style="text-decoration: none;">
+                        <a href="/app_duv/pages/news" style="text-decoration: none;">
                             <p class="text-black pt-1" style="font-family: var(--fuente);">Check the news</p>
                             <div class="line">
 
@@ -147,7 +147,7 @@ session_start();
 
                 </div>
                 <div class="">
-                    <video id="my-video" src="./uploads/video.mp4" type="video/mp4" class="video-js vjs-theme-city"
+                    <video id="my-video" src="../uploads/video.mp4" type="video/mp4" class="video-js vjs-theme-city"
                         controls="true"></video>
                 </div>
                 <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
@@ -156,29 +156,29 @@ session_start();
                 </div>
                 <div class="row flex-row ">
 
-                    <img src="./uploads/1-img-blg.png" loading="lazy" class="col-md-4" alt="primer-imagen-blog">
+                    <img src="../uploads/1-img-blg.png" loading="lazy" class="col-md-4" alt="primer-imagen-blog">
 
-                    <img src="./uploads/2-img-blg.png" loading="lazy" class="col-md-4" alt="segunda-imagen-blog">
+                    <img src="../uploads/2-img-blg.png" loading="lazy" class="col-md-4" alt="segunda-imagen-blog">
 
-                    <img src="./uploads/3-img-blg.png" loading="lazy" class="col-md-4" alt="tercera-imagen-blog">
+                    <img src="../uploads/3-img-blg.png" loading="lazy" class="col-md-4" alt="tercera-imagen-blog">
 
                 </div>
                 <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
                     <p class="fs-2 text-center" style="font-family: var(--fuente);">DESCRIPCIÓN</p>
                 </div>
                 <div class="row">
-                    <img src="./uploads/4-img-blg.png" loading="lazy" alt="cuarta-imagen-blog">
+                    <img src="../uploads/4-img-blg.png" loading="lazy" alt="cuarta-imagen-blog">
                 </div>
                 <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
                     <p class="fs-2 text-center" style="font-family: var(--fuente);">DESCRIPCIÓN</p>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-6">
-                        <img src="./uploads/5-img-blg.png" loading="lazy" class="rounded" alt="quinta-imagen-blog" width="100%">
+                        <img src="../uploads/5-img-blg.png" loading="lazy" class="rounded" alt="quinta-imagen-blog" width="100%">
                         <p class="text-white fs-3" style="font-family: var(--fuente);">Descripción</p>
                     </div>
                     <div class="col-md-6">
-                        <img src="./uploads/6-img-blg.png" loading="lazy" class="rounded" alt="sexta-imagen-blog" width="100%">
+                        <img src="../uploads/6-img-blg.png" loading="lazy" class="rounded" alt="sexta-imagen-blog" width="100%">
                         <p class="text-white fs-3" style="font-family: var(--fuente);">Descripción</p>
                     </div>
                 </div>

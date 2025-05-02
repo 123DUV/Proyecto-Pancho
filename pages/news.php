@@ -342,7 +342,7 @@
 
         <div class="row text-center">
             <div class="col-md-6 ">
-                <img src="./uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
+                <img src="../uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
                     alt="imagen descripición news uno">
                 <div class="text-black " style="font-family: 'Space Mono', monospace;;">
                     <p class="fs-4">Descripción</p>
@@ -350,7 +350,7 @@
 
             </div>
             <div class="col-md-6 ">
-                <img src="./uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
+                <img src="../uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
                     alt="imagen descripción news dos">
                 <div class="text-black" style="font-family: 'Space Mono', monospace;">
                     <p class="fs-4">Descripción</p>

@@ -2,8 +2,7 @@ RewriteEngine On
 
 # Permitir URLs sin index.php
 RewriteCond %{REQUEST_FILENAME} !-f
-
-RewriteRule ^([^/.]+)$ $1.php [L]
+RewriteRule ^pages/([^/.]+)$ pages/$1.php [L]
 RewriteRule ^api/(.*)$ api.php?endpoint=$1 [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -20,4 +19,3 @@ RewriteRule ^uploads/(.*)$ uploads/$1.svg [L]
     Header set Pragma "no-cache"
     Header set Expires 0
 </FilesMatch>
-

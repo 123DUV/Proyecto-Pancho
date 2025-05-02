@@ -4,6 +4,7 @@ if (!empty($_SESSION['user'])) {
   header("Location: /app_duv/");
 }
 
+include_once '../config.php'
 
 
 ?>
@@ -62,7 +63,7 @@ if (!empty($_SESSION['user'])) {
       <div class="row d-flex align-items-center justify-content-center h-auto">
         <h2 class="text-center mb-5 text-uppercase" style="font-family: var(--fuente);">Inicia sesión</h2>
         <div class="col-md-8 col-lg-7 col-xl-6">
-          <img src="./uploads/draw1.svg" class="img-fluid" alt="login-image">
+          <img src="../uploads/draw1.svg" class="img-fluid" alt="login-image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
           <form method="post" action="api.php" id="myForm">
@@ -91,7 +92,7 @@ if (!empty($_SESSION['user'])) {
               </div>
               <a href="#!" style="text-decoration: none; color: black; font-family: var(--fuente);">Olvide mi
                 contraseña?</a>
-              <a href="/app_duv/registro"
+              <a href="/app_duv/pages/registro"
                 style="text-decoration: none; color: black; font-family: var(--fuente);">Registrarse</a>
             </div>
             <!-- Submit button -->
@@ -166,7 +167,7 @@ if (!empty($_SESSION['user'])) {
           text: 'Campo nombre usuario necesario'
         });
       } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`http://localhost/app_duv/api.php/validar`, {
+        fetch(`<?php echo $BASE_URL?>api.php/validar`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"

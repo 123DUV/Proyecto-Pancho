@@ -1,10 +1,12 @@
 ///en todas en el campo nombre hay q poner q tipo son
 ///si son tipo: jpg, svg, etc. Ejm: imagen1.jpg
+todas deben ser de un tipo preferiblemente png (jpg, png, etc...)
 
 PAGINA PRINCIPAL
-/ todas son formato "jpg"= 
-1- Nombre imagen: imagenPrincipal
+/ = 
+1- Nombre imagen: imagenPrincipal.png
 2- Nombre imagen: segundaInicio
+3-Nombre imagen: terceraInicio
 3-son las ofertas, las q estan en una cajita blanca
 Nombre imagen: imagen-#-li
 El "#" significa q de acuerdo al numero de cajas q creó tiene q crear imagenes una por una hasta ese numero, ejm, si creó 6 imagenes en la cajita de ofertas, tiene q subir 6 imagenes nombradas imagen-1-li, imagen-2-li y asi...
@@ -19,8 +21,13 @@ REGISTRO
 1-draw2
 
 NOTICIAS
-/news todas son tipo "jpg" = 
+/news  = 
 1-news1
 2-"slide": fijas, establecidas directamente por el creador por comodidad
 3-desc-nws-1
 4-desc-nws-2
+
+BLOG
+/blog  =
+Nombre Video : video.mp4, comprimir video
+1-6: #-img-blg

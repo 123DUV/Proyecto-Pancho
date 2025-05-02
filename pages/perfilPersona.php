@@ -11,12 +11,13 @@ $password = '';
 $dbname = 'app-duv';
 $tablaPrincipal = 'datos';
 
+include_once '../config.php';
 
 $con = mysqli_connect($hostname, $username, $password, $dbname);
 if (!$con) {
     die("fallo" . mysqli_connect_error());
 }
-$imgDefectoPerfil = "./uploads./imgsDefecto./imgPerfilDefecto.jpg";
+$imgDefectoPerfil = "../uploads./imgsDefecto./imgPerfilDefecto.jpg";
 $user;
 $imgExtraida;
 $estadoCeIn;
@@ -89,21 +90,19 @@ if ($logeado) {
     <div class="container-fluid">
         <div class="row">
             <div class=" bg-dark ">
-                <div
-                    class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/app_duv/perfilPersona" class="d-block p-3 text-white text-decoration-none" title="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-original-title="Icon-only">
+                <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
+                    <a href="/app_duv/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
-                    <ul
-                        class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+                    <ul class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                         <li class="nav-item">
-                            <a href="/app_duv/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                            <a href="#" onclick="history.go(-1)" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-original-title="Home">
-                                <i class="bi-house fs-3"></i>
+                                <i class="bi-arrow-left fs-3"></i>
                             </a>
                         </li>
-                     
+
                     </ul>
                     <div class="dropdown">
                         <a href="#"
@@ -112,8 +111,8 @@ if ($logeado) {
                             <i class="bi-person-circle h2"></i>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-                           
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+
+                            <li><a class="dropdown-item" href="/app_duv/pages/settings">Configuración</a></li>
                             <li><a class="dropdown-item" href="/app_duv/">Inicio</a></li>
                         </ul>
                     </div>
@@ -121,41 +120,55 @@ if ($logeado) {
             </div>
         </div>
 
-        <form action="">
-            <div class="text-center ">
-                <label for="inputModificado" class="inputFalso ">
-                    <img src="<?php if (empty($imgExtraida)) {
-                        echo $imgDefectoPerfil;
-                    } else {
-                        echo $imgExtraida;
-                    } ?>" class="img-fluid" alt="imagen">
-                </label>
-                <input type="file" accept="image/*" multiple="true" name="image" class="" id="inputModificado" required>
-                <div class="text-center mt-2 mb-2">
-                    <h2>¡Hola, <?php echo $user ?>!</h2>
-                </div>
-                <div class="text-center">
-                    <button id="botonCrop" class="btn btn-lg border-bottom mt-2 mx-2">Editar foto perfil</button>
-                    <button id="botonCeIn" class="btn btn-lg btn-danger mt-2" onclick="<?php
 
-                    if ($logeado === true) {
-                        echo "cerrarSesion()";
-                    } else {
-                        echo "irLogin()";
-                    } ?>"> <?php echo $estadoCeIn; ?></button>
-                    <!-- <canvas id="previewCanvas"></canvas>  -->
-                </div>
-                <div id="vistaPrevia">
-                </div>
+        <div class="text-center ">
+            <label for="inputModificado" class="inputFalso">
+                <img src="<?php if (empty($imgExtraida)) {
+                    echo $imgDefectoPerfil;
+                } else {
+                    echo $imgExtraida;
+                } ?>" class="img-fluid" alt="imagen">
+            </label>
+            <input type="file" accept="image/*" multiple="true" name="image" class="" id="inputModificado" disabled>
+            <div class="text-center mt-2 mb-2">
+                <h2>¡Hola, <?php echo $user ?>!</h2>
             </div>
+            <div class="text-center">
+
+                <div id="botonEditarPerfil">
+
+                </div>
+
+                <button id="botonCeIn" class="btn btn-lg btn-danger mt-2" onclick="<?php
+
+                if ($logeado === true) {
+                    echo "cerrarSesion()";
+                } else {
+                    echo "irLogin()";
+                } ?>"> <?php echo $estadoCeIn; ?></button>
+                <!-- <canvas id="previewCanvas"></canvas>  -->
+            </div>
+            <div id="vistaPrevia">
+            </div>
+        </div>
 
 
-        </form>
+
 
         <script>
-            
+            const loged = <?php
+            $logeado = $logeado ?? false; echo json_encode($logeado);?>;
+            if (loged) {
+                editarPerfilBoton();
+            }
+            function editarPerfilBoton() {
+                document.getElementById('botonEditarPerfil').innerHTML = "<button id='botonCrop' class='btn btn-lg border-bottom mt-2 mx-2' onclick='irEditarPerfil();'>Editar foto perfil</button>"
+            }
+            function irEditarPerfil() {
+                window.location.href = "/app_duv/pages/editarPerfil";
+            }
             function irLogin() {
-                window.location.href = "/app_duv/login";
+                window.location.href = "/app_duv/pages/login";
             }
             function volver() {
                 window.location.href = "/app_duv/";
@@ -164,29 +177,29 @@ if ($logeado) {
                 const image = document.getElementById("");
             })
 
-            document.getElementById('inputModificado').addEventListener('change', function (event) {
-                let filas = event.target.files;
+            // document.getElementById('inputModificado').addEventListener('change', function (event) {
+            //     let filas = event.target.files;
 
-                let limpiarPrev = document.getElementById('vistaPrevia');
-                limpiarPrev.innerHTML = "";
+            //     let limpiarPrev = document.getElementById('vistaPrevia');
+            //     limpiarPrev.innerHTML = "";
 
-                let urls = [];
+            //     let urls = [];
 
-                for (let i = 0; i < filas.length; i++) {
-                    let url = URL.createObjectURL(filas[i]);
-                    urls.push(url);
+            //     for (let i = 0; i < filas.length; i++) {
+            //         let url = URL.createObjectURL(filas[i]);
+            //         urls.push(url);
 
-                    let crearImg = document.createElement("img");
-                    crearImg.src = url;
-                    crearImg.style.width = '100px';
-                    crearImg.style.margin = '5px';
-                    crearImg.style.border = 'solid';
-                    limpiarPrev.appendChild(crearImg);
-                }
-                console.log(urls);
-            });
+            //         let crearImg = document.createElement("img");
+            //         crearImg.src = url;
+            //         crearImg.style.width = '100px';
+            //         crearImg.style.margin = '5px';
+            //         crearImg.style.border = 'solid';
+            //         limpiarPrev.appendChild(crearImg);
+            //     }
+            //     console.log(urls);
+            // });
             function cerrarSesion() {
-                fetch(`http://localhost/app_duv/api.php/logout`, {
+                fetch('<?php echo $BASE_URL;?>api.php/logout', {
                     method: 'GET',
                     header: { "Content-Type": "application/json" }
                 })
