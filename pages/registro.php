@@ -203,9 +203,7 @@
 
         }
 
-        document.getElementById("mostrarInfo").addEventListener("click", function () {
-            divInfoOculto.style.display = "block";
-        })
+       
         function volver() {
             window.location.href = '/';
         }
