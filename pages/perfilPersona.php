@@ -87,6 +87,7 @@ if ($logeado) {
 </head>
 
 <body>
+    <!-- pa subir a git-->
     <div class="container-fluid">
         <div class="row">
             <div class=" bg-dark ">
