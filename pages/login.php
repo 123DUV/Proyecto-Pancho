@@ -49,7 +49,7 @@ include_once '../config.php';
           <img src="../uploads/draw1.svg" class="img-fluid" alt="login-image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form method="post" action="api.php" id="myForm">
+          <form method="post" action="api" id="myForm">
             <!-- User input -->
             <div data-mdb-input-init class="form-outline mb-4">
               <input type="text" onchange="recordar();" id="nameUser" name="nameUser" value="" autocomplete="username"
@@ -150,7 +150,7 @@ include_once '../config.php';
           text: 'Campo nombre usuario necesario'
         });
       } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`<?php echo $BASE_URL?>api.php/validar`, {
+        fetch(`<?php echo $BASE_URL?>api/validar`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"

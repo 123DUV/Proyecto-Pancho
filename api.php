@@ -6,6 +6,8 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Credentials: true");
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 include_once('../config.php');
 
@@ -16,7 +18,7 @@ if (!$con) {
 
 
 //obtener ruta despues de api.php
-$respuesta = str_replace("api.php/", "", $_SERVER['REQUEST_URI']);
+$respuesta = str_replace("api/", "", $_SERVER['REQUEST_URI']);
 
 $respuesta = explode("?", $respuesta)[0];
 error_log("ruta: " . $respuesta);

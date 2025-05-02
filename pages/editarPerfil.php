@@ -102,7 +102,7 @@ include_once '../config.php';
 
         function enviarImg(img) {
             console.log(img);
-            fetch('<?php echo $BASE_URL?>api.php/act-img', {
+            fetch('<?php echo $BASE_URL?>api/act-img', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

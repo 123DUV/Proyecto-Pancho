@@ -50,7 +50,7 @@
                     <img src="../uploads/draw2.svg" class="img-fluid" alt="register-image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form method="post" action="api.php">
+                    <form method="post" action="api">
                         <!-- User input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="text" class="form-control form-control-lg" id="nameUser" name="nameUser" />
@@ -222,7 +222,7 @@
                     text: 'Campo alias necesario'
                 });
             } else {
-                fetch(`<?php echo $BASE_URL?>api.php/get-user?user=${nameUser}`, {
+                fetch(`<?php echo $BASE_URL?>api/get-user?user=${nameUser}`, {
                     method: 'GET',
                 })
                     .then(respuesta => {
@@ -267,7 +267,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("<?php echo $BASE_URL?>api.php/save-user", {
+            fetch("<?php echo $BASE_URL?>api/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {
