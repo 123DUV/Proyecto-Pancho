@@ -404,7 +404,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <base href="/">
     <script>
         function eliminarCajas() {
-            fetch(`<?php echo $BASE_URL ?>api/no-cajas`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/no-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -423,7 +423,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         let cuenta = 1;
         let contadorAlterno = 0;
-        fetch(`<?php echo $BASE_URL ?>api/obtener-cajas`, {
+        fetch(`<?php echo $BASE_URL ?>api.php/obtener-cajas`, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -486,14 +486,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             caja.appendChild(crearDivL);
         }
         function fech() {
-            fetch(`<?php echo $BASE_URL ?>api/guardar-cajas?cajas=${contadorClicksAdd + contadorAlterno}`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/guardar-cajas?cajas=${contadorClicksAdd + contadorAlterno}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 method: "get"
 
             })
-            fetch(`<?php echo $BASE_URL ?>api/obtener-cajas`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/obtener-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -559,7 +559,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             document.getElementById('closeR').style.visibility = "visible";
         }
         function cerrarSesion() {
-            fetch(`<?php echo $BASE_URL ?>api/logout`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })

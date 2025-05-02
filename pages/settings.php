@@ -46,7 +46,7 @@ include_once '../config.php';
     </div>
     <script>
         function cerrarSesion() {
-            fetch(`<?php echo $BASE_URL ?>api/logout`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })

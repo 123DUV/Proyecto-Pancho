@@ -222,7 +222,7 @@
                     text: 'Campo alias necesario'
                 });
             } else {
-                fetch(`<?php echo $BASE_URL?>api/get-user?user=${nameUser}`, {
+                fetch(`<?php echo $BASE_URL?>api.php/get-user?user=${nameUser}`, {
                     method: 'GET',
                 })
                     .then(respuesta => {
@@ -267,7 +267,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("<?php echo $BASE_URL?>api/save-user", {
+            fetch("<?php echo $BASE_URL?>api.php/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {

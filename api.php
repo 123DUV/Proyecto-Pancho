@@ -281,7 +281,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         // falta archivo para manejar datos secretos como este captcha y su id
         $captcha = $datosRecibidos['g-recaptcha-response'] ?? $_POST['g-recaptcha-response'];
         $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
-        $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
+        $urlApi = 'https://www.google.com/recaptcha/api.php/siteverify?secret=' . $secretKey . '&response=' . $captcha;
 
         $response = file_get_contents($urlApi);
 

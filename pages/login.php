@@ -150,7 +150,7 @@ include_once '../config.php';
           text: 'Campo nombre usuario necesario'
         });
       } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`<?php echo $BASE_URL?>api/validar`, {
+        fetch(`<?php echo $BASE_URL?>api.php/validar`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
