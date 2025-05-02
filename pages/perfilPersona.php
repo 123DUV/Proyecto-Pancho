@@ -1,19 +1,10 @@
 <?php
 session_start();
-// $hostname = 'sql10.freesqldatabase.com';
-// $username = 'sql10768775';
-// $password = 'C5sPIR9Bbv';
-// $dbname = 'sql10768775';
-// $tablaPrincipal = 'datos';
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'app-duv';
-$tablaPrincipal = 'datos';
 
 include_once '../config.php';
 
-$con = mysqli_connect($hostname, $username, $password, $dbname);
+$con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
+
 if (!$con) {
     die("fallo" . mysqli_connect_error());
 }
@@ -46,19 +37,9 @@ if ($logeado) {
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <!-- CSS de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/cropperjs"></script>
+    <?php
+    include_once '../headers.php';
+    ?>
     <style>
         input[type="file"] {
             display: none;

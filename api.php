@@ -7,19 +7,9 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Credentials: true");
 
-// $hostname = 'sql10.freesqldatabase.com';
-// $username = 'sql10768775';
-// $password = 'C5sPIR9Bbv';
-// $dbname = 'sql10768775';
-// $tablaPrincipal = 'datos';
+include_once('../config.php');
 
-$hostname = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'app-duv';
-$tablaPrincipal = 'datos';
-
-$con = mysqli_connect($hostname, $username, $password, $dbname);
+$con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
 if (!$con) {
     die("fallo" . mysqli_connect_error());
 }

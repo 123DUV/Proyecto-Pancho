@@ -1,11 +1,12 @@
 <?php
- $lifetime = 60 * 60 * 24 * 30;
- session_set_cookie_params($lifetime);
- ini_set("session.gc_maxlifetime", $lifetime);
- ini_set("session.cookie_lifetime", $lifetime);
- session_start();
+$lifetime = 60 * 60 * 24 * 30;
+session_set_cookie_params($lifetime);
+ini_set("session.gc_maxlifetime", $lifetime);
+ini_set("session.cookie_lifetime", $lifetime);
+session_start();
 
-    include_once 'config.php';
+include_once 'config.php';
+include_once './headers.php';
 
 $mostrarSubir = false;
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
@@ -44,30 +45,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 <html lang="es1">
 
 <head>
-    <title>App</title>
-    <!--iconos-->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <!--encabezados -->
-    <meta charset="UTF-8">
-    <meta name="description" content="sewing machine services and information">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="MACHINE,SERVICES,INFORMATION, SEWING MACHINE">
-    <meta name="author" content="Duvan Bedoya">
-    <meta name="robots" content="index, follow">
-    <!--bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!--fuente-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-    <!--script boots y sweetalert-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/queryloader2/3.3.2/queryloader2.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/queryloader2/3.3.2/queryloader2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             position: relative;
@@ -307,36 +285,35 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <div class="row d-flex ">
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
-                <h4 style="font-family: var(--fuente);">Pagina</h4>
-                <p style="font-family: var(--fuente);">Descripción</p>
+                <h4 style="font-family: var(--fuente);">Controlcoser</h4>
+                <p style="font-family: var(--fuente);">Adquiere o repara tu maquina de coser</p>
                 <!-- <img src="./uploads/imagenPrincipal.png" loading="lazy" alt="imagen-principal" class="rounded"
                 width="100%"> -->
             </div>
 
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-            
-                <img src="./uploads/imagenPrincipal.png"  alt="imagen-principal" class="rounded"
-                    width="100%">
+
+                <img src="./uploads/imagenPrincipal.png" alt="imagen-principal" class="rounded" width="100%">
             </div>
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-facebook text-primary" onclick="window.location.href='https://www.facebook.com'"
+                <i class="bi bi-facebook text-primary" onclick="window.location.href='https://www.facebook.com/controlcoser/'"
                     style="font-size: 10vw;"></i>
-                <p><a href="https://www.facebook.com" style="text-decoration: none; color:inherit;">Facebook</a></p>
+                <p><a href="https://www.facebook.com/controlcoser/" style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
                 <i class="bi bi-whatsapp text-success"
-                    onclick="window.location.href='https://wa.me/3128616610?text=Hola,%quiero%solicitar%más%información%acerca%de%tus%servicios'"
+                    onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"
                     style="font-size: 10vw; text-decoration: inherit;"></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
-                        style="text-decoration: none; color:inherit;">Whatsapp</a></p>
+                        style="text-decoration: none; color:inherit;">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-instagram text-danger" onclick="window.location.href='https://www.instagram.com'"
+                <i class="bi bi-instagram text-danger" onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"
                     style="font-size: 10vw;"></i>
-                <p><a href="https://www.instagram.com" style="text-decoration: none; color:inherit;">Instagram</a></p>
+                <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg==" style="text-decoration: none; color:inherit;">Instagram</a></p>
             </div>
         </div>
         <div class="row inline-block reverse-order pt-5 ">
@@ -345,9 +322,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
-                <h4 style="font-family: var(--fuente);">Pagina</h4>
-                <p style="font-family: var(--fuente);">Descripción</p>
-               
+                <h4 style="font-family: var(--fuente);">Calidad precio</h4>
+                <p style="font-family: var(--fuente);">Maquinas que tienen una calidad y precio justo</p>
+
             </div>
 
 
@@ -355,7 +332,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row  pt-5 " id="oferts">
             <div class="contenedor-lightbox">
-                <h2 class="text-center" style="font-family: var(--fuente);">Titulo</h2>
+                <h2 class="text-center" style="font-family: var(--fuente);">Próximamente</h2>
                 <div class="<?php if ($mostrarSubir) {
                     echo "d-block  flex-row justify-content-end ";
                 } else {
@@ -386,23 +363,23 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-geo-alt fs-5"></i>
-                <p><a href="https://www.google.com/maps?q=Av.%20Siempre%20Viva%2042,%20Springfield"
-                        style="text-decoration: none; color:inherit;">Dirección #10-26</a> </p>
+                <p><a href="https://www.google.com/maps?q=ZONA%20FRANCA%20INTERNACIONAL%20DE%20PEREIRA%20USUARIO%20OPERADOR,%20PEREIRA,%20Risaralda"
+                        style="text-decoration: none; color:inherit;">Dirección Zona franca internacional de pereira</a> </p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-calendar fs-5"></i>
                 <p>Horario</p>
-               
-               <ul class="text-center " style="list-style-type: none; padding-left: 0!important;">
+
+                <ul class="text-center " style="list-style-type: none; padding-left: 0!important;">
                     <li>
                         Lunes-Sabado: 8 am - 4 pm
                     </li>
                     <li>
-                    Domingo: 8 am - 2pm 
+                        Domingo: 8 am - 2pm
                     </li>
                     <p> *<span> Los horarios pueden variar</span></p>
                 </ul>
-               
+
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-whatsapp"
@@ -427,7 +404,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <base href="/">
     <script>
         function eliminarCajas() {
-            fetch(`<?php echo $BASE_URL?>api.php/no-cajas`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/no-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -446,7 +423,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         let cuenta = 1;
         let contadorAlterno = 0;
-        fetch(`<?php echo $BASE_URL?>api.php/obtener-cajas`, {
+        fetch(`<?php echo $BASE_URL ?>api.php/obtener-cajas`, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -494,8 +471,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         });
         function crearCajas(contadorClicksAdd) {
             const numeroCajas = document.querySelectorAll(".cajita");
-           const arrayCajas= Array.from(numeroCajas);
-           contadorClicksAdd=arrayCajas.length +1;
+            const arrayCajas = Array.from(numeroCajas);
+            contadorClicksAdd = arrayCajas.length + 1;
 
             const caja = document.getElementById("cajaLight");
             const crearDivL = document.createElement("div");
@@ -509,14 +486,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             caja.appendChild(crearDivL);
         }
         function fech() {
-            fetch(`<?php echo $BASE_URL?>api.php/guardar-cajas?cajas=${contadorClicksAdd+contadorAlterno}`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/guardar-cajas?cajas=${contadorClicksAdd + contadorAlterno}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 method: "get"
 
             })
-            fetch(`<?php echo $BASE_URL?>api.php/obtener-cajas`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/obtener-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -582,7 +559,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             document.getElementById('closeR').style.visibility = "visible";
         }
         function cerrarSesion() {
-            fetch(`<?php echo $BASE_URL?>api.php/logout`, {
+            fetch(`<?php echo $BASE_URL ?>api.php/logout`, {
                 method: 'GET',
                 header: { "Content-Type": "application/json" }
             })

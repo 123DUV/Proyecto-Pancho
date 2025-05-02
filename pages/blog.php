@@ -1,42 +1,28 @@
-<?php 
+<?php
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
-
+<?php
+    include_once '../headers.php';
+?>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My blog</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
-    
-  <!--fuente-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-    <!--bootstrap y sweetalert-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!--video play-->
-    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
-    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+
 
     <style>
-        :root{
+        :root {
             --fuente: "Winky Sans", sans-serif;
         }
-        .text-justify{
+
+        .text-justify {
             text-align: justify;
             text-align-last: center;
-            
+
         }
+
         .line-container {
             cursor: pointer;
             width: 50%;
@@ -74,10 +60,16 @@ session_start();
             width: 100%;
             height: 80vh;
         }
+        .tamano_fuente_sm{
+                font-size: 1.5vw;
+            }
 
         @media(max-width: 768px) {
             #my-video {
                 height: 50vh;
+            }
+            .tamano_fuente_sm{
+                font-size: 2.5vw;
             }
 
             ;
@@ -89,7 +81,9 @@ session_start();
                 top: 18%;
 
             }
-
+            .tamano_fuente_sm{
+                font-size: 2.5vw;
+            }
         }
     </style>
 </head>
@@ -103,23 +97,20 @@ session_start();
         <div class="row">
             <!-- nav -->
             <div class="col-sm-auto bg-dark ">
-                <div class="d-flex flex-sm-column flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/pages/blog" class="d-block  text-white text-decoration-none" title="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-original-title="Icon-only">
+                <div
+                    class="d-flex flex-sm-column flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
+                    <a href="/pages/blog" class="d-block  text-white text-decoration-none" title=""
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
                     <ul
                         class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                         <li class="nav-item">
-                            <a href="/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                            <a href="#" onclick="history.go(-1);" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-original-title="Home">
-                                <i class="bi-house fs-3"></i>
+                                <i class="bi-arrow-left fs-3" ></i>
                             </a>
                         </li>
-                        
-                       
-
-                        
                     </ul>
                     <div class="">
                         <a href="/pages/perfilPersona"
@@ -127,7 +118,7 @@ session_start();
                             aria-expanded="false">
                             <i class="bi-person-circle h2"></i>
                         </a>
-                      
+
                     </div>
                 </div>
             </div>
@@ -138,9 +129,8 @@ session_start();
 
                     <div class="line-container">
                         <a href="/pages/news" style="text-decoration: none;">
-                            <p class="text-black pt-1" style="font-family: var(--fuente);">Check the news</p>
+                            <p class="text-black pt-1" style="font-family: var(--fuente);">Mira lo nuevo</p>
                             <div class="line">
-
                             </div>
                         </a>
                     </div>
@@ -151,8 +141,18 @@ session_start();
                         controls="true"></video>
                 </div>
                 <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
-                    <p class="fs-1" style="font-family: var(--fuente);">Acerca de mi</p>
-                    <p class="fs-3 text-justify mx-5" style="font-family: var(--fuente);">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente similique laborum nulla cumque, hic velit, distinctio, dolor autem ea recusandae nobis. Eveniet ratione repellendus eius corporis magnam rerum quae cum!</p>
+                    <p class="fs-1" style="font-family: var(--fuente);">Acerca de:<br>
+                        <strong>Fabio Bedoya</strong>
+                    </p>
+                    <p class="tamano_fuente_sm text-justify mx-5" style="font-family: var(--fuente);">
+                        Nacido en Medellín, Mi interés por las maquinas de coser apareció en mi juventud
+                        y desde entonces he querido aprender y mejorar cuanto pueda en este ámbito,
+                        estudié un técnico en reparación de maquinas de coser y desde entonces he implementado mis
+                        conocimientos
+                        como trabajador independiente.<br>
+                        Dentro de un corto plazo quisiera hacer crecer mi negocio ampliándome a nuevas zonas y a nuevos
+                        desafíos.
+                    </p>
                 </div>
                 <div class="row flex-row ">
 
@@ -163,7 +163,12 @@ session_start();
                     <img src="../uploads/3-img-blg.png" loading="lazy" class="col-md-4" alt="tercera-imagen-blog">
 
                 </div>
-                <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
+                <div class="row">
+                    <h2 class="text-center mt-3 text-white">
+                        Coming soon...
+                    </h2>
+                </div>
+                <!-- <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
                     <p class="fs-2 text-center" style="font-family: var(--fuente);">DESCRIPCIÓN</p>
                 </div>
                 <div class="row">
@@ -174,17 +179,19 @@ session_start();
                 </div>
                 <div class="row text-center">
                     <div class="col-md-6">
-                        <img src="../uploads/5-img-blg.png" loading="lazy" class="rounded" alt="quinta-imagen-blog" width="100%">
+                        <img src="../uploads/5-img-blg.png" loading="lazy" class="rounded" alt="quinta-imagen-blog"
+                            width="100%">
                         <p class="text-white fs-3" style="font-family: var(--fuente);">Descripción</p>
                     </div>
                     <div class="col-md-6">
-                        <img src="../uploads/6-img-blg.png" loading="lazy" class="rounded" alt="sexta-imagen-blog" width="100%">
+                        <img src="../uploads/6-img-blg.png" loading="lazy" class="rounded" alt="sexta-imagen-blog"
+                            width="100%">
                         <p class="text-white fs-3" style="font-family: var(--fuente);">Descripción</p>
                     </div>
                 </div>
                 <div class="row">
 
-                </div>
+                </div> -->
             </div>
 
 

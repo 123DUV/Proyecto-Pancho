@@ -1,22 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Imagenes </title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="./styles.css"> -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<?php
+    include_once '../headers.php';
+?>
     <style>
         .text-justify {
             text-align: justify;
@@ -125,6 +114,37 @@
     <div class="m-5">
         <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i> Volver</button>
     </div>
+    <div class="row">
+            <div class=" bg-dark ">
+                <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
+                    <a href="/pages/settings" class="d-block p-3 text-white text-decoration-none" title=""
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                        <i class="bi bi-c-circle fs-1"></i>
+                    </a>
+                    <ul class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+                        <li class="nav-item">
+                            <a href="#" onclick="history.go(-1)" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-original-title="Home">
+                                <i class="bi-arrow-left fs-3"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="dropdown">
+                        <a href="#"
+                            class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
+                            id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi-person-circle h2"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+
+                            <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/">Inicio</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     <form action="/pages/subirImagenes" method="post" enctype="multipart/form-data">
         <div class="w-50" style="margin: 0 auto;">
             <div class="d-flex flex-column" id="agregarInputs">

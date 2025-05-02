@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+<?php
+include_once '../headers.php';
+?>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <style>
         body {
             position: relative;
@@ -281,62 +272,81 @@
 <body>
     <button class="goup btn btn-light rounded"><i class="bi bi-arrow-up"></i></button>
 
-    <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded" data-mdb-navbar-init style="background: rgb(158,236,255);
-        background: linear-gradient(0deg, rgba(158,236,255,1) 25%, rgba(33,116,236,1) 67%);">
-        <div class="container" id="top">
-            
-            <a class="navbar-brand" href="/"><i class="bi bi-c-circle fs-3 text-white"></i></a>
-       
-        
+    <div class="row">
+            <div class=" bg-dark ">
+                <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
+                    <a href="/pages/news" class="d-block p-3 text-white text-decoration-none" title=""
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                        <i class="bi bi-c-circle fs-1"></i>
+                    </a>
+                    <ul class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+                        <li class="nav-item">
+                            <a href="#" onclick="history.go(-1)" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-original-title="Home">
+                                <i class="bi-arrow-left fs-3"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="dropdown">
+                        <a href="#"
+                            class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
+                            id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi-person-circle h2"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+
+                            <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/">Inicio</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
 
     <div class="contenedor-lo-demas">
-        <!-- <div>
+        <div>
             <div class="contenedor-slides">
                 <ul class="slides">
-                    <li id="slide1"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg" alt="" /></li>
-                    <li id="slide2"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw2.jpg" alt="" /></li>
-                    <li id="slide3"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw3.jpg" alt="" /></li>
-                    <li id="slide4"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw4.jpg" alt="" /></li>
-                    <li id="slide5"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw5.jpg" alt="" /></li>
+                    <li id="slide1"><img src="../uploads/imgsDefecto/coming.png" alt="" /></li>
+                    <li id="slide2"><img src="../uploads/imgsDefecto/coming.png" alt="" /></li>
+                    <li id="slide3"><img src="../uploads/imgsDefecto/coming.png" alt="" /></li>
+                    <li id="slide4"><img src="../uploads/imgsDefecto/coming.png" alt="" /></li>
+                    <li id="slide5"><img src="../uploads/imgsDefecto/coming.png" alt="" /></li>
                 </ul>
 
                 <ul class="thumbnails">
                     <li>
-                        <a href="#slide1"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw1.jpg" /></a>
+                        <a href="#slide1"><img src="../uploads/imgsDefecto/coming.png" /></a>
                     </li>
                     <li>
-                        <a href="#slide2"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw2.jpg" /></a>
+                        <a href="#slide2"><img src="../uploads/imgsDefecto/coming.png" /></a>
                     </li>
                     <li>
-                        <a href="#slide3"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw3.jpg" /></a>
+                        <a href="#slide3"><img src="../uploads/imgsDefecto/coming.png" /></a>
                     </li>
                     <li>
-                        <a href="#slide4"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw4.jpg" /></a>
+                        <a href="#slide4"><img src="../uploads/imgsDefecto/coming.png" /></a>
                     </li>
                     <li>
-                        <a href="#slide5"><img src="https://cdn.rawgit.com/huijing/filerepo/gh-pages/lw5.jpg" /></a>
+                        <a href="#slide5"><img src="../uploads/imgsDefecto/coming.png" /></a>
                     </li>
                 </ul>
-            </div> 
-
-        </div> -->
-        <div class="col-md-12 ">
-            <div class="col-md-6 text-center px-4 pt-4 bg-primary rounded"
-                style="margin: 0 auto; font-family: var(--fuente);">
-                <p class="fs-5 pb-4">Important News</p>
             </div>
 
+        </div>
+        <div class="col-md-12 ">
+            <div class="col-md-6 text-center px-4 pt-4 bg-warning rounded"
+                style="margin: 0 auto; font-family: var(--fuente);">
+                <p class="fs-5 pb-4">Lo ultimo!!</p>
+            </div>
 
         </div>
         <div class="col-md-12">
             <div class="text-justify col-md-6 p-4 " style="font-family: 'Space Mono', monospace;margin: 0 auto;">
                 <p class="fs-5">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur qui odio, nisi explicabo
-                    facere aliquid non. Enim inventore molestiae alias, vitae optio quibusdam atque commodi qui
-                    accusantium incidunt fugiat harum?
 
+                </p>
             </div>
         </div>
 
@@ -344,16 +354,16 @@
             <div class="col-md-6 ">
                 <img src="../uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
                     alt="imagen descripición news uno">
-                <div class="text-black " style="font-family: 'Space Mono', monospace;;">
-                    <p class="fs-4">Descripción</p>
+                <div class="text-black m-3" style="font-family: 'Space Mono', monospace;;">
+                    <p class="fs-4">Muy pronto artículos nuevos</p>
                 </div>
 
             </div>
             <div class="col-md-6 ">
                 <img src="../uploads/desc-1-nws.png" loading="lazy" class="rounded img-fluid"
                     alt="imagen descripción news dos">
-                <div class="text-black" style="font-family: 'Space Mono', monospace;">
-                    <p class="fs-4">Descripción</p>
+                <div class="text-black m-3" style="font-family: 'Space Mono', monospace;">
+                    <p class="fs-4">Muy pronto artículos nuevos</p>
                 </div>
 
             </div>
