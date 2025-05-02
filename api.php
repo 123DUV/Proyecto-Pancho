@@ -9,12 +9,17 @@ header("Access-Control-Allow-Credentials: true");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include_once('../config.php');
-
-$con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
-if (!$con) {
-    die("fallo" . mysqli_connect_error());
+include_once('config.php');
+if(isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)){
+    $con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
+    if (!$con) {
+        die("fallo" . mysqli_connect_error());
+    }
+}else{
+    http_response_code(400);
+    echo json_encode(["Error"=>"No llegan las variables de conexión con la bd"]);
 }
+
 
 
 //obtener ruta despues de api.php

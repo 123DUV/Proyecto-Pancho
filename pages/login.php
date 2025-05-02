@@ -49,7 +49,7 @@ include_once '../config.php';
           <img src="../uploads/draw1.svg" class="img-fluid" alt="login-image">
         </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form method="post" action="api.php" id="myForm">
+          <form method="post" action="../api.php" id="myForm">
             <!-- User input -->
             <div data-mdb-input-init class="form-outline mb-4">
               <input type="text" onchange="recordar();" id="nameUser" name="nameUser" value="" autocomplete="username"
@@ -165,7 +165,7 @@ include_once '../config.php';
 
               document.getElementById('myForm').submit();
 
-              //   console.log("enviado");
+                console.log("enviado");
               // });
             
               recordar();
