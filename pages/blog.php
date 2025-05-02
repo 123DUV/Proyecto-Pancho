@@ -7,7 +7,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="es">
 <?php
-    include_once '../headers.php';
+    include_once './headers.php';
 ?>
 <head>
 

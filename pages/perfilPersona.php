@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once '../config.php';
+include_once './config.php';
 
 $con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
 
@@ -38,7 +38,7 @@ if ($logeado) {
 
 <head>
     <?php
-    include_once '../headers.php';
+    include_once './headers.php';
     ?>
     <style>
         input[type="file"] {

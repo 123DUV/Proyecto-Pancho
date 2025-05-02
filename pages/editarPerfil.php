@@ -1,12 +1,12 @@
 <?php
-include_once '../config.php';
+include_once './config.php';
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    include_once '../headers.php';
+    include_once './headers.php';
 ?>
 <head>
  

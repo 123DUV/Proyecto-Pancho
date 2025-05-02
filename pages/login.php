@@ -4,14 +4,14 @@ if (!empty($_SESSION['user'])) {
   header("Location: /");
 }
 
-include_once '../config.php';
+include_once './config.php';
 
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <?php
-    include_once '../headers.php';
+    include_once './headers.php';
 ?>
 <head>
 
