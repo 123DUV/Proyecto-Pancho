@@ -50,7 +50,7 @@
                     <img src="../uploads/draw2.svg" class="img-fluid" alt="register-image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form method="post" action="api">
+                    <form method="post" action="api.php">
                         <!-- User input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="text" class="form-control form-control-lg" id="nameUser" name="nameUser" />
