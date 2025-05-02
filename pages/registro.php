@@ -279,7 +279,7 @@
                     response.json()
                     if (response.ok) {
                         document.getElementById("enviar").disabled = true;
-                        irLogin();
+                        // irLogin();
                     } else if (response.status === 409) {
                         Swal.fire({
                             icon: 'info',
