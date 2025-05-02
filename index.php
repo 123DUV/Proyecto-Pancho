@@ -255,21 +255,21 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         <li class="nav-item">
                             <div id="inicioSesion">
-                                <a class="nav-link " id="hide" href="app_duv/pages/login">Iniciar sesión</a>
+                                <a class="nav-link " id="hide" href="pages/login">Iniciar sesión</a>
                             </div>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/pages/blog">Blog</a>
+                            <a class="nav-link" href="pages/blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/#oferts">Ofertas</a>
+                            <a class="nav-link" href="#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/#contact">Contactame</a>
+                            <a class="nav-link" href="#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="app_duv/pages/news">Noticias</a>
+                            <a class="nav-link" href="pages/news">Noticias</a>
                         </li>
                         <div class="<?php
                         if ($mostrarSubir === true) {
@@ -279,19 +279,19 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                         }
                         ?>">
                             <li class="nav-item">
-                                <a class="nav-link" href="app_duv/pages/subirImagenes">subirImagenes</a>
+                                <a class="nav-link" href="pages/subirImagenes">subirImagenes</a>
                             </li>
                         </div>
 
                         <div id="perfil">
                             <li class="nav-item">
-                                <a class="nav-link" href="app_duv/pages/perfilPersona">Perfil</a>
+                                <a class="nav-link" href="pages/perfilPersona">Perfil</a>
                             </li>
                         </div>
 
                         <li>
                             <div id="closeR">
-                                <a class="nav-link rounded " href="app_duv/pages/registro" style="background-color: #c2c2c2; "
+                                <a class="nav-link rounded " href="pages/registro" style="background-color: #c2c2c2; "
                                     class="text-center ">Registrate</a>
                             </div>
 
