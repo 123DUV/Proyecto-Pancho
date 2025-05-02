@@ -46,7 +46,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 <head>
     <title>App</title>
     <!--iconos-->
-    <link rel="icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <!--encabezados -->
     <meta charset="UTF-8">
     <meta name="description" content="sewing machine services and information">
@@ -465,9 +465,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     const caja = document.getElementById("cajaLight");
                     const crearDivL = document.createElement("div");
                     const crearImg = document.createElement("img");
-                    crearImg.src = `/app_duv/uploads/imagen-${contadorAlterno}-li.png`;
+                    crearImg.src = `/uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.loading = "lazy";
-                    crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorAlterno}-li.png`;
+                    crearImg.dataset.imageHd = `/uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
                     crearDivL.classList = "cajita"
                     crearDivL.appendChild(crearImg);
@@ -500,9 +500,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             const caja = document.getElementById("cajaLight");
             const crearDivL = document.createElement("div");
             const crearImg = document.createElement("img");
-            crearImg.src = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.png`;
+            crearImg.src = `/uploads/imagen-${contadorClicksAdd}-li.png`;
             crearImg.loading = "lazy";
-            crearImg.dataset.imageHd = `/app_duv/uploads/imagen-${contadorClicksAdd}-li.png`;
+            crearImg.dataset.imageHd = `/uploads/imagen-${contadorClicksAdd}-li.png`;
             crearImg.alt = `imagen-${contadorClicksAdd}-ofertas`;
             crearDivL.classList = "cajita"
             crearDivL.appendChild(crearImg);
@@ -589,7 +589,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 .then(result => {
                     if (result.ok) {
 
-                        window.location.href = '/app_duv/'
+                        window.location.href = '/'
                     } else {
                         Swal.fire({
                             icon: 'error',

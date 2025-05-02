@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION['user'])) {
-  header("Location: /app_duv/");
+  header("Location: /");
 }
 
 include_once '../config.php'
@@ -17,7 +17,7 @@ include_once '../config.php'
   <title>Inicio de sesión</title>
   <!-- <link rel="stylesheet" href="./styles.css"> -->
   <title>Login</title>
-  <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+  <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <!--fuente-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,7 +92,7 @@ include_once '../config.php'
               </div>
               <a href="#!" style="text-decoration: none; color: black; font-family: var(--fuente);">Olvide mi
                 contraseña?</a>
-              <a href="/app_duv/pages/registro"
+              <a href="/pages/registro"
                 style="text-decoration: none; color: black; font-family: var(--fuente);">Registrarse</a>
             </div>
             <!-- Submit button -->
@@ -186,7 +186,7 @@ include_once '../config.php'
               // });
             
               recordar();
-              window.location.href = "/app_duv/"
+              window.location.href = "/"
               return result.json();
 
 
@@ -224,7 +224,7 @@ include_once '../config.php'
     }
 
     function volver() {
-      window.location.href = '/app_duv/';
+      window.location.href = '/';
 
     }
 

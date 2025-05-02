@@ -9,7 +9,7 @@ include_once '../config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>editar perfil</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
 
     <!--fuente-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +50,7 @@ include_once '../config.php';
         <!--nav-->
         <div class="row">
             <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                <a href="/app_duv/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
+                <a href="/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
                     data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                     <i class="bi bi-c-circle fs-1"></i>
                 </a>
@@ -71,8 +71,8 @@ include_once '../config.php';
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                        <li><a class="dropdown-item" href="/app_duv/pages/settings">Configuración</a></li>
-                        <li><a class="dropdown-item" href="/app_duv/">Inicio</a></li>
+                        <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                        <li><a class="dropdown-item" href="/">Inicio</a></li>
                     </ul>
                 </div>
             </div>

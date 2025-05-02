@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My blog</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
     
   <!--fuente-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,14 +104,14 @@ session_start();
             <!-- nav -->
             <div class="col-sm-auto bg-dark ">
                 <div class="d-flex flex-sm-column flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/app_duv/pages/blog" class="d-block  text-white text-decoration-none" title="" data-bs-toggle="tooltip"
+                    <a href="/pages/blog" class="d-block  text-white text-decoration-none" title="" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
                     <ul
                         class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                         <li class="nav-item">
-                            <a href="/app_duv/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
+                            <a href="/" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
                                 data-bs-placement="right" data-bs-original-title="Home">
                                 <i class="bi-house fs-3"></i>
                             </a>
@@ -122,7 +122,7 @@ session_start();
                         
                     </ul>
                     <div class="">
-                        <a href="/app_duv/pages/perfilPersona"
+                        <a href="/pages/perfilPersona"
                             class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none "
                             aria-expanded="false">
                             <i class="bi-person-circle h2"></i>
@@ -137,7 +137,7 @@ session_start();
                 <div class="text-center sticky-top" style="background-color: yellow;">
 
                     <div class="line-container">
-                        <a href="/app_duv/pages/news" style="text-decoration: none;">
+                        <a href="/pages/news" style="text-decoration: none;">
                             <p class="text-black pt-1" style="font-family: var(--fuente);">Check the news</p>
                             <div class="line">
 
@@ -198,7 +198,7 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function volver() {
-            window.location.href = '/app_duv/';
+            window.location.href = '/';
         }
     </script>
     <script>

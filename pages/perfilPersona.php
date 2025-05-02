@@ -49,7 +49,7 @@ if ($logeado) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -92,7 +92,7 @@ if ($logeado) {
         <div class="row">
             <div class=" bg-dark ">
                 <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/app_duv/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
+                    <a href="/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
@@ -113,8 +113,8 @@ if ($logeado) {
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                            <li><a class="dropdown-item" href="/app_duv/pages/settings">Configuración</a></li>
-                            <li><a class="dropdown-item" href="/app_duv/">Inicio</a></li>
+                            <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/">Inicio</a></li>
                         </ul>
                     </div>
                 </div>
@@ -166,13 +166,13 @@ if ($logeado) {
                 document.getElementById('botonEditarPerfil').innerHTML = "<button id='botonCrop' class='btn btn-lg border-bottom mt-2 mx-2' onclick='irEditarPerfil();'>Editar foto perfil</button>"
             }
             function irEditarPerfil() {
-                window.location.href = "/app_duv/pages/editarPerfil";
+                window.location.href = "/pages/editarPerfil";
             }
             function irLogin() {
-                window.location.href = "/app_duv/pages/login";
+                window.location.href = "/pages/login";
             }
             function volver() {
-                window.location.href = "/app_duv/";
+                window.location.href = "/";
             }
             document.addEventListener('DOMContentLoaded', function () {
                 const image = document.getElementById("");
@@ -207,7 +207,7 @@ if ($logeado) {
                     .then(result => {
                         if (result.ok) {
 
-                            window.location.href = '/app_duv/'
+                            window.location.href = '/'
                         } else {
                             Swal.fire({
                                 icon: 'error',

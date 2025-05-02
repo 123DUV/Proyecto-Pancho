@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -285,7 +285,7 @@
         background: linear-gradient(0deg, rgba(158,236,255,1) 25%, rgba(33,116,236,1) 67%);">
         <div class="container" id="top">
             
-            <a class="navbar-brand" href="/app_duv/"><i class="bi bi-c-circle fs-3 text-white"></i></a>
+            <a class="navbar-brand" href="/"><i class="bi bi-c-circle fs-3 text-white"></i></a>
        
         
         </div>
@@ -363,7 +363,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function volver() {
-            window.location.href = '/app_duv/';
+            window.location.href = '/';
         }
 
 

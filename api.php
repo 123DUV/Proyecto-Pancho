@@ -26,7 +26,7 @@ if (!$con) {
 
 
 //obtener ruta despues de api.php
-$respuesta = str_replace("/app_duv/api.php/", "", $_SERVER['REQUEST_URI']);
+$respuesta = str_replace("/api.php/", "", $_SERVER['REQUEST_URI']);
 
 $respuesta = explode("?", $respuesta)[0];
 error_log("ruta: " . $respuesta);

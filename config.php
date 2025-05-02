@@ -1,3 +1,3 @@
 <?php
-$BASE_URL= 'http://localhost/app_duv/';
+$BASE_URL= 'http://localhost/';
 ?>

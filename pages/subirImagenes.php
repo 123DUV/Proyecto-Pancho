@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Imagenes </title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -79,7 +79,7 @@
                                 text: 'Imagen $file actualizada correctamente'
                             }).then((result)=>{
                                 if(result.isConfirmed){
-                                    window.location.href = '/app_duv/';
+                                    window.location.href = '/';
                                 }
                             })
                         </script>";
@@ -111,7 +111,7 @@
                 text: 'Descarga exitosa'
             }).then((result)=>{
             if(result.isConfirmed){
-                window.location.href = '/app_duv/';
+                window.location.href = '/';
             }   
         });
             </script>";
@@ -125,11 +125,11 @@
     <div class="m-5">
         <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i> Volver</button>
     </div>
-    <form action="/app_duv/pages/subirImagenes" method="post" enctype="multipart/form-data">
+    <form action="/pages/subirImagenes" method="post" enctype="multipart/form-data">
         <div class="w-50" style="margin: 0 auto;">
             <div class="d-flex flex-column" id="agregarInputs">
                 <div class="input-group">
-                    <input type="text" class="form-control " placeholder="Id imagen" name="inputId[]">
+                    <input type="text" class="form-control " placeholder="URL imagen" name="inputId[]">
                     <div class="input-group-append">
                         <button class="btn btn-secondary " type="button" id="botonAgregar"><i
                                 class="bi bi-plus"></i></button>
@@ -478,7 +478,7 @@
         // });
 
         function volver() {
-            window.location.href = "/app_duv/";
+            window.location.href = "/";
         }
     </script>
 </body>

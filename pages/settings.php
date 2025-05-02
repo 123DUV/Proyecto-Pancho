@@ -10,7 +10,7 @@ include_once '../config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -35,7 +35,7 @@ include_once '../config.php';
         <div class="row d-flex flex-column justify-content-center align-items-center mt-3 rounded"
             style="background-color: #E3F5FA">
 
-            <a href="/app_duv/pages/editarPerfil" class="btn btn-light rounded">Editar Perfil</a>
+            <a href="/pages/editarPerfil" class="btn btn-light rounded">Editar Perfil</a>
             <a href="#" class="btn btn-light rounded" onclick="cerrarSesion();">Cerrar sesión</a>
 
         </div>
@@ -46,10 +46,10 @@ include_once '../config.php';
     </div>
     <div class="d-flex justify-content-between">
        
-            <img src="/app_duv/uploads/gifs/horse.gif" class="img-responsive" width="50%" height="auto"
+            <img src="/uploads/gifs/horse.gif" class="img-responsive" width="50%" height="auto"
                 alt="Gif perrito corriendo">
        
-        <img src="/app_duv/uploads/gifs/rain.gif" class="img-responsive" width="50%" height="auto"
+        <img src="/uploads/gifs/rain.gif" class="img-responsive" width="50%" height="auto"
         alt="Gif perrito corriendo">
         
     </div>
@@ -62,7 +62,7 @@ include_once '../config.php';
                 .then(result => {
                     if (result.ok) {
 
-                        window.location.href = '/app_duv/'
+                        window.location.href = '/'
                     } else {
                         Swal.fire({
                             icon: 'error',

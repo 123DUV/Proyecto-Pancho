@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="shortcut icon" type="image/svg+xml" href="/app_duv/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -129,7 +129,7 @@
                         <div class="d-flex justify-content-around align-items-center mb-4">
 
 
-                            <a href="/app_duv/pages/login">Iniciar sesión</a>
+                            <a href="/pages/login">Iniciar sesión</a>
                         </div>
 
                         <!-- Submit button -->
@@ -223,10 +223,10 @@
             divInfoOculto.style.display = "block";
         })
         function volver() {
-            window.location.href = '/app_duv/';
+            window.location.href = '/';
         }
         function irLogin() {
-            window.location.href = '/app_duv/pages/login';
+            window.location.href = '/pages/login';
         }
 
         function obtenerDatos() {
