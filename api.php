@@ -20,10 +20,8 @@ if(isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)){
     echo json_encode(["Error"=>"No llegan las variables de conexión con la bd"]);
 }
 
-
-
 //obtener ruta despues de api.php
-$respuesta = str_replace("api/", "", $_SERVER['REQUEST_URI']);
+$respuesta = trim(str_replace("api/", "", $_SERVER['REQUEST_URI']), "/");
 
 $respuesta = explode("?", $respuesta)[0];
 error_log("ruta: " . $respuesta);
@@ -281,7 +279,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         // falta archivo para manejar datos secretos como este captcha y su id
         $captcha = $datosRecibidos['g-recaptcha-response'] ?? $_POST['g-recaptcha-response'];
         $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
-        $urlApi = 'https://www.google.com/recaptcha/api.php/siteverify?secret=' . $secretKey . '&response=' . $captcha;
+        $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
 
         $response = file_get_contents($urlApi);
 

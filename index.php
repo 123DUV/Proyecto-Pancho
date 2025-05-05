@@ -294,7 +294,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
 
-                <img src="./uploads/imagenPrincipal.png" alt="imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/imagenPrincipal.pn" alt="imagen-principal" class="rounded" width="100%">
             </div>
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
@@ -318,7 +318,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row inline-block reverse-order pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./uploads/segundaInicio.png" alt="segunda-imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.pn" alt="segunda-imagen-principal" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
