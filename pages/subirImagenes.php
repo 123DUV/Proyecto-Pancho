@@ -6,6 +6,8 @@
 <?php
     include_once '../headers.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
     <style>
         .text-justify {
             text-align: justify;
@@ -29,15 +31,10 @@
     $contador = 0;
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (empty($_POST['inputName[]'])) {
-
         } else {
-
-
             foreach ($_POST['inputId'] as $campoId) {
-
                 foreach ($_POST['inputName'] as $campoName) {
                     $contador++;
-
                     $arrayId[] = ["id" => $campoId, "nombre" => $campoName];
                 }
             }
@@ -59,7 +56,6 @@
             if ($dh = opendir($path)) {
                 while (($file = readdir($dh)) !== false) {
 
-
                     if ($file == $nameImg) {
                         echo "<script>
                             Swal.fire({
@@ -68,7 +64,8 @@
                                 text: 'Imagen $file actualizada correctamente'
                             }).then((result)=>{
                                 if(result.isConfirmed){
-                                    window.location.href = '/';
+                                    // window.location.href = '/';
+                                    console.log($file);
                                 }
                             })
                         </script>";
@@ -100,7 +97,7 @@
                 text: 'Descarga exitosa'
             }).then((result)=>{
             if(result.isConfirmed){
-                window.location.href = '/';
+                // window.location.href = '/';
             }   
         });
             </script>";
@@ -111,13 +108,11 @@
 
 
     ?>
-    <div class="m-5">
-        <button class="btn btn-secondary" onclick="volver();"><i class="bi bi-arrow-left"></i> Volver</button>
-    </div>
+ 
     <div class="row">
             <div class=" bg-dark ">
                 <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/pages/settings" class="d-block p-3 text-white text-decoration-none" title=""
+                    <a href="<?php echo $RUTA_PAGES?>settings" class="d-block p-3 text-white text-decoration-none" title=""
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
@@ -138,14 +133,14 @@
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                            <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES?>settings">Configuración</a></li>
                             <li><a class="dropdown-item" href="/">Inicio</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    <form action="/pages/subirImagenes" method="post" enctype="multipart/form-data">
+    <form action="<?php echo $RUTA_PAGES?>subirImagenes" method="post" enctype="multipart/form-data">
         <div class="w-50" style="margin: 0 auto;">
             <div class="d-flex flex-column" id="agregarInputs">
                 <div class="input-group">
@@ -438,64 +433,18 @@
 
         document.getElementById("agregarInputs").addEventListener('click', function (event) {
             let target = event.target;
-
+            console.log(target)
             while (target && !target.classList.contains("e")) {
                 target = target.parentNode;
             }
+
             if (target) {
                 target.parentNode.parentNode.remove();
                 console.log(target.parentNode.parentNode);
             }
         });
     </script>
-    <!-- script subir imagenes normal-->
     <script>
-        //traer solo una vista previa
-
-        // document.getElementById('inputModificado').addEventListener("change", function () {
-        //     let archivo = this.files.length > 0 ? Array.from(this.files).map(file => file.name).join(" + ") : "Ningun archivo seleccionado";
-        //     $inputfalso = document.querySelector(".inputFalso");
-        //     $inputfalso.textContent = archivo;
-        // });
-
-        // const $imagenElegida = document.querySelector("#inputModificado");
-        // $imagenPre =  document.querySelector("#vistaPrevia");
-
-        // $imagenElegida.addEventListener("change", function(){
-        //     const archivos =$imagenElegida.files;
-        //     if(!archivos || !archivos.length){
-        //         $imagenPre.src="";
-        //         return;
-        //     }
-
-        //     const primerArchivo = archivos[0];
-        //     const url = URL.createObjectURL(primerArchivo);
-        //     $imagenPre.src=url;
-        // });
-
-        //traer varias
-
-        // document.getElementById('inputModificado').addEventListener('change', function (event) {
-        //     let filas = event.target.files;
-
-        //     let limpiarPrev = document.getElementById('vistaPrevia');
-        //     limpiarPrev.innerHTML = "";
-
-        //     let urls = [];
-
-        //     for (let i = 0; i < filas.length; i++) {
-        //         let url = URL.createObjectURL(filas[i]);
-        //         urls.push(url);
-
-        //         let crearImg = document.createElement("img");
-        //         crearImg.src = url;
-        //         crearImg.style.width = '100px';
-        //         crearImg.style.margin = '5px';
-        //         crearImg.style.border = 'solid';
-        //         limpiarPrev.appendChild(crearImg);
-        //     }
-        //     console.log(urls);
-        // });
 
         function volver() {
             window.location.href = "/";

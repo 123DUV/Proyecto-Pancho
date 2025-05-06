@@ -21,7 +21,7 @@ if(isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)){
 }
 
 //obtener ruta despues de api.php
-$respuesta = trim(str_replace("api/", "", $_SERVER['REQUEST_URI']), "/");
+$respuesta = trim(str_replace($RUTA_API."api/", "", $_SERVER['REQUEST_URI']), "/");
 
 $respuesta = explode("?", $respuesta)[0];
 error_log("ruta: " . $respuesta);
@@ -59,7 +59,7 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
         echo json_encode(["error" => "Error validando contraseña"]);
         exit;
     }
-    $nameUser = $datosLogin['nameUser'];
+    $nameUser = htmlspecialchars($datosLogin['nameUser']);
 
     $password = $datosLogin['password'];
 
@@ -239,8 +239,8 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         exit;
     }
 
-    $nameUser = $datosRecibidos['nameUser'];
-    $telefono = $datosRecibidos['telefono'];
+    $nameUser = htmlspecialchars($datosRecibidos['nameUser']);
+    $telefono = htmlspecialchars($datosRecibidos['telefono']);
     $contra = $datosRecibidos['contra'];
     $imagenPerfil = $datosRecibidos['imagenPerfil'];
 
@@ -277,15 +277,33 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
     } else {
 
         // falta archivo para manejar datos secretos como este captcha y su id
-        $captcha = $datosRecibidos['g-recaptcha-response'] ?? $_POST['g-recaptcha-response'];
-        $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN';
-        $urlApi = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $captcha;
+        $captcha = $_POST['g-recaptcha-response'] ?? '';
+        $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN'; // clave secreta (no pública)
+        
+        if (empty($captcha)) {
+            die("Captcha no enviado");
+        }
+        
+        $urlApi = 'https://www.google.com/recaptcha/api/siteverify';
+        
+        $data = [
+            'secret' => $secretKey,
+            'response' => $captcha
+        ];
+        
+        // Usamos cURL en lugar de file_get_contents (más robusto y recomendado)
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $urlApi);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        $responseData = json_decode($response);
+        
 
-        $response = file_get_contents($urlApi);
-
-        $responseTwo = json_decode($response);
-
-        if ($responseTwo->success == true) {
+        if ($responseData->success) {
             http_response_code(200);
             $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra, imgPerfil) values(?,?,?,?)';
             $stmt = mysqli_prepare($con, $insertarDatos);
@@ -319,6 +337,14 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
 
 
 }
+
+//registro logeos insertar
+if($respuesta === 'new-register' && $metodo === 'POST'){
+    $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+
+    
+}
+
 
 //actualizar imagen de perfil
 if ($respuesta === 'act-img' && $metodo === 'POST') {

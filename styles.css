@@ -1,0 +1,8 @@
+/* css de estilos globales, los mas usados botones, fondo, fuente, etc */
+:root {
+    --body-bg: #F4F9FB;
+    --body-color: #333333;
+    --fuente: "Winky Sans", sans-serif;
+    --botones: #6BCB77;
+  
+}

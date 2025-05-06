@@ -3,6 +3,8 @@
 <?php
 include_once '../headers.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
 
 <head>
 
@@ -23,10 +25,7 @@ include_once '../headers.php';
             width: 50px;
         }
 
-        :root {
-            --fuente: "Press Start 2P", serif;
-            --color-letra: black;
-        }
+     
 
         .imagen-news {
             margin-top: 2%;
@@ -275,7 +274,7 @@ include_once '../headers.php';
     <div class="row">
             <div class=" bg-dark ">
                 <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/pages/news" class="d-block p-3 text-white text-decoration-none" title=""
+                    <a href="<?php echo $RUTA_PAGES?>news" class="d-block p-3 text-white text-decoration-none" title=""
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
@@ -296,7 +295,7 @@ include_once '../headers.php';
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                            <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES?>settings">Configuración</a></li>
                             <li><a class="dropdown-item" href="/">Inicio</a></li>
                         </ul>
                     </div>
@@ -373,7 +372,7 @@ include_once '../headers.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function volver() {
-            window.location.href = '/';
+            window.location.href = '<?php echo $BASE_URL ?>';
         }
 
 

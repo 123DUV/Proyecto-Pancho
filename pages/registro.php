@@ -8,6 +8,8 @@
 <?php
     include_once '../headers.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
 <head>
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -113,7 +115,7 @@
                         <div class="d-flex justify-content-around align-items-center mb-4">
 
 
-                            <a href="/pages/login">Iniciar sesión</a>
+                            <a href="<?php echo $RUTA_PAGES?>login">Iniciar sesión</a>
                         </div>
 
                         <!-- Submit button -->
@@ -205,10 +207,10 @@
 
        
         function volver() {
-            window.location.href = '/';
+            window.location.href = '<?php echo $BASE_URL ?>';
         }
         function irLogin() {
-            window.location.href = '/pages/login';
+            window.location.href = '<?php echo $RUTA_PAGES?>login';
         }
 
         function obtenerDatos() {
@@ -291,7 +293,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: "Completa el captcha"
+                            text: "Error al completar el captcha, reintentalo de nuevo"
                         })
                     }
 

@@ -9,6 +9,8 @@ include_once '../config.php';
 <?php
     include_once '../headers.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
 <head>
  
     <style>
@@ -26,7 +28,7 @@ include_once '../config.php';
         <div class="row d-flex flex-column justify-content-center align-items-center mt-3 rounded"
             style="background-color: #E3F5FA">
 
-            <a href="/pages/editarPerfil" class="btn btn-light rounded">Editar Perfil</a>
+            <a href="<?php echo $RUTA_PAGES?>editarPerfil" class="btn btn-light rounded">Editar Perfil</a>
             <a href="#" class="btn btn-light rounded" onclick="cerrarSesion();">Cerrar sesión</a>
 
         </div>
@@ -37,11 +39,11 @@ include_once '../config.php';
     </div>
     <div class="d-flex justify-content-between">
        
-            <img src="/uploads/gifs/horse.gif" class="img-responsive" width="50%" height="auto"
-                alt="Gif perrito corriendo">
+            <img src="<?php echo $BASE_URL?>uploads/gifs/horse.gif" class="img-responsive" width="50%" height="auto"
+                alt="Gif caballo corriendo">
        
-        <img src="/uploads/gifs/rain.gif" class="img-responsive" width="50%" height="auto"
-        alt="Gif perrito corriendo">
+        <img src="<?php echo $BASE_URL?>uploads/gifs/rain.gif" class="img-responsive" width="50%" height="auto"
+        alt="Gif lloviendo">
         
     </div>
     <script>
@@ -53,7 +55,7 @@ include_once '../config.php';
                 .then(result => {
                     if (result.ok) {
 
-                        window.location.href = '/'
+                        window.location.href = '<?php echo $BASE_URL ?>'
                     } else {
                         Swal.fire({
                             icon: 'error',

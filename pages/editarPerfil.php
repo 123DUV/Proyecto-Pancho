@@ -8,6 +8,8 @@ include_once '../config.php';
 <?php
     include_once '../headers.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
 <head>
  
 
@@ -19,7 +21,7 @@ include_once '../config.php';
         <!--nav-->
         <div class="row">
             <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                <a href="/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
+                <a href="<?php echo $RUTA_PAGES?>perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
                     data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                     <i class="bi bi-c-circle fs-1"></i>
                 </a>
@@ -40,7 +42,7 @@ include_once '../config.php';
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                        <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                        <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES?>settings">Configuración</a></li>
                         <li><a class="dropdown-item" href="/">Inicio</a></li>
                     </ul>
                 </div>
@@ -102,7 +104,7 @@ include_once '../config.php';
 
         function enviarImg(img) {
             console.log(img);
-            fetch('<?php echo $BASE_URL?>.php/act-img', {
+            fetch('<?php echo $BASE_URL?>api/act-img', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

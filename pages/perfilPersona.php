@@ -40,6 +40,8 @@ if ($logeado) {
     <?php
     include_once '../headers.php';
     ?>
+    <link rel="stylesheet" href="../styles.css">
+
     <style>
         input[type="file"] {
             display: none;
@@ -73,7 +75,7 @@ if ($logeado) {
         <div class="row">
             <div class=" bg-dark ">
                 <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/pages/perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
+                    <a href="<?php echo $RUTA_PAGES?>perfilPersona" class="d-block p-3 text-white text-decoration-none" title=""
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
@@ -94,7 +96,7 @@ if ($logeado) {
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                            <li><a class="dropdown-item" href="/pages/settings">Configuración</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES?>settings">Configuración</a></li>
                             <li><a class="dropdown-item" href="/">Inicio</a></li>
                         </ul>
                     </div>
@@ -144,13 +146,13 @@ if ($logeado) {
                 editarPerfilBoton();
             }
             function editarPerfilBoton() {
-                document.getElementById('botonEditarPerfil').innerHTML = "<button id='botonCrop' class='btn btn-lg border-bottom mt-2 mx-2' onclick='irEditarPerfil();'>Editar foto perfil</button>"
+                document.getElementById('botonEditarPerfil').innerHTML = "<button id='botonCrop' class='btn btn-lg border-bottom mt-2 mx-2' onclick='irEditarPerfil();'>Editar perfil</button>"
             }
             function irEditarPerfil() {
-                window.location.href = "/pages/editarPerfil";
+                window.location.href = "<?php echo $RUTA_PAGES?>editarPerfil";
             }
             function irLogin() {
-                window.location.href = "/pages/login";
+                window.location.href = "<?php echo $RUTA_PAGES?>login";
             }
             function volver() {
                 window.location.href = "/";
@@ -188,7 +190,7 @@ if ($logeado) {
                     .then(result => {
                         if (result.ok) {
 
-                            window.location.href = '/'
+                            window.location.href = '<?php echo $BASE_URL ?>'
                         } else {
                             Swal.fire({
                                 icon: 'error',

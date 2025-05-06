@@ -8,14 +8,15 @@ session_start();
 <html lang="es">
 <?php
     include_once '../headers.php';
+    include_once '../config.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
 <head>
 
 
     <style>
-        :root {
-            --fuente: "Winky Sans", sans-serif;
-        }
+       
 
         .text-justify {
             text-align: justify;
@@ -99,7 +100,7 @@ session_start();
             <div class="col-sm-auto bg-dark ">
                 <div
                     class="d-flex flex-sm-column flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="/pages/blog" class="d-block  text-white text-decoration-none" title=""
+                    <a href="<?php echo $RUTA_PAGES?>blog" class="d-block  text-white text-decoration-none" title=""
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                         <i class="bi bi-c-circle fs-1"></i>
                     </a>
@@ -113,7 +114,7 @@ session_start();
                         </li>
                     </ul>
                     <div class="">
-                        <a href="/pages/perfilPersona"
+                        <a href="<?php echo $RUTA_PAGES?>perfilPersona"
                             class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none "
                             aria-expanded="false">
                             <i class="bi-person-circle h2"></i>
@@ -128,7 +129,7 @@ session_start();
                 <div class="text-center sticky-top" style="background-color: yellow;">
 
                     <div class="line-container">
-                        <a href="/pages/news" style="text-decoration: none;">
+                        <a href="<?php echo $RUTA_PAGES?>news" style="text-decoration: none;">
                             <p class="text-black pt-1" style="font-family: var(--fuente);">Mira lo nuevo</p>
                             <div class="line">
                             </div>
@@ -205,7 +206,7 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function volver() {
-            window.location.href = '/';
+            window.location.href = '<?php echo $BASE_URL ?>';
         }
     </script>
     <script>

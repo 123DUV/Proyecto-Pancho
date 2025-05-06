@@ -44,7 +44,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 <!DOCTYPE html>
 <html lang="es1">
 
+
 <head>
+    <link rel="stylesheet" href="./styles.css">
 
     <style>
         body {
@@ -61,13 +63,6 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             width: 50px;
         }
 
-
-        :root {
-            --body-bg: #FFFFFF;
-            --body-color: #000000;
-            --fuente: "Winky Sans", sans-serif;
-        }
-
         .full-lados {
             margin: 0 !important;
             padding: 0 !important;
@@ -76,8 +71,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         }
 
         .gradient {
-            background: rgb(210, 247, 255);
-            background: linear-gradient(0deg, rgba(210, 247, 255, 1) 25%, rgba(142, 227, 250, 1) 100%);
+            background: #FFFFFF;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 85%, rgba(142, 227, 250, 1) 100%);
         }
 
         .gradient-nav {
@@ -85,10 +80,10 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             background: linear-gradient(0deg, rgba(210, 247, 255, 1) 25%, rgba(113, 224, 254, 1) 100%);
         }
 
-        /* .gradient-arriba {
-            background: rgb(249, 248, 246);
-            background: linear-gradient(0deg, rgba(249, 248, 246, 1) 19%, rgba(65, 65, 65, 1) 95%);
-        }  */
+        .gradient-arriba {
+            background: #8EE3FA;
+            background: linear-gradient(0deg, rgba(142, 227, 250, 1) 59%, rgba(255, 255, 255, 1) 88%);   
+        } 
 
         .shadow {
             box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
@@ -208,22 +203,22 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
 </head>
 
-<body class="gradient">
+<body class="gradient" style=" color: var(--body-color);">
     <script>
         var logedIn = <?php echo json_encode($logedIn); ?>;
     </script>
     <div class="container-fluid ">
         <button class="goup btn btn-light"><i class="bi bi-arrow-up"></i></button>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded gradient-nav" data-mdb-navbar-init>
+        <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded gradient-nav">
             <div class="container" id="top">
 
                 <div class="d-flex justify-content-center align-items-center">
-                    <i class="bi bi-cursor-fill fs-3" id="irArriba"></i>
+                    <i class="bi bi-cart3 fs-3" id="irArriba"></i>
                     <p class="m-3" style="color: black;"><?php echo $saludo ?></p>
                 </div>
                 <a class="navbar-brand" href="#!"></a>
-                <button class="navbar-toggler" type="button" data-mdb-collapse-init data-bs-toggle="collapse"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <i class="bi bi-person-lines-fill"></i>
@@ -233,12 +228,12 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         <li class="nav-item">
                             <div id="inicioSesion">
-                                <a class="nav-link " id="hide" href="pages/login">Iniciar sesión</a>
+                                <a class="nav-link " id="hide" href="<?php echo $RUTA_PAGES ?>login">Iniciar sesión</a>
                             </div>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/blog">Blog</a>
+                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>blog">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#oferts">Ofertas</a>
@@ -247,30 +242,22 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                             <a class="nav-link" href="#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/news">Noticias</a>
+                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>news">Noticias</a>
                         </li>
-                        <div class="<?php
-                        if ($mostrarSubir === true) {
-                            echo "d-block";
-                        } else {
-                            echo "d-none";
-                        }
-                        ?>">
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/subirImagenes">subirImagenes</a>
-                            </li>
-                        </div>
 
-                        <div id="perfil">
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/perfilPersona">Perfil</a>
-                            </li>
-                        </div>
+                        <li class="nav-item <?php echo $mostrarSubir ? '' : 'd-none'; ?>">
+
+                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>subirImagenes">subirImagenes</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>perfilPersona">Perfil</a>
+                        </li>
 
                         <li>
                             <div id="closeR">
-                                <a class="nav-link rounded " href="pages/registro" style="background-color: #c2c2c2; "
-                                    class="text-center ">Registrate</a>
+                                <a class="nav-link rounded " href="<?php echo $RUTA_PAGES ?>registro"
+                                    style="background-color: #c2c2c2; " class="text-center ">Registrate</a>
                             </div>
 
                         </li>
@@ -299,21 +286,25 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-facebook text-primary" onclick="window.location.href='https://www.facebook.com/controlcoser/'"
-                    style="font-size: 10vw;"></i>
-                <p><a href="https://www.facebook.com/controlcoser/" style="text-decoration: none; color:inherit;">Facebook</a></p>
+                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
+                    onclick="window.location.href='https://www.facebook.com/controlcoser/'"
+                    ></i>
+                <p><a href="https://www.facebook.com/controlcoser/"
+                        style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
-                <i class="bi bi-whatsapp text-success"
+                <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
                     onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"
-                    style="font-size: 10vw; text-decoration: inherit;"></i>
+                    ></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
                         style="text-decoration: none; color:inherit;">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-instagram text-danger" onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"
-                    style="font-size: 10vw;"></i>
-                <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg==" style="text-decoration: none; color:inherit;">Instagram</a></p>
+                <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
+                    onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"
+                    ></i>
+                <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
+                        style="text-decoration: none; color:inherit;">Instagram</a></p>
             </div>
         </div>
         <div class="row inline-block reverse-order pt-5 ">
@@ -331,7 +322,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         </div>
         <div class="row  pt-5 " id="oferts">
-            <div class="contenedor-lightbox">
+            <div class="contenedor-lightbox gradient-arriba ">
                 <h2 class="text-center" style="font-family: var(--fuente);">Próximamente</h2>
                 <div class="<?php if ($mostrarSubir) {
                     echo "d-block  flex-row justify-content-end ";
@@ -351,20 +342,32 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
         </div>
         <!-- footer -->
-        <div class="row  pt-5" style="background-image: url('./img/R.jpeg');" id="contact">
+        <div class="row  pt-5" style="background-color:#1F3A52;color:#EEEEEE;" id="contact">
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-telephone fs-5"></i>
-                <p>3128616610</p>
+                <button class="btn" data-clipboard-text="3128616610"><i class="bi bi-copy" style="color:#EEEEEE"></i></button>
+
+                <p>3128616610
+                </p>
+
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-envelope-at fs-5"></i>
+                <button class="btn" data-clipboard-text="bedoyafabio4@gmail.com"><i class="bi bi-copy" style="color:#EEEEEE"></i></button>
+
                 <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=bedoyafabio4@gmail.com&su=<?php echo $hora ?>&body="
-                        style="text-decoration: none; color:inherit;">bedoyafabio4@gmail.com</a></p>
+                        style="text-decoration: none; color:inherit;">bedoyafabio4@gmail.com</a>
+                </p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-geo-alt fs-5"></i>
+                <button class="btn"
+                    data-clipboard-text="ZONA FRANCA INTERNACIONAL DE PEREIRA USUARIO OPERADOR, PEREIRA, RISARALDA"><i
+                        class="bi bi-copy" style="color:#EEEEEE"></i></button>
                 <p><a href="https://www.google.com/maps?q=ZONA%20FRANCA%20INTERNACIONAL%20DE%20PEREIRA%20USUARIO%20OPERADOR,%20PEREIRA,%20Risaralda"
-                        style="text-decoration: none; color:inherit;">Dirección Zona franca internacional de pereira</a> </p>
+                        style="text-decoration: none; color:inherit;">Dirección Controlcoser</a>
+
+                </p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-calendar fs-5"></i>
@@ -397,9 +400,6 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <!--fin footer-->
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <base href="/">
     <script>
@@ -442,9 +442,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     const caja = document.getElementById("cajaLight");
                     const crearDivL = document.createElement("div");
                     const crearImg = document.createElement("img");
-                    crearImg.src = `/uploads/imagen-${contadorAlterno}-li.png`;
+                    crearImg.src = `<?php echo $BASE_URL?>/uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.loading = "lazy";
-                    crearImg.dataset.imageHd = `/uploads/imagen-${contadorAlterno}-li.png`;
+                    crearImg.dataset.imageHd = `<?php echo $BASE_URL?>uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
                     crearDivL.classList = "cajita"
                     crearDivL.appendChild(crearImg);
@@ -548,6 +548,30 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         }());
     </script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const clipboard = new ClipboardJS('[data-clipboard-text]');
+
+            clipboard.on('success', function (e) {
+                console.log('copiado')
+                Toastify({
+                    text: "Copiado",
+                    duration: 2000,
+                    close: true,
+                    gravity: "bottom", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        color: "#333333",
+                        background: "#6BCB77",
+                    }
+                }).showToast();
+            });
+
+            clipboard.on('error', function (e) {
+                console.error('Error al copiar:', e);
+                alert('No se pudo copiar el texto');
+            });
+        });
 
         if (logedIn) {
             document.getElementById('inicioSesion').style.visibility = "hidden";
@@ -566,7 +590,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 .then(result => {
                     if (result.ok) {
 
-                        window.location.href = '/'
+                        window.location.href = '<?php echo $BASE_URL ?>'
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -589,6 +613,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             window.location.hash = "Again-No-back-button" //chrome
             window.onhashchange = function () { window.location.hash = ""; }
         }
+
     </script>
     <script>
         $(document).ready(function () {

@@ -13,18 +13,14 @@ include_once '../config.php';
 <?php
     include_once '../headers.php';
 ?>
+<link rel="stylesheet" href="../styles.css">
+
 <head>
 
   <style>
-    :root {
-      --fuente: "Winky Sans", sans-serif;
-    }
+  
 
-    .gradient {
-      background: rgb(210, 247, 255);
-      background: linear-gradient(0deg, rgba(210, 247, 255, 1) 25%, rgba(142, 227, 250, 1) 100%);
-    }
-
+    
     .gradient-nav {
       background: rgb(255, 255, 255);
       background: linear-gradient(0deg, rgba(255, 255, 255, 1) 22%, rgba(203, 244, 255, 1) 100%);
@@ -75,7 +71,7 @@ include_once '../config.php';
               </div>
               <a href="#!" style="text-decoration: none; color: black; font-family: var(--fuente);">Olvide mi
                 contraseña?</a>
-              <a href="/pages/registro"
+              <a href="<?php echo $RUTA_PAGES?>registro"
                 style="text-decoration: none; color: black; font-family: var(--fuente);">Registrarse</a>
             </div>
             <!-- Submit button -->
@@ -169,7 +165,7 @@ include_once '../config.php';
               // });
             
               recordar();
-              window.location.href = "/"
+              window.location.href = "<?php echo $BASE_URL?>"
               return result.json();
 
 
@@ -207,7 +203,7 @@ include_once '../config.php';
     }
 
     function volver() {
-      window.location.href = '/';
+      window.location.href = '<?php echo $BASE_URL ?>';
 
     }
 
