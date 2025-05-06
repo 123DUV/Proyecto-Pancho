@@ -82,8 +82,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         .gradient-arriba {
             background: #8EE3FA;
-            background: linear-gradient(0deg, rgba(142, 227, 250, 1) 59%, rgba(255, 255, 255, 1) 88%);   
-        } 
+            background: linear-gradient(0deg, rgba(142, 227, 250, 1) 59%, rgba(255, 255, 255, 1) 88%);
+        }
 
         .shadow {
             box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
@@ -181,18 +181,23 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             top: 0;
             left: 0;
             z-index: 20;
+     
+            justify-content: center;
+            align-items: center;
             padding-top: 30px;
             box-sizing: border-box;
         }
 
         .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
             display: block;
             margin: auto;
+            border-radius: 10px;
         }
 
         .lightbox .caption {
             margin: 15px auto;
-            width: 50%;
             text-align: center;
             font-size: 1em;
             line-height: 1.5;
@@ -287,22 +292,19 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
                 <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
-                    onclick="window.location.href='https://www.facebook.com/controlcoser/'"
-                    ></i>
+                    onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
                 <p><a href="https://www.facebook.com/controlcoser/"
                         style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
                 <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
-                    onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"
-                    ></i>
+                    onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
                         style="text-decoration: none; color:inherit;">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
                 <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
-                    onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"
-                    ></i>
+                    onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"></i>
                 <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
                         style="text-decoration: none; color:inherit;">Instagram</a></p>
             </div>
@@ -345,7 +347,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <div class="row  pt-5" style="background-color:#1F3A52;color:#EEEEEE;" id="contact">
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-telephone fs-5"></i>
-                <button class="btn" data-clipboard-text="3128616610"><i class="bi bi-copy" style="color:#EEEEEE"></i></button>
+                <button class="btn" data-clipboard-text="3128616610"><i class="bi bi-copy"
+                        style="color:#EEEEEE"></i></button>
 
                 <p>3128616610
                 </p>
@@ -353,7 +356,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-envelope-at fs-5"></i>
-                <button class="btn" data-clipboard-text="bedoyafabio4@gmail.com"><i class="bi bi-copy" style="color:#EEEEEE"></i></button>
+                <button class="btn" data-clipboard-text="bedoyafabio4@gmail.com"><i class="bi bi-copy"
+                        style="color:#EEEEEE"></i></button>
 
                 <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=bedoyafabio4@gmail.com&su=<?php echo $hora ?>&body="
                         style="text-decoration: none; color:inherit;">bedoyafabio4@gmail.com</a>
@@ -442,9 +446,10 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     const caja = document.getElementById("cajaLight");
                     const crearDivL = document.createElement("div");
                     const crearImg = document.createElement("img");
-                    crearImg.src = `<?php echo $BASE_URL?>/uploads/imagen-${contadorAlterno}-li.png`;
+                    crearImg.src = `<?php echo $BASE_URL ?>uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.loading = "lazy";
-                    crearImg.dataset.imageHd = `<?php echo $BASE_URL?>uploads/imagen-${contadorAlterno}-li.png`;
+                    
+                    crearImg.dataset.imageHd = `<?php echo $BASE_URL ?>uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
                     crearDivL.classList = "cajita"
                     crearDivL.appendChild(crearImg);
@@ -477,9 +482,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             const caja = document.getElementById("cajaLight");
             const crearDivL = document.createElement("div");
             const crearImg = document.createElement("img");
-            crearImg.src = `/uploads/imagen-${contadorClicksAdd}-li.png`;
+            crearImg.src = `<?php echo $BASE_URL ?>uploads/imagen-${contadorClicksAdd}-li.png`;
             crearImg.loading = "lazy";
-            crearImg.dataset.imageHd = `/uploads/imagen-${contadorClicksAdd}-li.png`;
+            crearImg.dataset.imageHd = `<?php echo $BASE_URL ?>uploads/imagen-${contadorClicksAdd}-li.png`;
             crearImg.alt = `imagen-${contadorClicksAdd}-ofertas`;
             crearDivL.classList = "cajita"
             crearDivL.appendChild(crearImg);
@@ -514,7 +519,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
 
         // Create a lightbox
-        (function () {
+        $(function () {
+
             var $lightbox = $("<div class='lightbox'></div>");
             var $img = $("<img class='rounded'>");
             var $caption = $("<p class='caption'></p>");
@@ -527,18 +533,18 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             // Add lightbox to document
             $('body').append($lightbox);
 
-            $('.lightbox-gallery img').click(function (e) {
+            $(document).on('click', '.lightbox-gallery img', function (e) {
                 e.preventDefault();
 
-                // Get image link and description
+                // Obtener el enlace de la imagen y la descripción
                 var src = $(this).attr("data-image-hd");
                 var cap = $(this).attr("alt");
 
-                // Add data to lightbox
+                // Agregar datos al lightbox
                 $img.attr('src', src);
                 $caption.text(cap);
 
-                // Show lightbox
+                // Mostrar el lightbox
                 $lightbox.fadeIn('fast');
             });
 
@@ -589,7 +595,6 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             })
                 .then(result => {
                     if (result.ok) {
-
                         window.location.href = '<?php echo $BASE_URL ?>'
                     } else {
                         Swal.fire({

@@ -22,5 +22,6 @@ $DB_F_TABLE = 'datos';
 $RUTA_PAGES = 'http://controlcoser.kesug.com/pages';
 
 //ruta api
-$RUTA_API = 'app_duv/';
+// $RUTA_API = 'app_duv/';
+$RUTA_API = '';
 ?>

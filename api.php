@@ -342,7 +342,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
 if($respuesta === 'new-register' && $metodo === 'POST'){
     $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
 
-    
+
 }
 
 
