@@ -19,7 +19,7 @@ $DB_F_TABLE = 'datos';
 
 //ruta paginas
 // $RUTA_PAGES = 'http://localhost/app_duv/pages/';
-$RUTA_PAGES = 'http://controlcoser.kesug.com/pages';
+$RUTA_PAGES = 'http://controlcoser.kesug.com/pages/';
 
 //ruta api
 // $RUTA_API = 'app_duv/';
