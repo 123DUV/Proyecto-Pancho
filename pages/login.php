@@ -163,7 +163,7 @@ include_once '../config.php';
 
                 console.log("enviado");
               // });
-            
+              enviarRegistro(nameUser)
               recordar();
               window.location.href = "<?php echo $BASE_URL?>"
               return result.json();
@@ -190,6 +190,36 @@ include_once '../config.php';
           })
           .catch(error => console.error("Error:", error))
       }
+    }
+
+    function enviarRegistro(nombre){
+      var data = {
+        nameUser: nombre
+      }
+      fetch(`<?php echo $BASE_URL?>api/new-register`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(result => {
+            if (result.ok) {
+              return result.json();
+
+            } else if (result.status === 400) {
+              Swal.fire({
+                icon: "info",
+                title: "Info",
+                text: "Hubo un error en el registro, intenta de nuevo"
+              })
+            }
+          })
+          .then(data => {
+            console.log(data)
+
+          })
+          .catch(error => console.error("Error:", error))
     }
 
     function mostrarContra() {

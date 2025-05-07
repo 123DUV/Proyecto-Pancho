@@ -8,12 +8,19 @@ session_start();
 include_once 'config.php';
 include_once './headers.php';
 
+
 $mostrarSubir = false;
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 if ($_SESSION['user'] === "admin") {
     $mostrarSubir = true;
 } else {
     $mostrarSubir = false;
+}
+
+if ($_SESSION['user'] === "admin") {
+    $admin = true;
+} else if ($_SESSION['user'] === "") {
+    $admin = false;
 }
 
 if (isset($_SESSION['user'])) {
@@ -181,7 +188,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             top: 0;
             left: 0;
             z-index: 20;
-     
+
             justify-content: center;
             align-items: center;
             padding-top: 30px;
@@ -211,6 +218,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 <body class="gradient" style=" color: var(--body-color);">
     <script>
         var logedIn = <?php echo json_encode($logedIn); ?>;
+        var jefe = <?php echo json_encode($admin); ?>;
     </script>
     <div class="container-fluid ">
         <button class="goup btn btn-light"><i class="bi bi-arrow-up"></i></button>
@@ -241,10 +249,10 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                             <a class="nav-link" href="<?php echo $RUTA_PAGES ?>blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#oferts">Ofertas</a>
+                            <a class="nav-link" href="<?php echo $BASE_URL ?>#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contactame</a>
+                            <a class="nav-link" href="<?php echo $BASE_URL ?>#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo $RUTA_PAGES ?>news">Noticias</a>
@@ -291,19 +299,19 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
+                <i class="bi bi-faceboo " style="color: #3b5998; font-size: 10vw;"
                     onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
                 <p><a href="https://www.facebook.com/controlcoser/"
                         style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
-                <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
+                <i class="bi bi-whatsap " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
                     onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
                         style="text-decoration: none; color:inherit;">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
+                <i class="bi bi-instagra " style="color: #e1308c; font-size: 10vw;"
                     onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"></i>
                 <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
                         style="text-decoration: none; color:inherit;">Instagram</a></p>
@@ -341,6 +349,24 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                 </div>
 
+            </div>
+        </div>
+        <!--modal texto imagenes-->
+        <div class="modal fade" tabindex="-1" id="modalText" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Título del modal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="inputAlt" placeholder="Escriba aquí">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="guardarAlt" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- footer -->
@@ -394,6 +420,11 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 <i class="bi bi-facebook" onclick="window.location.href='https://www.facebook.com'"></i>
                 <i class="bi bi-instagram" onclick="window.location.href='https://www.instagram.com'"></i>
             </div>
+            <div data-mdb-input-init class="form-outline">
+                <textarea class="form-control" id="comentarios" placeholder="Escribe tu petición o sugerencia" rows="4"
+                    maxlength="500" name="comentarios"></textarea>
+                <button class="btn btn-success" onclick="comments();">Send</button>
+            </div>
 
             <div class="text-center mt-5" style="font-family: var(--fuente);">
                 <i class="bi bi-c-circle fs-5"></i>
@@ -407,6 +438,74 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <base href="/">
     <script>
+        function comments() {
+            if (logedIn) {
+                sendComments();
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Info',
+                    text: 'Necesitas estar logeado para enviar un comentario'
+                })
+            }
+        }
+        function sendComments() {
+            const comentarios = document.getElementById('comentarios').value;
+            if (comentarios === '') {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Info',
+                    text: 'No hay nada en la bandeja de comentarios'
+                })
+                return;
+            }
+            var data = {
+                nameUser: "<?php echo $_SESSION['user'] ?>",
+                comentarios: comentarios
+            }
+            fetch(`<?php echo $BASE_URL ?>api/insert-comment`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => {
+                    if (result.ok) {
+                        Toastify({
+                            text: 'Enviado',
+                            duration: 3000,
+                            close: true,
+                            gravity: 'bottom',
+                            position: 'center',
+                            style: {
+                                color: "#333333",
+                                background: "#6BCB77",
+                            }
+                        }).showToast();
+                        return result.json();
+
+                    } else if (result.status === 400) {
+                        Swal.fire({
+                            icon: "info",
+                            title: "Info",
+                            text: "Hubo un error en el registro, intenta de nuevo"
+                        })
+                    } else if (result.status === 404) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Info',
+                            text: 'No hay nada en el campo de comentarios'
+                        })
+                    }
+                })
+                .then(data => {
+                    console.log(data)
+
+                })
+                .catch(error => console.error("Error:", error))
+        }
+
         function eliminarCajas() {
             fetch(`<?php echo $BASE_URL ?>api/no-cajas`, {
                 headers: {
@@ -427,6 +526,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         let cuenta = 1;
         let contadorAlterno = 0;
+
         fetch(`<?php echo $BASE_URL ?>api/obtener-cajas`, {
             headers: {
                 "Content-Type": "application/json"
@@ -446,34 +546,65 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     const caja = document.getElementById("cajaLight");
                     const crearDivL = document.createElement("div");
                     const crearImg = document.createElement("img");
+
                     crearImg.src = `<?php echo $BASE_URL ?>uploads/imagen-${contadorAlterno}-li.png`;
                     crearImg.loading = "lazy";
-                    
                     crearImg.dataset.imageHd = `<?php echo $BASE_URL ?>uploads/imagen-${contadorAlterno}-li.png`;
-                    crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
-                    crearDivL.classList = "cajita"
+                    // crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
+                    crearImg.id=`contador-${contadorAlterno}`;
+                    crearDivL.classList = `cajita `;
+
+                    if (jefe) {
+                        const crearButtonMod = document.createElement("button");
+                        crearButtonMod.type = "button";
+                        crearButtonMod.classList = `btn btn-success botonEditText  `;
+                        crearButtonMod.textContent = "Editar";
+                        crearButtonMod.setAttribute("data-bs-toggle", "modal");
+                        crearButtonMod.setAttribute("data-bs-target", "#modalText");
+
+                        (function (currentIndex) {
+                            crearButtonMod.onclick = function () {
+
+                                document.getElementById('guardarAlt').dataset.contadorAlterno = currentIndex;
+                            };
+                        })(contadorAlterno)
+                        crearDivL.appendChild(crearButtonMod);
+                    }
                     crearDivL.appendChild(crearImg);
                     caja.appendChild(crearDivL);
                     cuenta--;
                 }
-
             })
 
+        document.getElementById("guardarAlt").addEventListener('click', function () {
+            let index = 0;
+            console.log(this.dataset);
+            index = this.dataset.contadorAlterno;
+            console.log(index)
+            const nuevoAlt = document.getElementById("inputAlt").value;
+            const img = document.getElementById(`contador-${index}`);
+
+            const valores = {
+                imagen: img,
+                alt: nuevoAlt
+            }
+
+            const valoresJson = JSON.stringify(valores);
+            localStorage.setItem('datosImg',valoresJson);
+            console.log(img);
+            if (img) img.alt = nuevoAlt;
+            document.getElementById('modalText').modal('hide');
+        });
 
         let varia = contadorAlterno + 1 ?? 1;
 
-
-
         var contadorClicksAdd = varia ?? 1;
         document.getElementById("btnAdd").addEventListener("click", function () {
-
             crearCajas(contadorClicksAdd);
             fech();
             contadorClicksAdd++;
-
-
-
         });
+
         function crearCajas(contadorClicksAdd) {
             const numeroCajas = document.querySelectorAll(".cajita");
             const arrayCajas = Array.from(numeroCajas);
@@ -482,14 +613,31 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             const caja = document.getElementById("cajaLight");
             const crearDivL = document.createElement("div");
             const crearImg = document.createElement("img");
+
             crearImg.src = `<?php echo $BASE_URL ?>uploads/imagen-${contadorClicksAdd}-li.png`;
             crearImg.loading = "lazy";
             crearImg.dataset.imageHd = `<?php echo $BASE_URL ?>uploads/imagen-${contadorClicksAdd}-li.png`;
-            crearImg.alt = `imagen-${contadorClicksAdd}-ofertas`;
-            crearDivL.classList = "cajita"
+            // crearImg.alt = `imagen-${contadorClicksAdd}-ofertas`;
+            crearImg.id=`contador-${contadorAlterno}`;
+
+            crearDivL.classList = `cajita `;
+
+            if (jefe) {
+                const crearButtonMod = document.createElement("button");
+                crearButtonMod.type = "button";
+                crearButtonMod.classList = `btn btn-success botonEditText `;
+                crearButtonMod.textContent = "Editar";
+                crearButtonMod.dataset.bsToggle = "modal";
+                crearButtonMod.setAttribute("data-bs-target", "#modalText");
+                // crearButtonMod.onclick = function () {
+                //     modTextLight(contadorAlterno)
+                // };
+                crearDivL.appendChild(crearButtonMod);
+            }
             crearDivL.appendChild(crearImg);
             caja.appendChild(crearDivL);
         }
+
         function fech() {
             fetch(`<?php echo $BASE_URL ?>api/guardar-cajas?cajas=${contadorClicksAdd + contadorAlterno}`, {
                 headers: {
@@ -513,10 +661,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     console.log(varia);
                     console.log(data)
                 })
-
         }
-
-
 
         // Create a lightbox
         $(function () {
@@ -552,8 +697,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 $lightbox.fadeOut('fast');
             });
         }());
-    </script>
-    <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const clipboard = new ClipboardJS('[data-clipboard-text]');
 
@@ -613,14 +757,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         document.getElementById('irArriba').addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
+
         function deshabilitaRetroceso() {
             window.location.hash = "no-back-button";
             window.location.hash = "Again-No-back-button" //chrome
             window.onhashchange = function () { window.location.hash = ""; }
         }
 
-    </script>
-    <script>
+
         $(document).ready(function () {
             $('.goup').hide();
             $('.goup').click(function () {
@@ -637,6 +781,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 }
             });
         });
+
     </script>
 
 </body>

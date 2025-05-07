@@ -1,7 +1,8 @@
 <?php
 session_start();
 use function PHPSTORM_META\type;
-header("Access-Control-Allow-Origin: *");
+include_once('config.php');
+header("Access-Control-Allow-Origin: $BASE_URL");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -9,7 +10,9 @@ header("Access-Control-Allow-Credentials: true");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include_once('config.php');
+
+
+
 if(isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)){
     $con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
     if (!$con) {
@@ -341,8 +344,64 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
 //registro logeos insertar
 if($respuesta === 'new-register' && $metodo === 'POST'){
     $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+    
+    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']) ;
+    
+   
+    if(!empty($nameUser)){
+        http_response_code(200);
+        $insertarDatos = 'INSERT INTO registros(nombre) values(?)';
+            $stmt = mysqli_prepare($con, $insertarDatos);
+            mysqli_stmt_bind_param($stmt, 'ss', $nameUser);
+            $ejecutado = mysqli_stmt_execute($stmt);
+            if ($ejecutado === true) {
+                http_response_code(200);
+                $response=["Success"=>"Se insertó el registro en la bd"];
+                echo json_encode($response);
+            }else{
+                http_response_code(400);
+                $response = ["Error"=>"No se insertó el registro en la bd"];
+                echo json_encode($response);
+            }
+    }else{
+        http_response_code(400);
+        $response = ["Error"=>"No se obtuvo el nombre de usuario"];
+        echo json_encode($response);
+    }
+}
 
-
+//registro insertar comentarios
+if($respuesta ==='insert-comment' && $metodo==='POST'){
+    $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+    
+    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']) ;
+    $comentarios = htmlspecialchars($datosRecibidos['comentarios'] ?? $_POST['comentarios']);
+    
+    if(empty($comentarios)){
+        $comentarios="";
+        http_response_code(404);
+        $response = ["Error"=>"No llegaron los comentarios"];
+        echo json_encode($response);
+    }else if(!empty($nameUser)){
+        http_response_code(200);
+        $insertarDatos = "UPDATE registros SET comentarios = ? WHERE nombre = ?";
+            $stmt = mysqli_prepare($con, $insertarDatos);
+            mysqli_stmt_bind_param($stmt, 'ss', $comentarios, $nameUser);
+            $ejecutado = mysqli_stmt_execute($stmt);
+            if ($ejecutado === true) {
+                http_response_code(200);
+                $response=["Success"=>"Se insertó el comentario en la bd"];
+                echo json_encode($response);
+            }else{
+                http_response_code(400);
+                $response = ["Error"=>"No se insertó el comentario en la bd"];
+                echo json_encode($response);
+            }
+    }else{
+        http_response_code(400);
+        $response = ["Error"=>"No se obtuvo el nombre de usuario"];
+        echo json_encode($response);
+    }
 }
 
 
@@ -391,7 +450,6 @@ if ($respuesta === 'act-img' && $metodo === 'POST') {
 //cerrar sesión 
 
 if ($respuesta === 'logout' && $metodo === 'GET') {
-
 
     session_destroy();
     setcookie("PHPSESSID", "", time() - 3600, "/");
