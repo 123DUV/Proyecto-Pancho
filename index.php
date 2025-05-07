@@ -421,6 +421,10 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 <i class="bi bi-instagram" onclick="window.location.href='https://www.instagram.com'"></i>
             </div>
             <div data-mdb-input-init class="form-outline">
+
+                <div class="nombreArea" id="nombreArea">
+                    <input type="text" id="nombreArea" name="nombreArea" class="form-control" placeholder="Tu nombre">
+                </div>
                 <textarea class="form-control" id="comentarios" placeholder="Escribe tu petición o sugerencia" rows="4"
                     maxlength="500" name="comentarios"></textarea>
                 <button class="btn btn-success" onclick="comments();">Send</button>
@@ -438,6 +442,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <base href="/">
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (logedIn) {
+                document.getElementById('nombreArea').display = "none";
+            } else {
+                document.getElementById('nombreArea').display = "block";
+            }
+        })
+
         function comments() {
             if (logedIn) {
                 sendComments();
@@ -551,7 +563,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     crearImg.loading = "lazy";
                     crearImg.dataset.imageHd = `<?php echo $BASE_URL ?>uploads/imagen-${contadorAlterno}-li.png`;
                     // crearImg.alt = `imagen-${contadorAlterno}-ofertas`;
-                    crearImg.id=`contador-${contadorAlterno}`;
+                    crearImg.id = `contador-${contadorAlterno}`;
                     crearDivL.classList = `cajita `;
 
                     if (jefe) {
@@ -590,7 +602,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             }
 
             const valoresJson = JSON.stringify(valores);
-            localStorage.setItem('datosImg',valoresJson);
+            localStorage.setItem('datosImg', valoresJson);
             console.log(img);
             if (img) img.alt = nuevoAlt;
             document.getElementById('modalText').modal('hide');
@@ -618,7 +630,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             crearImg.loading = "lazy";
             crearImg.dataset.imageHd = `<?php echo $BASE_URL ?>uploads/imagen-${contadorClicksAdd}-li.png`;
             // crearImg.alt = `imagen-${contadorClicksAdd}-ofertas`;
-            crearImg.id=`contador-${contadorAlterno}`;
+            crearImg.id = `contador-${contadorAlterno}`;
 
             crearDivL.classList = `cajita `;
 

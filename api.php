@@ -13,18 +13,18 @@ error_reporting(E_ALL);
 
 
 
-if(isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)){
+if (isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)) {
     $con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
     if (!$con) {
         die("fallo" . mysqli_connect_error());
     }
-}else{
+} else {
     http_response_code(400);
-    echo json_encode(["Error"=>"No llegan las variables de conexión con la bd"]);
+    echo json_encode(["Error" => "No llegan las variables de conexión con la bd"]);
 }
 
 //obtener ruta despues de api.php
-$respuesta = trim(str_replace($RUTA_API."api/", "", $_SERVER['REQUEST_URI']), "/");
+$respuesta = trim(str_replace($RUTA_API . "api/", "", $_SERVER['REQUEST_URI']), "/");
 
 $respuesta = explode("?", $respuesta)[0];
 error_log("ruta: " . $respuesta);
@@ -282,18 +282,18 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         // falta archivo para manejar datos secretos como este captcha y su id
         $captcha = $_POST['g-recaptcha-response'] ?? '';
         $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN'; // clave secreta (no pública)
-        
+
         if (empty($captcha)) {
             die("Captcha no enviado");
         }
-        
+
         $urlApi = 'https://www.google.com/recaptcha/api/siteverify';
-        
+
         $data = [
             'secret' => $secretKey,
             'response' => $captcha
         ];
-        
+
         // Usamos cURL en lugar de file_get_contents (más robusto y recomendado)
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $urlApi);
@@ -302,9 +302,9 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
-        
+
         $responseData = json_decode($response);
-        
+
 
         if ($responseData->success) {
             http_response_code(200);
@@ -342,64 +342,64 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
 }
 
 //registro logeos insertar
-if($respuesta === 'new-register' && $metodo === 'POST'){
+if ($respuesta === 'new-register' && $metodo === 'POST') {
     $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
-    
-    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']) ;
-    
-   
-    if(!empty($nameUser)){
+
+    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']);
+
+
+    if (!empty($nameUser)) {
         http_response_code(200);
         $insertarDatos = 'INSERT INTO registros(nombre) values(?)';
-            $stmt = mysqli_prepare($con, $insertarDatos);
-            mysqli_stmt_bind_param($stmt, 'ss', $nameUser);
-            $ejecutado = mysqli_stmt_execute($stmt);
-            if ($ejecutado === true) {
-                http_response_code(200);
-                $response=["Success"=>"Se insertó el registro en la bd"];
-                echo json_encode($response);
-            }else{
-                http_response_code(400);
-                $response = ["Error"=>"No se insertó el registro en la bd"];
-                echo json_encode($response);
-            }
-    }else{
+        $stmt = mysqli_prepare($con, $insertarDatos);
+        mysqli_stmt_bind_param($stmt, 'ss', $nameUser);
+        $ejecutado = mysqli_stmt_execute($stmt);
+        if ($ejecutado === true) {
+            http_response_code(200);
+            $response = ["Success" => "Se insertó el registro en la bd"];
+            echo json_encode($response);
+        } else {
+            http_response_code(400);
+            $response = ["Error" => "No se insertó el registro en la bd"];
+            echo json_encode($response);
+        }
+    } else {
         http_response_code(400);
-        $response = ["Error"=>"No se obtuvo el nombre de usuario"];
+        $response = ["Error" => "No se obtuvo el nombre de usuario"];
         echo json_encode($response);
     }
 }
 
 //registro insertar comentarios
-if($respuesta ==='insert-comment' && $metodo==='POST'){
+if ($respuesta === 'insert-comment' && $metodo === 'POST') {
     $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
-    
-    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']) ;
+
+    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']);
     $comentarios = htmlspecialchars($datosRecibidos['comentarios'] ?? $_POST['comentarios']);
-    
-    if(empty($comentarios)){
-        $comentarios="";
+
+    if (empty($comentarios)) {
+        $comentarios = "";
         http_response_code(404);
-        $response = ["Error"=>"No llegaron los comentarios"];
+        $response = ["Error" => "No llegaron los comentarios"];
         echo json_encode($response);
-    }else if(!empty($nameUser)){
+    } else if (!empty($nameUser)) {
         http_response_code(200);
         $insertarDatos = "UPDATE registros SET comentarios = ? WHERE nombre = ?";
-            $stmt = mysqli_prepare($con, $insertarDatos);
-            mysqli_stmt_bind_param($stmt, 'ss', $comentarios, $nameUser);
-            $ejecutado = mysqli_stmt_execute($stmt);
-            if ($ejecutado === true) {
-                http_response_code(200);
-                $response=["Success"=>"Se insertó el comentario en la bd"];
-                echo json_encode($response);
-            }else{
-                http_response_code(400);
-                $response = ["Error"=>"No se insertó el comentario en la bd"];
-                echo json_encode($response);
-            }
-    }else{
+        $stmt = mysqli_prepare($con, $insertarDatos);
+        mysqli_stmt_bind_param($stmt, 'ss', $comentarios, $nameUser);
+        $ejecutado = mysqli_stmt_execute($stmt);
+        if ($ejecutado === true) {
+            http_response_code(200);
+            $response = ["Success" => "Se insertó el comentario en la bd"];
+            echo json_encode($response);
+        } else {
+            http_response_code(400);
+            $response = ["Error" => "No se insertó el comentario en la bd"];
+            echo json_encode($response);
+        }
+    } else {
         http_response_code(400);
-        $response = ["Error"=>"No se obtuvo el nombre de usuario"];
+        $response = ["Error" => "No se obtuvo el nombre de usuario"];
         echo json_encode($response);
     }
 }
@@ -437,7 +437,7 @@ if ($respuesta === 'act-img' && $metodo === 'POST') {
             ];
             echo json_encode($response);
         }
-    }else{
+    } else {
         http_response_code(400);
         $response = [
             "error" => "Imagen vacia",
@@ -447,6 +447,19 @@ if ($respuesta === 'act-img' && $metodo === 'POST') {
     }
 }
 
+
+//mensaje sin login
+
+if ($respuesta === 'comment-w-login' && $metodo === 'POST') {
+    $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+
+    if ($datosRecibidos === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["error" => "Error decoding JSON: " . json_last_error_msg()]);
+        exit;
+    }
+
+    
+}
 //cerrar sesión 
 
 if ($respuesta === 'logout' && $metodo === 'GET') {
