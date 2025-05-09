@@ -294,24 +294,24 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
 
-                <img src="./uploads/imagenPrincipal.pn" alt="imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/imagenPrincipal.png" alt="imagen-principal" class="rounded" width="100%">
             </div>
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-faceboo " style="color: #3b5998; font-size: 10vw;"
+                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
                     onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
                 <p><a href="https://www.facebook.com/controlcoser/"
                         style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
-                <i class="bi bi-whatsap " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
+                <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
                     onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
                         style="text-decoration: none; color:inherit;">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-instagra " style="color: #e1308c; font-size: 10vw;"
+                <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
                     onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"></i>
                 <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
                         style="text-decoration: none; color:inherit;">Instagram</a></p>
@@ -319,7 +319,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row inline-block reverse-order pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./uploads/segundaInicio.pn" alt="segunda-imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.png" alt="segunda-imagen-principal" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
@@ -431,7 +431,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     echo "comments();";
                 } else {
                     echo "comment_w_login();";
-                } ?>">Send</button>
+                } ?>">Enviar</button>
             </div>
 
             <div class="text-center mt-5" style="font-family: var(--fuente);">
