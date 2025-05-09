@@ -352,7 +352,7 @@ if ($respuesta === 'new-register' && $metodo === 'POST') {
         http_response_code(200);
         $insertarDatos = 'INSERT INTO registros(nombre) values(?)';
         $stmt = mysqli_prepare($con, $insertarDatos);
-        mysqli_stmt_bind_param($stmt, 'ss', $nameUser);
+        mysqli_stmt_bind_param($stmt, 's', $nameUser);
         $ejecutado = mysqli_stmt_execute($stmt);
         if ($ejecutado === true) {
             http_response_code(200);
@@ -404,6 +404,51 @@ if ($respuesta === 'insert-comment' && $metodo === 'POST') {
     }
 }
 
+//mensaje sin login
+
+if ($respuesta === 'comment-w-login' && $metodo === 'POST') {
+    $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+
+    if ($datosRecibidos === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["error" => "Error decoding JSON: " . json_last_error_msg()]);
+        exit;
+    }
+
+    $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']);
+    $comentarios = htmlspecialchars($datosRecibidos['comentarios'] ?? $_POST['comentarios']);
+   
+    if (empty($comentarios)) {
+        $comentarios = "";
+        http_response_code(404);
+        $response = ["Error" => "No llegaron los comentarios"];
+        echo json_encode($response);
+    } else if (empty($nameUser)) {
+        $nombre = "";
+        http_response_code(404);
+        $response = ["Error" => "No llegó el nombre"];
+        echo json_encode($response);
+    } else if (!empty($nameUser)) {
+        http_response_code(200);
+        $insertarDatos = "INSERT INTO comment_w_login(nombre, comentarios) VALUES (?,?) ";
+        $stmt = mysqli_prepare($con, $insertarDatos);
+        mysqli_stmt_bind_param($stmt, 'ss', $nameUser, $comentarios);
+        $ejecutado = mysqli_stmt_execute($stmt);
+        if ($ejecutado === true) {
+            http_response_code(200);
+            $response = ["Success" => "Se insertó el comentario en la bd"];
+            echo json_encode($response);
+        } else {
+            http_response_code(400);
+            $response = ["Error" => "No se insertó el comentario en la bd"];
+            echo json_encode($response);
+        }
+    } else {
+        http_response_code(400);
+        $response = ["Error" => "No se obtuvo el nombre de usuario"];
+        echo json_encode($response);
+    }
+
+}
 
 //actualizar imagen de perfil
 if ($respuesta === 'act-img' && $metodo === 'POST') {
@@ -447,19 +492,6 @@ if ($respuesta === 'act-img' && $metodo === 'POST') {
     }
 }
 
-
-//mensaje sin login
-
-if ($respuesta === 'comment-w-login' && $metodo === 'POST') {
-    $datosRecibidos = json_decode(file_get_contents("php://input"), true) ?? $_POST;
-
-    if ($datosRecibidos === null && json_last_error() !== JSON_ERROR_NONE) {
-        echo json_encode(["error" => "Error decoding JSON: " . json_last_error_msg()]);
-        exit;
-    }
-
-    
-}
 //cerrar sesión 
 
 if ($respuesta === 'logout' && $metodo === 'GET') {

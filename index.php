@@ -422,12 +422,16 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
             <div data-mdb-input-init class="form-outline">
 
-                <div class="nombreArea" id="nombreArea">
-                    <input type="text" id="nombreArea" name="nombreArea" class="form-control" placeholder="Tu nombre">
+                <div class="nombreArea" id="nombreAreaDiv">
+                    <input type="text" id="nombreArea" name="nombreArea" max="20" class="form-control" placeholder="Tu nombre">
                 </div>
                 <textarea class="form-control" id="comentarios" placeholder="Escribe tu petición o sugerencia" rows="4"
                     maxlength="500" name="comentarios"></textarea>
-                <button class="btn btn-success" onclick="comments();">Send</button>
+                <button class="btn btn-success" onclick="<?php if ($logedIn) {
+                    echo "comments();";
+                } else {
+                    echo "comment_w_login();";
+                } ?>">Send</button>
             </div>
 
             <div class="text-center mt-5" style="font-family: var(--fuente);">
@@ -444,9 +448,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (logedIn) {
-                document.getElementById('nombreArea').display = "none";
+                document.getElementById('nombreAreaDiv').style.display = "none";
             } else {
-                document.getElementById('nombreArea').display = "block";
+                document.getElementById('nombreAreaDiv').style.display = "block";
             }
         })
 
@@ -461,6 +465,72 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 })
             }
         }
+
+        function comment_w_login() {
+            const comentarios = document.getElementById('comentarios').value;
+            const nombre = document.getElementById('nombreArea').value;
+            console.log(nombre)
+            if (comentarios.trim() === '') {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Info',
+                    text: 'Campo comentarios vacío'
+                })
+            } else if (nombre === '') {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Info',
+                    text: 'Campo nombre vacío'
+                })
+            } else {
+                var data = {
+                    nameUser: nombre,
+                    comentarios: comentarios
+                }
+                fetch(`<?php echo $BASE_URL ?>api/comment-w-login`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(result => {
+                        if (result.ok) {
+                            Toastify({
+                                text: 'Enviado',
+                                duration: '3000',
+                                close: true,
+                                gravity: 'bottom',
+                                position: 'center',
+                                style: {
+                                    color: "#333333",
+                                    background: "#6BCB77",
+                                }
+                            }).showToast();
+                            return result.json();
+                        } else if (result.status === 400) {
+                            Swal.fire({
+                                icon: "info",
+                                title: "Info",
+                                text: "Hubo un error en el registro, intenta de nuevo"
+                            })
+                        } else if (result.status === 404) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Info',
+                                text: 'No hay nada en el campo de comentarios'
+                            })
+                        }
+                    })
+                    .then(data => {
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+        }
+
         function sendComments() {
             const comentarios = document.getElementById('comentarios').value;
             if (comentarios === '') {
@@ -595,6 +665,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             console.log(index)
             const nuevoAlt = document.getElementById("inputAlt").value;
             const img = document.getElementById(`contador-${index}`);
+            if (img) img.alt = nuevoAlt;
 
             const valores = {
                 imagen: img,
@@ -604,7 +675,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             const valoresJson = JSON.stringify(valores);
             localStorage.setItem('datosImg', valoresJson);
             console.log(img);
-            if (img) img.alt = nuevoAlt;
+
             document.getElementById('modalText').modal('hide');
         });
 
