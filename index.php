@@ -294,24 +294,24 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
 
-                <img src="./uploads/imagenPrincipal.png" alt="imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/imagenPrincipal.pn" alt="imagen-principal" class="rounded" width="100%">
             </div>
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
+                <i class="bi bi-faceboo " style="color: #3b5998; font-size: 10vw;"
                     onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
                 <p><a href="https://www.facebook.com/controlcoser/"
                         style="text-decoration: none; color:inherit;">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
-                <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
+                <i class="bi bi-whatsap " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
                     onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
                         style="text-decoration: none; color:inherit;">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
+                <i class="bi bi-instagra " style="color: #e1308c; font-size: 10vw;"
                     onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"></i>
                 <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
                         style="text-decoration: none; color:inherit;">Instagram</a></p>
@@ -319,7 +319,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row inline-block reverse-order pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./uploads/segundaInicio.png" alt="segunda-imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.pn" alt="segunda-imagen-principal" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
@@ -343,6 +343,10 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                     <button class="btn " onclick="eliminarCajas();" id="delete"
                         style="background-color:rgb(253, 67, 67);">-</button>
+
+                    <button class="btn" id="save" style="background-color: #25d366" onclick="">
+                            Guardar
+                    </button>
 
                 </div>
                 <div class="lightbox-gallery" id="cajaLight">
@@ -423,7 +427,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             <div data-mdb-input-init class="form-outline">
 
                 <div class="nombreArea" id="nombreAreaDiv">
-                    <input type="text" id="nombreArea" name="nombreArea" max="20" class="form-control" placeholder="Tu nombre">
+                    <input type="text" id="nombreArea" name="nombreArea" max="20" class="form-control"
+                        placeholder="Tu nombre">
                 </div>
                 <textarea class="form-control" id="comentarios" placeholder="Escribe tu petición o sugerencia" rows="4"
                     maxlength="500" name="comentarios"></textarea>
@@ -446,6 +451,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <base href="/">
     <script>
+
+
+
         document.addEventListener('DOMContentLoaded', function () {
             if (logedIn) {
                 document.getElementById('nombreAreaDiv').style.display = "none";
@@ -589,6 +597,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         }
 
         function eliminarCajas() {
+
             fetch(`<?php echo $BASE_URL ?>api/no-cajas`, {
                 headers: {
                     "Content-Type": "application/json"
@@ -596,6 +605,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 method: "get"
             })
                 .then(result => {
+                    
                     return result.json()
                 })
                 .then(data => {
@@ -619,6 +629,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 return result.json()
             })
             .then(data => {
+
                 cuenta = data.nroCajas;
                 console.log(cuenta);
                 console.log(data)
@@ -646,8 +657,9 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
                         (function (currentIndex) {
                             crearButtonMod.onclick = function () {
-
-                                document.getElementById('guardarAlt').dataset.contadorAlterno = currentIndex;
+                                if (currentIndex > 0) {
+                                    document.getElementById('guardarAlt').dataset.contadorAlterno = currentIndex;
+                                }
                             };
                         })(contadorAlterno)
                         crearDivL.appendChild(crearButtonMod);
@@ -666,18 +678,15 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             const nuevoAlt = document.getElementById("inputAlt").value;
             const img = document.getElementById(`contador-${index}`);
             if (img) img.alt = nuevoAlt;
-
-            const valores = {
-                imagen: img,
-                alt: nuevoAlt
-            }
-
-            const valoresJson = JSON.stringify(valores);
-            localStorage.setItem('datosImg', valoresJson);
-            console.log(img);
-
-            document.getElementById('modalText').modal('hide');
+          
+            const modal = bootstrap.Modal.getInstance(document.getElementById('modalText'));
+            modal.hide();
         });
+
+        function traerAlt() {
+            
+        }   
+
 
         let varia = contadorAlterno + 1 ?? 1;
 
@@ -763,7 +772,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             $(document).on('click', '.lightbox-gallery img', function (e) {
                 e.preventDefault();
-
+                traerAlt()
                 // Obtener el enlace de la imagen y la descripción
                 var src = $(this).attr("data-image-hd");
                 var cap = $(this).attr("alt");
