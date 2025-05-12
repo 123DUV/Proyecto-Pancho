@@ -2,7 +2,7 @@
 session_start();
 use function PHPSTORM_META\type;
 include_once('config.php');
-header("Access-Control-Allow-Origin: $BASE_URL");
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");

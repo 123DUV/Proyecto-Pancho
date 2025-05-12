@@ -17,7 +17,7 @@
 //------------------------------------------------------------------------>
 
 //DATOS INFINITY
-$BASE_URL= 'http://controlcoser.kesug.com/';
+$BASE_URL= 'https://controlcoser.kesug.com/';
 
 
 $DB_HOST = 'sql306.infinityfree.com';
@@ -27,7 +27,7 @@ $DB_NAME = 'if0_38888091_app_duv';
 $DB_F_TABLE = 'datos';
 
 
-$RUTA_PAGES = 'http://controlcoser.kesug.com/pages/';
+$RUTA_PAGES = 'https://controlcoser.kesug.com/pages/';
 
 
 $RUTA_API = '';
