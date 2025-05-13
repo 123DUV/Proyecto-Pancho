@@ -49,7 +49,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="es1">
+<html lang="es">
 
 
 <head>

@@ -5,7 +5,7 @@ include_once '../config.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <?php
     include_once '../headers.php';
 ?>

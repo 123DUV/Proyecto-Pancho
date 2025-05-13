@@ -11,16 +11,13 @@ include_once '../config.php';
 <!DOCTYPE html>
 <html lang="es">
 <?php
-    include_once '../headers.php';
+include_once '../headers.php';
 ?>
 <link rel="stylesheet" href="../styles.css">
 
 <head>
 
   <style>
-  
-
-    
     .gradient-nav {
       background: rgb(255, 255, 255);
       background: linear-gradient(0deg, rgba(255, 255, 255, 1) 22%, rgba(203, 244, 255, 1) 100%);
@@ -71,7 +68,7 @@ include_once '../config.php';
               </div>
               <a href="#!" style="text-decoration: none; color: black; font-family: var(--fuente);">Olvide mi
                 contraseña?</a>
-              <a href="<?php echo $RUTA_PAGES?>registro"
+              <a href="<?php echo $RUTA_PAGES ?>registro"
                 style="text-decoration: none; color: black; font-family: var(--fuente);">Registrarse</a>
             </div>
             <!-- Submit button -->
@@ -145,8 +142,10 @@ include_once '../config.php';
           title: 'Info',
           text: 'Campo nombre usuario necesario'
         });
-      } else if (password.length < 8) { Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" }) } else {
-        fetch(`<?php echo $BASE_URL?>api/validar`, {
+      } else if (password.length < 8) {
+        Swal.fire({ icon: "info", title: 'Info', text: "El campo contraseña está incompleto" })
+      } else {
+        fetch(`<?php echo $BASE_URL ?>api/validar`, {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
@@ -161,11 +160,11 @@ include_once '../config.php';
 
               document.getElementById('myForm').submit();
 
-                console.log("enviado");
+              console.log("enviado");
               // });
               enviarRegistro(nameUser)
               recordar();
-              window.location.href = "<?php echo $BASE_URL?>"
+              window.location.href = "<?php echo $BASE_URL ?>"
               return result.json();
 
 
@@ -192,34 +191,34 @@ include_once '../config.php';
       }
     }
 
-    function enviarRegistro(nombre){
+    function enviarRegistro(nombre) {
       var data = {
         nameUser: nombre
       }
-      fetch(`<?php echo $BASE_URL?>api/new-register`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
+      fetch(`<?php echo $BASE_URL ?>api/new-register`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then(result => {
+          if (result.ok) {
+            return result.json();
+
+          } else if (result.status === 400) {
+            Swal.fire({
+              icon: "info",
+              title: "Info",
+              text: "Hubo un error en el registro, intenta de nuevo"
+            })
+          }
         })
-          .then(result => {
-            if (result.ok) {
-              return result.json();
+        .then(data => {
+          console.log(data)
 
-            } else if (result.status === 400) {
-              Swal.fire({
-                icon: "info",
-                title: "Info",
-                text: "Hubo un error en el registro, intenta de nuevo"
-              })
-            }
-          })
-          .then(data => {
-            console.log(data)
-
-          })
-          .catch(error => console.error("Error:", error))
+        })
+        .catch(error => console.error("Error:", error))
     }
 
     function mostrarContra() {

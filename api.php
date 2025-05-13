@@ -280,7 +280,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
     } else {
 
         // falta archivo para manejar datos secretos como este captcha y su id
-        $captcha = $_POST['g-recaptcha-response'] ?? '';
+        $captcha = $_POST['g-recaptcha-response'] ?? $datosRecibidos['g-recaptcha-response'];
         $secretKey = '6LdJffgqAAAAACRGFpdopqIryS-sECsf_6Aor1pN'; // clave secreta (no pública)
 
         if (empty($captcha)) {
@@ -328,7 +328,8 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
                 echo json_encode($response);
             }
 
-        } else {
+        }
+         else {
             http_response_code(400);
             $mensaje = [
                 "Error" => "error en la validación del captcha"

@@ -20,7 +20,13 @@ RewriteRule ^uploads/(.*)$ uploads/$1.svg [L]
     Header set Expires 0
 </FilesMatch>
 
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{HTTPS} !=on
+#     RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#     RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
+# </IfModule>
+
+# RewriteCond %{HTTP:X-Forwarded-Proto} !https
+# RewriteCond %{HTTPS} off
+# RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

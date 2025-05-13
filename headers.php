@@ -3,12 +3,13 @@
 <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
 <!--encabezados -->
 <meta charset="UTF-8">
-<meta name="description" content="sewing machine services and information">
+<meta name="description" content="sewing machine services and information, máquinas de coser, servicios e información">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="MACHINE,SERVICES,INFORMATION, SEWING MACHINE">
 <meta name="author" content="Fabio Bedoya">
 <meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary"></meta>
 <!--fuente-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +44,7 @@
 <link rel="stylesheet" href="../styles.css">
 
 <!-- clipboard js -->
-<script src="./libraries/clipboard.js-master/dist/clipboard.min.js"></script>
+<script src="<?php echo $BASE_URL?>libraries/clipboard.js-master/dist/clipboard.min.js"></script>
 
 <!-- toastify.js -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
