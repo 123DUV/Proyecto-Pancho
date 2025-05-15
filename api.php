@@ -2,16 +2,12 @@
 session_start();
 use function PHPSTORM_META\type;
 include_once('config.php');
-header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Credentials: true");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-
-
 
 if (isset($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME)) {
     $con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
@@ -57,7 +53,6 @@ if ($respuesta === 'get-all-user' && $metodo === 'GET') {
 if ($respuesta === 'validar' && $metodo === 'POST') {
 
     $datosLogin = json_decode(file_get_contents("php://input"), true) ?? $_POST;
-
     if ($datosLogin === null && json_last_error() !== JSON_ERROR_NONE) {
         echo json_encode(["error" => "Error validando contraseña"]);
         exit;
@@ -68,6 +63,11 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
 
     $stmtContra = $con->prepare("SELECT contra FROM datos WHERE nameUser='$nameUser'");
     $stmtContra->execute();
+
+    // $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra, imgPerfil) values(?,?,?,?)';
+    // $stmt = mysqli_prepare($con, $insertarDatos);
+    // mysqli_stmt_bind_param($stmt, 'siss', $nameUser, $telefono, $contraCod, $imagenPerfil);
+    // $ejecutado = mysqli_stmt_execute($stmt);
     $resultadoContra = $stmtContra->get_result();
 
     if ($resultadoContra) {
@@ -105,6 +105,43 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
         http_response_code(500);
         $respuestaErrorContra = [
             "Error" => "error validacion contraseña"
+        ];
+        echo json_encode($respuestaErrorContra);
+    }
+}
+
+//cambiar contraseña
+if ($respuesta === 'change-pass' && $metodo === 'POST') {
+
+    $datosLogin = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+    if ($datosLogin === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["error" => "Error validando contraseña"]);
+        exit;
+    }
+    $nameUser = htmlspecialchars($datosLogin['nameUser']);
+    $password = $datosLogin['password'];
+    $contraCod = password_hash($password, PASSWORD_BCRYPT);
+    // $stmtContra = $con->prepare("SELECT contra FROM datos WHERE nameUser='$nameUser'");
+    // $stmtContra->execute();
+
+    $actualizarContra = 'UPDATE datos SET contra = ? WHERE nameUser = ?';
+    $stmt = mysqli_prepare($con, $actualizarContra);
+    mysqli_stmt_bind_param($stmt, 'ss', $contraCod, $nameUser);
+    $ejecutado = mysqli_stmt_execute($stmt);
+   
+    
+    if ($ejecutado) {
+        http_response_code(200);
+        $_SESSION['user'] = $nameUser;
+        $mostrart = [
+            "Success" => "Cambio correcto"
+        ];
+        echo json_encode($mostrart);
+
+    } else {
+        http_response_code(500);
+        $respuestaErrorContra = [
+            "Error" => "error cambio contraseña"
         ];
         echo json_encode($respuestaErrorContra);
     }
@@ -200,7 +237,6 @@ if ($respuesta === 'get-user' && $metodo === 'GET') {
         $resultado = $stmt->get_result();
 
         if ($resultado) {
-
             $datos = $resultado->fetch_all(MYSQLI_ASSOC);
             if (count($datos) > 0) {
                 http_response_code(200);
@@ -305,7 +341,6 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
 
         $responseData = json_decode($response);
 
-
         if ($responseData->success) {
             http_response_code(200);
             $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra, imgPerfil) values(?,?,?,?)';
@@ -328,8 +363,7 @@ if ($respuesta === 'save-user' && $metodo === 'POST') {
                 echo json_encode($response);
             }
 
-        }
-         else {
+        } else {
             http_response_code(400);
             $mensaje = [
                 "Error" => "error en la validación del captcha"
@@ -417,7 +451,7 @@ if ($respuesta === 'comment-w-login' && $metodo === 'POST') {
 
     $nameUser = htmlspecialchars($datosRecibidos['nameUser'] ?? $_POST['nameUser']);
     $comentarios = htmlspecialchars($datosRecibidos['comentarios'] ?? $_POST['comentarios']);
-   
+
     if (empty($comentarios)) {
         $comentarios = "";
         http_response_code(404);

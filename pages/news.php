@@ -25,7 +25,7 @@ include_once '../headers.php';
             width: 50px;
         }
 
-     
+
 
         .imagen-news {
             margin-top: 2%;
@@ -272,36 +272,36 @@ include_once '../headers.php';
     <button class="goup btn btn-light rounded"><i class="bi bi-arrow-up"></i></button>
 
     <div class="row">
-            <div class=" bg-dark ">
-                <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
-                    <a href="<?php echo $RUTA_PAGES?>news" class="d-block p-3 text-white text-decoration-none" title=""
-                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-                        <i class="bi bi-c-circle fs-1"></i>
-                    </a>
-                    <ul class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
-                        <li class="nav-item">
-                            <a href="#" onclick="history.go(-1)" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
-                                data-bs-placement="right" data-bs-original-title="Home">
-                                <i class="bi-arrow-left fs-3"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-                    <div class="dropdown">
-                        <a href="#"
-                            class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
-                            id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi-person-circle h2"></i>
+        <div class=" bg-dark ">
+            <div class="d-flex  flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
+                <a href="<?php echo $RUTA_PAGES ?>news" class="d-block p-3 text-white text-decoration-none" title=""
+                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                    <i class="bi bi-c-circle fs-1"></i>
+                </a>
+                <ul class="nav flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+                    <li class="nav-item">
+                        <a href="#" onclick="history.go(-1)" class="nav-link py-3 px-2" title=""
+                            data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                            <i class="bi-arrow-left fs-3"></i>
                         </a>
-                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                    </li>
 
-                            <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES?>settings">Configuración</a></li>
-                            <li><a class="dropdown-item" href="/">Inicio</a></li>
-                        </ul>
-                    </div>
+                </ul>
+                <div class="dropdown">
+                    <a href="#"
+                        class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
+                        id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi-person-circle h2"></i>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+
+                        <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES ?>settings">Configuración</a></li>
+                        <li><a class="dropdown-item" href="/">Inicio</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
     <div class="contenedor-lo-demas">
         <div>
