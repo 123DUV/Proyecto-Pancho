@@ -345,7 +345,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                         style="background-color:rgb(253, 67, 67);">-</button>
 
                     <button class="btn" id="save" style="background-color: #25d366" onclick="">
-                            Guardar
+                        Guardar
                     </button>
 
                 </div>
@@ -432,7 +432,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 </div>
                 <textarea class="form-control" id="comentarios" placeholder="Escribe tu petición o sugerencia" rows="4"
                     maxlength="500" name="comentarios"></textarea>
-                <button class="btn btn-success" onclick="<?php if ($logedIn) {
+                <button id="comentariosBtn" class="btn btn-success" onclick="<?php if ($logedIn) {
                     echo "comments();";
                 } else {
                     echo "comment_w_login();";
@@ -477,6 +477,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         function comment_w_login() {
             const comentarios = document.getElementById('comentarios').value;
             const nombre = document.getElementById('nombreArea').value;
+            const btnComments = document.getElementById('comentariosBtn');
             console.log(nombre)
             if (comentarios.trim() === '') {
                 Swal.fire({
@@ -515,6 +516,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                                     background: "#6BCB77",
                                 }
                             }).showToast();
+                            btnComments.setAttribute('disabled', 'disabled');
                             return result.json();
                         } else if (result.status === 400) {
                             Swal.fire({
@@ -541,6 +543,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
         function sendComments() {
             const comentarios = document.getElementById('comentarios').value;
+            const btnComments = document.getElementById('comentariosBtn');
+
             if (comentarios === '') {
                 Swal.fire({
                     icon: 'info',
@@ -573,6 +577,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                                 background: "#6BCB77",
                             }
                         }).showToast();
+                        btnComments.setAttribute('disabled', 'disabled');
                         return result.json();
 
                     } else if (result.status === 400) {
@@ -605,7 +610,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 method: "get"
             })
                 .then(result => {
-                    
+
                     return result.json()
                 })
                 .then(data => {
@@ -678,14 +683,14 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             const nuevoAlt = document.getElementById("inputAlt").value;
             const img = document.getElementById(`contador-${index}`);
             if (img) img.alt = nuevoAlt;
-          
+
             const modal = bootstrap.Modal.getInstance(document.getElementById('modalText'));
             modal.hide();
         });
 
         function traerAlt() {
-            
-        }   
+
+        }
 
 
         let varia = contadorAlterno + 1 ?? 1;

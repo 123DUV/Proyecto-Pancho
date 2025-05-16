@@ -154,6 +154,7 @@ if ($logeado) {
             function irLogin() {
                 window.location.href = "<?php echo $RUTA_PAGES?>login";
             }
+            
             function volver() {
                 window.location.href = "/";
             }

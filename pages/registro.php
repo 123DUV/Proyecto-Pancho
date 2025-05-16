@@ -1,12 +1,18 @@
 <?php
-    include_once '../config.php';
+session_start();
+include_once '../config.php';
+if (!empty($_SESSION['user'])) {
+    header("Location: $BASE_URL");
+}
+
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <?php
-    include_once '../headers.php';
+include_once '../headers.php';
 ?>
 <link rel="stylesheet" href="../styles.css">
 
@@ -21,22 +27,25 @@
             height: 1px;
             background: #eee;
         }
-        input[type="file"]{
+
+        input[type="file"] {
             display: none;
         }
-        .inputFalso{
+
+        .inputFalso {
             background-color: white;
             border-color: rebeccapurple;
             border-radius: 15px;
             padding: 5%;
             width: 100%;
             cursor: pointer;
-            background-color:rgb(163, 163, 163);
+            background-color: rgb(163, 163, 163);
             color: black;
             margin-top: 2%;
         }
-        .inputFalso:hover{
-            background-color:rgb(97, 96, 97);
+
+        .inputFalso:hover {
+            background-color: rgb(97, 96, 97);
 
         }
     </style>
@@ -47,7 +56,7 @@
     <section class="h-auto">
         <div class="container py-5 h-auto">
             <div class="row d-flex align-items-center justify-content-center h-auto">
-            <h2 class="text-center mb-5 text-uppercase">Registrate</h2>
+                <h2 class="text-center mb-5 text-uppercase">Registrate</h2>
                 <div class="col-md-8 col-lg-7 col-xl-6">
                     <img src="../uploads/draw2.svg" class="img-fluid" alt="register-image">
                 </div>
@@ -56,7 +65,8 @@
                         <!-- User input -->
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="text" class="form-control form-control-lg" id="nameUser" name="nameUser" />
-                            <label class="form-label" for="nameUser">Nombre usuario <span style="color:red">*</span></label>
+                            <label class="form-label" for="nameUser">Nombre usuario <span
+                                    style="color:red">*</span></label>
                         </div>
                         <!-- Phone input -->
                         <div data-mdb-input-init class="form-outline mb-4">
@@ -95,16 +105,16 @@
                         <!--Imagen Perfil -->
                         <div class="d-flex flex-column mb-3">
                             <span>Definir imagen de perfil. (Opcional)</span>
-                
+
 
                             <div id="divImagen">
                                 <input id="inputImg" accept="image/*" type="file">
-                                <label for="inputImg"  class="inputFalso overflow-hidden ">Cargar Imagen</label>
+                                <label for="inputImg" class="inputFalso overflow-hidden ">Cargar Imagen</label>
                                 <div id="vistaPrevia">
-                                    
+
                                 </div>
                             </div>
-                            
+
 
                         </div>
 
@@ -115,7 +125,7 @@
                         <div class="d-flex justify-content-around align-items-center mb-4">
 
 
-                            <a href="<?php echo $RUTA_PAGES?>login">Iniciar sesión</a>
+                            <a href="<?php echo $RUTA_PAGES ?>login">Iniciar sesión</a>
                         </div>
 
                         <!-- Submit button -->
@@ -156,39 +166,39 @@
         const iconoCambio = document.getElementById('icono');
         const divInfoOculto = document.getElementById('oculto');
         var imagenPerfil;
-        
 
-        document.getElementById('inputImg').addEventListener("change", function(){
-                let archivo = this.files.length > 0 ? Array.from(this.files).map(file=>file.name).join(" + "): "Ningun archivo seleccionado";
-                $inputfalso = document.querySelector(".inputFalso");
-                $inputfalso.textContent = archivo;
-            });
-            document.getElementById('inputImg').addEventListener('change', function(event){
-                let filas = event.target.files;
 
-                let limpiarPrev = document.getElementById('vistaPrevia');
-                limpiarPrev.innerHTML = "";
+        document.getElementById('inputImg').addEventListener("change", function () {
+            let archivo = this.files.length > 0 ? Array.from(this.files).map(file => file.name).join(" + ") : "Ningun archivo seleccionado";
+            $inputfalso = document.querySelector(".inputFalso");
+            $inputfalso.textContent = archivo;
+        });
+        document.getElementById('inputImg').addEventListener('change', function (event) {
+            let filas = event.target.files;
 
-                
+            let limpiarPrev = document.getElementById('vistaPrevia');
+            limpiarPrev.innerHTML = "";
 
-                if(filas.length>0){
-                    let reader = new FileReader();
-                    reader.onload = function(e){
-                        imagenPerfil = e.target.result;
+
+
+            if (filas.length > 0) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    imagenPerfil = e.target.result;
                     let crearImg = document.createElement("img");
-                    crearImg.src= imagenPerfil;
+                    crearImg.src = imagenPerfil;
                     crearImg.style.width = '100%';
-                   
+
                     crearImg.style.border = 'solid';
                     limpiarPrev.appendChild(crearImg);
-                    }
-                    reader.readAsDataURL(filas[0]);
                 }
-               
-            });
+                reader.readAsDataURL(filas[0]);
+            }
+
+        });
 
 
-       
+
 
         function mostrarContra() {
             if (botonMostrarC.type === "password") {
@@ -205,12 +215,12 @@
 
         }
 
-       
+
         function volver() {
             window.location.href = '<?php echo $BASE_URL ?>';
         }
         function irLogin() {
-            window.location.href = '<?php echo $RUTA_PAGES?>login';
+            window.location.href = '<?php echo $RUTA_PAGES ?>login';
         }
 
         function obtenerDatos() {
@@ -224,7 +234,7 @@
                     text: 'Campo alias necesario'
                 });
             } else {
-                fetch(`<?php echo $BASE_URL?>api/get-user?user=${nameUser}`, {
+                fetch(`<?php echo $BASE_URL ?>api/get-user?user=${nameUser}`, {
                     method: 'GET',
                 })
                     .then(respuesta => {
@@ -258,9 +268,9 @@
             const nameUser = document.getElementById('nameUser').value;
             const telefono = document.getElementById('telefono').value;
             const contra = document.getElementById('contra').value;
-            
+
             const captchaResponse = grecaptcha.getResponse();
-          
+
             var data = {
                 nameUser: nameUser,
                 telefono: telefono,
@@ -269,7 +279,7 @@
                 imagenPerfil: imagenPerfil
             }
 
-            fetch("<?php echo $BASE_URL?>api/save-user", {
+            fetch("<?php echo $BASE_URL ?>api/save-user", {
                 method: "POST",
                 signal: signal,
                 headers: {
@@ -281,7 +291,7 @@
                     response.json()
                     if (response.ok) {
                         document.getElementById("enviar").disabled = true;
-                        // irLogin();
+                        irLogin();
                     } else if (response.status === 409) {
                         Swal.fire({
                             icon: 'info',
@@ -310,11 +320,11 @@
             const nameUser = document.getElementById('nameUser').value;
             const telefono = document.getElementById('telefono').value;
             const contra = document.getElementById('contra').value;
-         
+
 
 
             if (nameUser.length < 3 || nameUser.length > 12) {
-               
+
                 Swal.fire({
                     title: "Info",
                     text: "El campo nombre debe tener entre 3 y 12 caracteres",
@@ -336,7 +346,7 @@
                 });
 
 
-            }else {
+            } else {
                 enviarDatos();
             }
 

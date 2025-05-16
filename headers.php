@@ -1,6 +1,10 @@
+<?php 
+    include 'config.php';
+?>
+
 <title>Controlcoser</title>
 <!--iconos-->
-<link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/svg+xml" href="<?php echo $BASE_URL?>favicon.svg">
 <!--encabezados -->
 <meta charset="UTF-8">
 <meta name="description" content="sewing machine services and information, máquinas de coser, servicios e información">

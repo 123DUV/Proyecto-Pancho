@@ -49,6 +49,41 @@ if ($respuesta === 'get-all-user' && $metodo === 'GET') {
     }
 }
 
+//actualizar nombre de usuario      
+if($respuesta==='change-name' && $metodo === 'GET'){
+    if(isset($_GET['user']) && isset($_GET['userA'])){
+        $nombre = htmlspecialchars($_GET['user']);
+        $nombreAntiguo = htmlspecialchars($_GET['userA']);
+        
+    $sentenciaNombre = "UPDATE datos SET nameUser = ? WHERE nameUser = ?";
+    $stmtName= mysqli_prepare($con, $sentenciaNombre);
+    mysqli_stmt_bind_param($stmtName, 'ss', $nombre, $nombreAntiguo);
+    $ejecutado = mysqli_stmt_execute($stmtName);
+
+    if($ejecutado){
+        http_response_code(200);
+        $response = [
+            "Success"=>"Nombre cambiado exitosamente"
+        ];
+        echo json_encode($response);
+    }else{
+        http_response_code(400);
+        $response = [
+            "Error"=>"Error cambiando nombre"
+        ];
+        echo json_encode($response);
+    }
+} else {
+    http_response_code(400);
+    $response = [
+        "error" => "Parámetro 'nameUser' no proporcionado"
+    ];
+    echo json_encode($response);
+}
+
+}
+
+
 //validar contra
 if ($respuesta === 'validar' && $metodo === 'POST') {
 
@@ -110,6 +145,16 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
     }
 }
 
+//validar correo - recuperar contra - en fase de pruebas
+if($respuesta==='validar-correo' && $metodo ==='POST'){
+    $datosLogin = json_decode(file_get_contents("php://input"), true) ?? $_POST;
+    if ($datosLogin === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["error" => "Error validando contraseña"]);
+        exit;
+    }
+    $correo = $datosLogin['correo'];
+}
+
 //cambiar contraseña
 if ($respuesta === 'change-pass' && $metodo === 'POST') {
 
@@ -137,7 +182,8 @@ if ($respuesta === 'change-pass' && $metodo === 'POST') {
             "Success" => "Cambio correcto"
         ];
         echo json_encode($mostrart);
-
+        session_destroy();
+        setcookie("PHPSESSID", "", time() - 3600, "/");
     } else {
         http_response_code(500);
         $respuestaErrorContra = [

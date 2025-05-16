@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /pages
 Disallow: /uploads
 Disallow: /libraries 
 

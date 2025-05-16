@@ -1,7 +1,9 @@
 <?php
 session_start();
 include_once('../config.php');
-
+// if (!empty($_SESSION['user'])) {
+//     header("Location: $BASE_URL");
+// }
 
 ?>
 <!DOCTYPE html>
@@ -72,7 +74,7 @@ include_once('../config.php');
             </div>
 
             <div class="w-100" id="contraDiv">
-            <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Ingresa tu contraseña actual.</span>
+                <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Ingresa tu contraseña actual.</span>
                 <div class="d-flex justify-content-center text-center mt-2">
                     <input type="password" id="contra" class="password-container w-75" placeholder="Antigua contraseña">
                     <button class="btn btn-outline-secondary " onclick="mostrarContra(this.previousElementSibling.id)"
@@ -84,7 +86,7 @@ include_once('../config.php');
             </div>
 
             <div class="w-100" id="confirmDiv">
-            <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Ingresa tu nueva contraseña.</span>
+                <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Ingresa tu nueva contraseña.</span>
                 <div class="d-flex justify-content-center text-center mt-2">
                     <input type="password" id="confContra" class="password-container w-75"
                         placeholder="Nueva contraseña" autocomplete="new-password">
@@ -212,6 +214,11 @@ include_once('../config.php');
 
             })
     }
+
+    function verificarCorreo() {
+
+    }
+
     function cambiarContra(name, contraNueva) {
         if (!regexContra.test(contraNueva)) {
             Swal.fire({
