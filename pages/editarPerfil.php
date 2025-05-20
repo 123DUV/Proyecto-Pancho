@@ -14,9 +14,10 @@ include_once '../headers.php';
 <head>
 
     <style>
-        :root{
+        :root {
             --font-size: clamp(0.8rem, 2.5vw, 1.5rem);
         }
+
         #dropzone {
             margin: 0 auto;
             /* Centra horizontalmente */
@@ -65,8 +66,10 @@ include_once '../headers.php';
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-                        <li><a class="dropdown-item" style="font-size: var(--font-size);" href="<?php echo $RUTA_PAGES ?>settings">Configuración</a></li>
-                        <li><a class="dropdown-item" style="font-size: var(--font-size);" href="<?php echo $BASE_URL ?>">Inicio</a></li>
+                        <li><a class="dropdown-item" style="font-size: var(--font-size);"
+                                href="<?php echo $RUTA_PAGES ?>settings">Configuración</a></li>
+                        <li><a class="dropdown-item" style="font-size: var(--font-size);"
+                                href="<?php echo $BASE_URL ?>">Inicio</a></li>
                     </ul>
                 </div>
             </div>
@@ -80,6 +83,10 @@ include_once '../headers.php';
                     <div class="x_title d-flex justify-content-center " style="text-align-last: center;">
                         <div class="clearfix"></div>
                     </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-secondary btn-sm " onclick="limpiarDrop()"><i class="fas fa-broom" ></i></button>
+
+                    </div>
                     <div class="x_content mt-2">
                         <form action="editarPerfil.php" id="dropzone" class="dropzone"></form>
                         <br />
@@ -89,14 +96,17 @@ include_once '../headers.php';
             </div>
         </div>
         <div class="row">
-        <h2 style="font-size: var(--font-size); text-align: center;">Modificar Nombre</h2>
+            <h2 style="font-size: var(--font-size); text-align: center;">Modificar Nombre</h2>
 
             <div class="d-flex justify-content-center">
-                <input style="font-size: var(--font-size);"  type="text" id="nombre"  maxlength="15" class="form-control text-center w-75" disabled>
-                <button class="btn btn-light mx-1" style="background-color:rgb(209, 208, 208);" id="modInput" onclick="modificarInput();"><i class="bi bi-pen"></i></button>
+                <input style="font-size: var(--font-size);" type="text" id="nombre" maxlength="15"
+                    class="form-control text-center w-75" disabled>
+                <button class="btn btn-light mx-1" style="background-color:rgb(209, 208, 208);" id="modInput"
+                    onclick="modificarInput();"><i class="bi bi-pen"></i></button>
             </div>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-success w-50 mt-2 " style="font-size: var(--font-size);"  onclick="modificarNombre();">Guardar</button>
+                <button class="btn btn-success w-50 mt-2 " style="font-size: var(--font-size);"
+                    onclick="modificarNombre();">Guardar</button>
             </div>
         </div>
         <div class="row mt-5 d-flex justify-content-center">
@@ -114,8 +124,11 @@ include_once '../headers.php';
     <script>
         document.getElementById('nombre').value = "<?php echo $_SESSION['user'] ?>";
 
-
-        function modificarInput(){
+        function limpiarDrop() {
+            const dropzoneInstance = Dropzone.forElement("#dropzone");
+            dropzoneInstance.removeAllFiles(true); // true para limpiar incluso los archivos en subida o error
+        }
+        function modificarInput() {
             const modInput = document.getElementById('nombre');
             modInput.removeAttribute('disabled')
         }
@@ -130,22 +143,22 @@ include_once '../headers.php';
             autoProcessQueue: false,
             dictDefaultMessage: "<p style='font-size: clamp(0.8rem, 2.5vw, 1.5rem);''><strong>Foto de perfil</strong>. <br> Arrastra tu archivo aquí o haz clic para seleccionar</p>",
             accept: function (file, done) {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Info',
-                        text: `Desea subir el archivo: ${file.name}`,
-                        showCancelButton: true,
-                        confirmButtonText: 'Subir',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            done();
-                            this.processQueue();
-                        } else {
-                            this.removeAllFiles();
-                        }
-                    })
-                
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Info',
+                    text: `Desea subir el archivo: ${file.name}`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Subir',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        done();
+                        this.processQueue();
+                    } else {
+                        this.removeAllFiles();
+                    }
+                })
+
             },
             success: function (file) {
                 enviarImg(file.dataURL);
@@ -188,13 +201,13 @@ include_once '../headers.php';
 
         function modificarNombre() {
             const nombre = document.getElementById('nombre').value;
-            const userA = '<?php echo $_SESSION['user']?>';
+            const userA = '<?php echo $_SESSION['user'] ?>';
             fetch(`<?php echo $BASE_URL ?>api/change-name?user=${nombre}&userA=${userA}`, {
                 method: 'get',
                 header: {
                     "Content-Type": "application/json"
                 },
-             
+
             })
                 .then(result => {
                     if (result.status !== 200) {

@@ -98,18 +98,12 @@ if ($respuesta === 'validar' && $metodo === 'POST') {
 
     $stmtContra = $con->prepare("SELECT contra FROM datos WHERE nameUser='$nameUser'");
     $stmtContra->execute();
-
-    // $insertarDatos = 'INSERT INTO datos(nameUser, telefono, contra, imgPerfil) values(?,?,?,?)';
-    // $stmt = mysqli_prepare($con, $insertarDatos);
-    // mysqli_stmt_bind_param($stmt, 'siss', $nameUser, $telefono, $contraCod, $imagenPerfil);
-    // $ejecutado = mysqli_stmt_execute($stmt);
     $resultadoContra = $stmtContra->get_result();
 
     if ($resultadoContra) {
 
         $row = $resultadoContra->fetch_assoc();
         if ($row) {
-
 
             $contrahash = $row['contra'];
 
@@ -152,7 +146,36 @@ if($respuesta==='validar-correo' && $metodo ==='POST'){
         echo json_encode(["error" => "Error validando contraseña"]);
         exit;
     }
+    $nameUser = $datosLogin['nameUser'];
     $correo = $datosLogin['correo'];
+
+
+    $stmt = $con->prepare("SELECT correo FROM datos WHERE nameUser = '$nameUser'");
+    $stmt->execute();
+    $correoBd = $stmt->get_result();
+    
+    if ($correoBd && $correoBd->num_rows > 0) {
+        $resultado = $correoBd->fetch_assoc(); // Obtiene la fila como un array asociativo
+        if ($resultado['correo'] === $correo) { // Compara el correo de la BD con el correo recibido
+            http_response_code(200);
+            $response = [
+                "Success" => "Validado correctamente"
+            ];
+            echo json_encode($response);
+        } else {
+            http_response_code(400);
+            $response = [
+                "Error" => "El correo no coincide"
+            ];
+            echo json_encode($response);
+        }
+    } else {
+        http_response_code(404);
+        $response = [
+            "Error" => "Usuario no encontrado"
+        ];
+        echo json_encode($response);
+    }
 }
 
 //cambiar contraseña

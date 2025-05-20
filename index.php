@@ -8,7 +8,14 @@ session_start();
 include_once 'config.php';
 include_once './headers.php';
 
+$con = mysqli_connect($DB_HOST, $DB_USERNAME, $DB_PASS, $DB_NAME);
 
+if (!$con) {
+    die("fallo" . mysqli_connect_error());
+}
+$imgDefectoPerfil = "./uploads./imgsDefecto./imgPerfilDefecto.jpg";
+$imgExtraida;
+$user;
 $mostrarSubir = false;
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 if ($_SESSION['user'] === "admin") {
@@ -25,8 +32,17 @@ if ($_SESSION['user'] === "admin") {
 
 if (isset($_SESSION['user'])) {
     $logedIn = true;
+    $user = $_SESSION['user'];
 } else {
     $logedIn = false;
+}
+if ($logedIn) {
+    $stmt = $con->prepare("SELECT imgPerfil FROM datos WHERE nameUser = ?");
+    $stmt->bind_param("s", $user);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $extraerImg = $resultado->fetch_assoc();
+    $imgExtraida = $extraerImg['imgPerfil'];
 }
 
 $nameGlobal = $_SESSION['user'];
@@ -211,11 +227,20 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             font-weight: 700;
             color: #eee;
         }
+
+        .icono-perfil {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+            /* Hace la imagen redonda */
+        }
     </style>
 
 </head>
 
 <body class="gradient" style=" color: var(--body-color);">
+
     <script>
         var logedIn = <?php echo json_encode($logedIn); ?>;
         var jefe = <?php echo json_encode($admin); ?>;
@@ -225,56 +250,60 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 rounded gradient-nav">
             <div class="container" id="top">
-
                 <div class="d-flex justify-content-center align-items-center">
                     <i class="bi bi-cart3 fs-3" id="irArriba"></i>
-                    <p class="m-3" style="color: black;"><?php echo $saludo ?></p>
+                    <p class="m-3" style="color: black; font-size: clamp(0.8rem, 2.5vw, 1.5rem);"><?php echo $saludo ?></p>
                 </div>
                 <a class="navbar-brand" href="#!"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="bi bi-person-lines-fill"></i>
+
+                    <img src="<?php if (empty($imgExtraida)) {
+                        echo $imgDefectoPerfil;
+                    } else {
+                        echo $imgExtraida;
+                    } ?>" class="img-fluid icono-perfil" width="100%" height="auto" alt="imagen">
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
 
                         <li class="nav-item">
                             <div id="inicioSesion">
-                                <a class="nav-link " id="hide" href="<?php echo $RUTA_PAGES ?>login">Iniciar sesión</a>
+                                <a class="nav-link " style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" id="hide" href="<?php echo $RUTA_PAGES ?>login">Iniciar sesión</a>
                             </div>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>blog">Blog</a>
+                            <a class="nav-link" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" href="<?php echo $RUTA_PAGES ?>blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $BASE_URL ?>#oferts">Ofertas</a>
+                            <a class="nav-link" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" href="<?php echo $BASE_URL ?>#oferts">Ofertas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $BASE_URL ?>#contact">Contactame</a>
+                            <a class="nav-link" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" href="<?php echo $BASE_URL ?>#contact">Contactame</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>news">Noticias</a>
+                            <a class="nav-link" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" href="<?php echo $RUTA_PAGES ?>news">Noticias</a>
                         </li>
 
                         <li class="nav-item <?php echo $mostrarSubir ? '' : 'd-none'; ?>">
 
-                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>subirImagenes">subirImagenes</a>
+                            <a class="nav-link" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" href="<?php echo $RUTA_PAGES ?>subirImagenes">subirImagenes</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $RUTA_PAGES ?>perfilPersona">Perfil</a>
+                            <a class="nav-link" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" href="<?php echo $RUTA_PAGES ?>perfilPersona">Perfil</a>
                         </li>
 
                         <li>
                             <div id="closeR">
                                 <a class="nav-link rounded " href="<?php echo $RUTA_PAGES ?>registro"
-                                    style="background-color: #c2c2c2; " class="text-center ">Registrate</a>
+                                    style="background-color: #c2c2c2; font-size: clamp(0.8rem, 2.5vw, 1.5rem);" class="text-center ">Registrate</a>
                             </div>
 
                         </li>
-                        <button type="button" id="closeS" class="btn btn-light" onclick="cerrarSesion();">Cerrar
+                        <button type="button" id="closeS" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" class="btn btn-light" onclick="cerrarSesion();">Cerrar
                             sesión</button>
 
                     </ul>
@@ -285,8 +314,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         <div class="row d-flex ">
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
-                <h4 style="font-family: var(--fuente);">Controlcoser</h4>
-                <p style="font-family: var(--fuente);">Adquiere o repara tu maquina de coser</p>
+                <h4 style="font-family: var(--fuente);font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Controlcoser</h4>
+                <p style="font-family: var(--fuente);font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Adquiere o repara tu maquina de coser</p>
                 <!-- <img src="./uploads/imagenPrincipal.png" loading="lazy" alt="imagen-principal" class="rounded"
                 width="100%"> -->
             </div>
@@ -294,37 +323,37 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             <div class="col-md-6 col-sm-12 d-flex justify-content-center">
 
-                <img src="./uploads/imagenPrincipal.pn" alt="imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/imagenPrincipal.png" alt="imagen-principal" class="rounded" width="100%">
             </div>
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-faceboo " style="color: #3b5998; font-size: 10vw;"
+                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
                     onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
                 <p><a href="https://www.facebook.com/controlcoser/"
-                        style="text-decoration: none; color:inherit;">Facebook</a></p>
+                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Facebook</a></p>
             </div>
             <div class="col-md-4 align-self-start block">
-                <i class="bi bi-whatsap " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
+                <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
                     onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"></i>
                 <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
-                        style="text-decoration: none; color:inherit;">WhatsApp</a></p>
+                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">WhatsApp</a></p>
             </div>
             <div class="col-md-4 align-self-center block">
-                <i class="bi bi-instagra " style="color: #e1308c; font-size: 10vw;"
+                <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
                     onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"></i>
                 <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
-                        style="text-decoration: none; color:inherit;">Instagram</a></p>
+                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Instagram</a></p>
             </div>
         </div>
         <div class="row inline-block reverse-order pt-5 ">
             <div class="col-md-6 col-sm-12 d-flex justify-content-center ">
-                <img src="./uploads/segundaInicio.pn" alt="segunda-imagen-principal" class="rounded" width="100%">
+                <img src="./uploads/segundaInicio.png" alt="segunda-imagen-principal" class="rounded" width="100%">
             </div>
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center text-center"
                 style="margin-top: 5%; margin-bottom: 5%;">
-                <h4 style="font-family: var(--fuente);">Calidad precio</h4>
-                <p style="font-family: var(--fuente);">Maquinas que tienen una calidad y precio justo</p>
+                <h4 style="font-family: var(--fuente);font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Calidad precio</h4>
+                <p style="font-family: var(--fuente);font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Maquinas que tienen una calidad y precio justo</p>
 
             </div>
 
@@ -333,7 +362,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
         </div>
         <div class="row  pt-5 " id="oferts">
             <div class="contenedor-lightbox gradient-arriba ">
-                <h2 class="text-center" style="font-family: var(--fuente);">Próximamente</h2>
+                <h2 class="text-center" style="font-family: var(--fuente);font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Próximamente</h2>
                 <div class="<?php if ($mostrarSubir) {
                     echo "d-block  flex-row justify-content-end ";
                 } else {
@@ -344,7 +373,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     <button class="btn " onclick="eliminarCajas();" id="delete"
                         style="background-color:rgb(253, 67, 67);">-</button>
 
-                    <button class="btn" id="save" style="background-color: #25d366" onclick="">
+                    <button class="btn" id="save" style="background-color: #25d366;font-size: clamp(0.8rem, 2.5vw, 1.5rem);" onclick="">
                         Guardar
                     </button>
 
@@ -380,7 +409,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                 <button class="btn" data-clipboard-text="3128616610"><i class="bi bi-copy"
                         style="color:#EEEEEE"></i></button>
 
-                <p>3128616610
+                <p style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">3128616610
                 </p>
 
             </div>
@@ -390,7 +419,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                         style="color:#EEEEEE"></i></button>
 
                 <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=bedoyafabio4@gmail.com&su=<?php echo $hora ?>&body="
-                        style="text-decoration: none; color:inherit;">bedoyafabio4@gmail.com</a>
+                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">bedoyafabio4@gmail.com</a>
                 </p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
@@ -399,22 +428,22 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                     data-clipboard-text="ZONA FRANCA INTERNACIONAL DE PEREIRA USUARIO OPERADOR, PEREIRA, RISARALDA"><i
                         class="bi bi-copy" style="color:#EEEEEE"></i></button>
                 <p><a href="https://www.google.com/maps?q=ZONA%20FRANCA%20INTERNACIONAL%20DE%20PEREIRA%20USUARIO%20OPERADOR,%20PEREIRA,%20Risaralda"
-                        style="text-decoration: none; color:inherit;">Dirección Controlcoser</a>
+                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Dirección Controlcoser</a>
 
                 </p>
             </div>
             <div class="text-center mt-2" style="font-family: var(--fuente);">
                 <i class="bi bi-calendar fs-5"></i>
-                <p>Horario</p>
+                <p style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Horario</p>
 
                 <ul class="text-center " style="list-style-type: none; padding-left: 0!important;">
-                    <li>
+                    <li style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">
                         Lunes-Sabado: 8 am - 4 pm
                     </li>
-                    <li>
+                    <li style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">
                         Domingo: 8 am - 2pm
                     </li>
-                    <p> *<span> Los horarios pueden variar</span></p>
+                    <p> *<span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);"> Los horarios pueden variar</span></p>
                 </ul>
 
             </div>
@@ -431,8 +460,8 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                         placeholder="Tu nombre">
                 </div>
                 <textarea class="form-control" id="comentarios" placeholder="Escribe tu petición o sugerencia" rows="4"
-                    maxlength="500" name="comentarios"></textarea>
-                <button id="comentariosBtn" class="btn btn-success" onclick="<?php if ($logedIn) {
+                    maxlength="500" name="comentarios" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);"></textarea>
+                <button id="comentariosBtn" style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);" class="btn btn-success mt-1" onclick="<?php if ($logedIn) {
                     echo "comments();";
                 } else {
                     echo "comment_w_login();";
@@ -441,7 +470,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
 
             <div class="text-center mt-5" style="font-family: var(--fuente);">
                 <i class="bi bi-c-circle fs-5"></i>
-                <span> 2025 Name company all rights reserved</span>
+                <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);"> 2025 Name company all rights reserved</span>
             </div>
 
         </div>

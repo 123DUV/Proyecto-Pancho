@@ -74,9 +74,9 @@ include_once('../config.php');
             </div>
 
             <div class="w-100" id="contraDiv">
-                <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Ingresa tu contraseña actual.</span>
+                <span style="font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Ingresa tu correo.</span>
                 <div class="d-flex justify-content-center text-center mt-2">
-                    <input type="password" id="contra" class="password-container w-75" placeholder="Antigua contraseña">
+                    <input type="password" id="correo" class="password-container w-75" placeholder="Correo">
                     <button class="btn btn-outline-secondary " onclick="mostrarContra(this.previousElementSibling.id)"
                         style="width:clamp(30%,50%,40%)" type="button" id="watch"><i class="bi bi-eye"
                             id="icono"></i></button>
@@ -127,8 +127,8 @@ include_once('../config.php');
 
     document.getElementById('enviar').addEventListener('click', function () {
         const name = document.getElementById('nombre').value;
-        const contra = document.getElementById('contra').value;
-        validarContra(name, contra);
+        const correo = document.getElementById('correo').value;
+        verificarCorreo(name, correo);
     })
 
     document.getElementById('cambiar').addEventListener('click', function () {
@@ -144,7 +144,6 @@ include_once('../config.php');
         console.log(botonMostrarC)
         if (botonMostrarC.type === "password") {
             botonMostrarC.type = "text";
-
         } else {
             botonMostrarC.type = "password"
         }
@@ -182,18 +181,47 @@ include_once('../config.php');
 
             })
     }
-    function validarContra(name, pass) {
+    
+    // function validarContra(name, pass) {
 
 
-        fetch('<?php echo $BASE_URL ?>api/validar', {
+    //     fetch('<?php echo $BASE_URL ?>api/validar', {
+    //         method: 'post',
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             nameUser: name,
+    //             password: pass
+    //         })
+    //     })
+    //         .then(result => {
+    //             if (result.status !== 200) {
+    //                 Swal.fire({
+    //                     icon: 'info',
+    //                     title: 'Info',
+    //                     text: 'Contraseña actual incorrecta'
+    //                 })
+    //             } else {
+    //                 estado = 'crear';
+    //                 mostrarEsconder(estado);
+    //             }
+    //             return result.json();
+    //         })
+    //         .then(data => {
+
+    //             console.log(data);
+
+    //         })
+    // }
+
+    function verificarCorreo(nameUser, correo) {
+        fetch(`<?php echo $BASE_URL ?>api/validar-correo`, {
             method: 'post',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                nameUser: name,
-                password: pass
-            })
+            body: JSON.stringify({ correo: correo, nameUser: nameUser })
         })
             .then(result => {
                 if (result.status !== 200) {
@@ -209,14 +237,11 @@ include_once('../config.php');
                 return result.json();
             })
             .then(data => {
-
                 console.log(data);
-
             })
-    }
-
-    function verificarCorreo() {
-
+            .catch(error => {
+                console.error("Error validando correo: ", error);
+            })
     }
 
     function cambiarContra(name, contraNueva) {
