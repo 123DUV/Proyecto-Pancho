@@ -299,7 +299,7 @@ if (empty($nameGlobal) || $nameGlobal === null) {
                         <li>
                             <div id="closeR">
                                 <a class="nav-link rounded " href="<?php echo $RUTA_PAGES ?>registro"
-                                    style="background-color: #c2c2c2; font-size: clamp(0.8rem, 2.5vw, 1.5rem);" class="text-center ">Registrate</a>
+                                    style="background-color: #c2c2c2; font-size: clamp(0.8rem, 2.5vw, 1.5rem);" class="text-center ">Registrat</a>
                             </div>
 
                         </li>
