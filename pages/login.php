@@ -64,8 +64,8 @@ include_once '../headers.php';
                 <label class="form-check-label" for="form1Example3" style="font-family: var(--fuente);">
                   Recordarme</label>
               </div>
-              <a href="<?php echo $RUTA_PAGES?>cambiarContra" style="text-decoration: none; color: black; font-family: var(--fuente);">Olvide mi
-                contraseña?</a>
+              <!-- <a href="<?php echo $RUTA_PAGES?>cambiarContra" style="text-decoration: none; color: black; font-family: var(--fuente);">Olvide mi
+                contraseña?</a> -->
               <a href="<?php echo $RUTA_PAGES ?>registro"
                 style="text-decoration: none; color: black; font-family: var(--fuente);">Registrarse</a>
             </div>

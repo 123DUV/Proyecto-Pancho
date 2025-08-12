@@ -287,7 +287,7 @@ include_once '../headers.php';
                     </li>
 
                 </ul>
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <a href="#"
                         class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
                         id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
@@ -298,7 +298,7 @@ include_once '../headers.php';
                         <li><a class="dropdown-item" href="<?php echo $RUTA_PAGES ?>settings">Configuración</a></li>
                         <li><a class="dropdown-item" href="/">Inicio</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

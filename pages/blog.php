@@ -102,7 +102,7 @@ session_start();
                     class="d-flex flex-sm-column flex-row flex-nowrap bg-dark align-items-center sticky-top fijar-left">
                     <a href="<?php echo $RUTA_PAGES?>blog" class="d-block  text-white text-decoration-none" title=""
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-                        <i class="bi bi-c-circle fs-1"></i>
+                        <i class="bi bi-c-circle fs-2"></i>
                     </a>
                     <ul
                         class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
@@ -113,14 +113,14 @@ session_start();
                             </a>
                         </li>
                     </ul>
-                    <div class="">
+                    <!-- <div class="">
                         <a href="<?php echo $RUTA_PAGES?>perfilPersona"
                             class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none "
                             aria-expanded="false">
                             <i class="bi-person-circle h2"></i>
                         </a>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- fin nav -->
