@@ -6,14 +6,52 @@
 <!--iconos-->
 <link rel="shortcut icon" type="image/svg+xml" href="<?php echo $BASE_URL?>favicon.svg">
 <!--encabezados -->
-<meta charset="UTF-8">
-<meta name="description" content="sewing machine services and information, máquinas de coser, servicios e información">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="MACHINE,SERVICES,INFORMATION, SEWING MACHINE">
-<meta name="author" content="Fabio Bedoya">
+<title>Máquinas de coser en La Virginia - ControlCoser</title>
+<meta name="description"
+    content="Venta y reparación de máquinas de coser en La Virginia, Risaralda. ControlCoser ofrece servicio técnico, repuestos y asesoría especializada para todo tipo de máquinas.">
+<meta name="keywords"
+    content="máquinas de coser, La Virginia, Risaralda, venta máquinas de coser, reparación máquinas de coser, ControlCoser, servicio técnico de costura">
 <meta name="robots" content="index, follow">
-<meta name="twitter:card" content="summary"></meta>
+<meta name="author" content="ControlCoser">
+
+<!-- SEO Local con microdatos JSON-LD -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "ControlCoser",
+    "image": "https://controlcoser.kesug.com/favicon.svg",
+    "@id": "",
+    "url": "https://controlcoser.kesug.com",
+    "telephone": "+57 312 861 66 10",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle 5 # 8-15",
+        "addressLocality": "La Virginia",
+        "addressRegion": "Risaralda",
+        "postalCode": "661040",
+        "addressCountry": "CO"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 4.8997,
+        "longitude": -75.8836
+    },
+    "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        ],
+        "opens": "08:00",
+        "closes": "18:00"
+    }],
+    "sameAs": [
+        "https://www.facebook.com/ControlCoser",
+        "https://www.instagram.com/ControlCoser"
+    ]
+}
+</script>
+
 <!--fuente-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,9 +62,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-    
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 
