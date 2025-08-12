@@ -237,11 +237,11 @@ if (empty($nameGlobal) || $nameGlobal === null) {
     }
 
     @media (max-width: 1350px) {
-        .navbar-expand-xl .navbar-collapse {
+        .navbar-expand-xl  {
             display: none !important;
         }
 
-        .navbar-expand-xl .navbar-toggler {
+        .navbar-expand-xl  {
             display: block !important;
         }
     }
@@ -352,24 +352,24 @@ if (empty($nameGlobal) || $nameGlobal === null) {
             </div>
         </div>
         <div class="row d-flex text-center pt-5 " style="font-family: var(--fuente);">
-            <div class="col-md-4 align-self-center block">
-                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
-                    onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
-                <p><a href="https://www.facebook.com/controlcoser/"
-                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Facebook</a>
-                </p>
-            </div>
             <div class="col-md-4 align-self-start block">
                 <i class="bi bi-whatsapp " style="color:#25d366; font-size: 10vw; text-decoration: inherit"
                     onclick="window.location.href='https://wa.me/3128616610?text=Hola, quiero solicitar má información acerca de tus servicios'"></i>
-                <p><a href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
+                <p><a target="_blank" href='https://wa.me/3128616610?text=Hola, quiero solicitar más información acerca de tus servicios'
                         style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">WhatsApp</a>
+                </p>
+            </div>
+            <div class="col-md-4 align-self-center block">
+                <i class="bi bi-facebook " style="color: #3b5998; font-size: 10vw;"
+                    onclick="window.location.href='https://www.facebook.com/controlcoser/'"></i>
+                <p><a target="_blank" href="https://www.facebook.com/controlcoser/"
+                        style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Facebook</a>
                 </p>
             </div>
             <div class="col-md-4 align-self-center block">
                 <i class="bi bi-instagram " style="color: #e1308c; font-size: 10vw;"
                     onclick="window.location.href='https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=='"></i>
-                <p><a href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
+                <p><a target="_blank" href="https://www.instagram.com/controlcoser?igsh=YzljYTk10Dg3Zg=="
                         style="text-decoration: none; color:inherit;font-size: clamp(0.8rem, 2.5vw, 1.5rem);">Instagram</a>
                 </p>
             </div>
