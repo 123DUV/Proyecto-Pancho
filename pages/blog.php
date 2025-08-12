@@ -143,7 +143,7 @@ session_start();
                 </div>
                 <div class="bg-black text-center text-white" style="padding-top: 5%;padding-bottom: 5%;">
                     <p class="fs-1" style="font-family: var(--fuente);">Acerca de:<br>
-                        <!-- <strong>Fabio Bedoya</strong> -->
+                        <strong>Fabio Bedoya</strong>
                     </p>
                     <p class="tamano_fuente_sm text-justify mx-5" style="font-family: var(--fuente);">
                         Nacido en Medellín, Mi interés por las maquinas de coser apareció en mi juventud
