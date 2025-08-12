@@ -88,7 +88,12 @@ if ($logeado) {
                         </li>
 
                     </ul>
-                    <div class="dropdown">
+                    <div style="display: <?php if($logeado){ 
+                        echo "block"; }
+                        else{
+                        echo "none";}
+                         ?>" 
+                         class="dropdown">
                         <a href="#"
                             class="d-flex text-white align-items-center justify-content-center p-3  text-decoration-none dropdown-toggle"
                             id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">

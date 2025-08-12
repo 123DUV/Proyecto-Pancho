@@ -1,0 +1,14 @@
+#node modules
+node_modules/
+
+#package-lock.json
+package-lock.json
+
+#package.json
+package.json
+
+#client-secrets.json
+client_secret_881834234291-po02klp5104t4or9cbtgbtj9le0jqk1a.apps.googleusercontent.com.json
+
+
+
