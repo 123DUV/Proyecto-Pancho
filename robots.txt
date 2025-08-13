@@ -1,5 +1,3 @@
 User-agent: *
-Disallow: /uploads
-Disallow: /libraries 
-
-Crawl-delay: 6
+Allow: /
+Sitemap: https://controlcoser.kesug.com/sitemap.xml
